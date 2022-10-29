@@ -29,7 +29,7 @@ public class Image {
  * to future assignments.
  *
  * Load
- * Save (should loading and saving be part of the model?) | Should do this one first
+ * Save ("should loading and saving be part of the model?") | Should do this one first
  *
  * Function objects needed:
  * VisualizeRed

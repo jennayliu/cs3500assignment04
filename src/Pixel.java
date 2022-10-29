@@ -26,4 +26,5 @@ public class Pixel {
     this.blue = blue;
   }
 
+
 }
