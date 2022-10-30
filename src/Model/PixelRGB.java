@@ -1,5 +1,8 @@
-
+package Model;
 // may or may not need this class
+
+import Model.Pixel;
+
 /**
  * This class represents a single pixel of an image, represented as RGB.
  */

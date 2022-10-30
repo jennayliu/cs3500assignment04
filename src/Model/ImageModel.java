@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * This interface represents the operations offered by the image processing
  * model.
@@ -6,7 +8,7 @@ public interface ImageModel {
 
 
   /**
-   * This method takes in an ImageFunctionObject and applies it to the image.
+   * This method takes in an Model.ImageFunctionObject and applies it to the image.
    */
   public void process(ImageFunctionObject modification, String filename);
 

@@ -1,3 +1,7 @@
+package Model;
+
+import Model.ImageFunctionObject;
+
 /**
  * This class is used to brighten images.
  */
@@ -13,7 +17,7 @@ public class Brighten implements ImageFunctionObject {
     this.amount = amount;
   }
   @Override
-  public void apply(Image image) {
+  public void apply(Pixel[][] image) {
     // code that brightens the image
   }
 }

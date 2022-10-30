@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * This interface represents a pixel in an image.
  */
