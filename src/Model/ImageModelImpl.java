@@ -8,7 +8,7 @@ import java.util.Objects;
  * This is the implementation of the Model.ImageModel interface.
  */
 public class ImageModelImpl implements ImageModel {
-  private final ImageFunctionObject function;
+
   private final Map<String, Pixel[][]> loadedImages;
 
   /**
@@ -16,15 +16,13 @@ public class ImageModelImpl implements ImageModel {
    * @param image The image, represented by an image class
    * @param function The Model.ImageFunctionObject which decides what to do with the image
    */
-  public ImageModelImpl(ImageFunctionObject function) {
-    Objects.requireNonNull(function, "Function Object can't be null.");
-    this.function = function;
+  public ImageModelImpl() {
     this.loadedImages = new HashMap<>();
   }
 
   @Override
   public void process(ImageFunctionObject modification, String filename) {
-    this.function.apply(loadedImages.get(filename));
+    modification.apply(loadedImages.get(filename));
   }
 
   @Override
