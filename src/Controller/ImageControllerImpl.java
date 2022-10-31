@@ -11,6 +11,13 @@ public class ImageControllerImpl {
   Readable readable;
   Appendable appendable;
 
+  /**
+   * This constructor creates an instance of a controller.
+   * @param model The model to work with
+   * @param readable The readable to read from
+   * @param appendable The appendable to transmit outputs
+   * @throws IllegalArgumentException If any of the fields are null
+   */
   public ImageControllerImpl(ImageModel model, Readable readable, Appendable appendable)
   throws IllegalArgumentException {
     if (model == null || readable == null || appendable == null) {
