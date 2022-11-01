@@ -5,7 +5,7 @@ import model.ImageRepo;
 /**
  * This class is the implementation of the ImageController.
  */
-public class ImageControllerImpl {
+public class ImageControllerImpl implements ImageController {
 
   ImageRepo model;
   Readable readable;
