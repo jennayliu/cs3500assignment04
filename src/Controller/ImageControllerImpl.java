@@ -5,7 +5,7 @@ import Model.ImageModel;
 /**
  * This class is the implementation of the ImageController.
  */
-public class ImageControllerImpl {
+public class ImageControllerImpl implements ImageController {
 
   ImageModel model;
   Readable readable;
