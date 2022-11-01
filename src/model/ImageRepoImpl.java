@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class ImageRepoImpl implements ImageRepo {
 
-  private final Map<String, Pixel[][]> loadedImages;
+  private final Map<String, PixelRGB[][]> loadedImages;
 
   /**
    * This constructor takes in an image and a function object.
@@ -20,7 +20,7 @@ public class ImageRepoImpl implements ImageRepo {
   }
 
   @Override
-  public void add(String name, ImageModel image) {
+  public void add(String name, PixelRGB[][] image) {
 
   }
 

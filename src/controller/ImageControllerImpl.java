@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.IOException;
+import java.util.Scanner;
+
+import model.ImageFunctionObject;
 import model.ImageRepo;
 
 /**
@@ -7,9 +11,9 @@ import model.ImageRepo;
  */
 public class ImageControllerImpl implements ImageController {
 
-  ImageRepo model;
-  Readable readable;
-  Appendable appendable;
+  private final ImageRepo model;
+  private final Readable readable;
+  private final Appendable appendable;
 
   /**
    * This constructor creates an instance of a controller.
@@ -27,6 +31,20 @@ public class ImageControllerImpl implements ImageController {
     this.model = model;
     this.readable = readable;
     this.appendable = appendable;
+  }
+
+  @Override
+  public void control() throws IOException {
+    Scanner sc = new Scanner(this.readable);
+    String command = sc.next();
+    switch(command) {
+      case("load"):
+        break;
+      case("save"):
+        break;
+      default:
+        this.appendable.append("Unknown command.");
+    }
 
   }
 }

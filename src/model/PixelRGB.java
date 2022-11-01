@@ -6,9 +6,9 @@ package model;
  */
 public class PixelRGB implements Pixel {
 
-  private final int red;
-  private final int green;
-  private final int blue;
+  protected int red;
+  protected int green;
+  protected int blue;
   private final int maxValue; // the max value that RGB can get
 
   /**

@@ -16,11 +16,11 @@ public class ImageUtil {
    *
    * @param filename the path of the file. 
    */
-  public static Pixel[][] readPPM(String filename) {
+  public static PixelRGB[][] readPPM(String filename) {
     Scanner sc;
 
     // new
-    Pixel[][] image;
+    PixelRGB[][] image;
     
     try {
         sc = new Scanner(new FileInputStream(filename));
@@ -28,7 +28,7 @@ public class ImageUtil {
     catch (FileNotFoundException e) {
         System.out.println("File " + filename + " not found!");
         // changed to return an empty pixel array
-        return new Pixel[0][0];
+        return new PixelRGB[0][0];
     }
     StringBuilder builder = new StringBuilder();
     //read the file line by line, and populate a string. This will throw away any comment lines
@@ -56,7 +56,7 @@ public class ImageUtil {
     System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
 
     // new
-    Pixel[][] pixels = new Pixel[height][width];
+    PixelRGB[][] pixels = new PixelRGB[height][width];
     
     for (int i=0; i<height; i++) {
         for (int j=0; j<width; j++) {
