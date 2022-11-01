@@ -1,13 +1,13 @@
-package Controller;
+package controller;
 
-import Model.ImageModel;
+import model.ImageRepo;
 
 /**
  * This class is the implementation of the ImageController.
  */
 public class ImageControllerImpl {
 
-  ImageModel model;
+  ImageRepo model;
   Readable readable;
   Appendable appendable;
 
@@ -18,7 +18,7 @@ public class ImageControllerImpl {
    * @param appendable The appendable to transmit outputs
    * @throws IllegalArgumentException If any of the fields are null
    */
-  public ImageControllerImpl(ImageModel model, Readable readable, Appendable appendable)
+  public ImageControllerImpl(ImageRepo model, Readable readable, Appendable appendable)
   throws IllegalArgumentException {
     if (model == null || readable == null || appendable == null) {
       throw new IllegalArgumentException("Can't have null fields.");

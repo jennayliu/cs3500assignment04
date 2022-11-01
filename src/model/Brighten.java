@@ -1,6 +1,4 @@
-package Model;
-
-import Model.ImageFunctionObject;
+package model;
 
 /**
  * This class is used to brighten images.

@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -56,7 +56,7 @@ public class ImageUtil {
     System.out.println("Maximum value of a color in this file (usually 255): " + maxValue);
 
     // new
-    image = new Pixel[height][width];
+    Pixel[][] pixels = new Pixel[height][width];
     
     for (int i=0; i<height; i++) {
         for (int j=0; j<width; j++) {
@@ -66,12 +66,12 @@ public class ImageUtil {
             System.out.println("Color of pixel (" + j + "," + i + "): " + r + "," + g + "," + b);
 
             // new
-            image[i][j] = new PixelRGB(r, g, b);
+            pixels[i][j] = new PixelRGB(r, g, b, maxValue);
         }
     }
 
     // new
-    return image;
+    return pixels;
   }
 
   //demo main

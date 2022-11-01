@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 /**
  * This class represents a function object that can be used in the Model.ImageModel to modify an image.

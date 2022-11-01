@@ -1,13 +1,12 @@
-package Model;
+package model;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * This is the implementation of the Model.ImageModel interface.
  */
-public class ImageModelImpl implements ImageModel {
+public class ImageRepoImpl implements ImageRepo {
 
   private final Map<String, Pixel[][]> loadedImages;
 
@@ -16,8 +15,13 @@ public class ImageModelImpl implements ImageModel {
    * @param image The image, represented by an image class
    * @param function The Model.ImageFunctionObject which decides what to do with the image
    */
-  public ImageModelImpl() {
+  public ImageRepoImpl() {
     this.loadedImages = new HashMap<>();
+  }
+
+  @Override
+  public void add(String name, ImageModel image) {
+
   }
 
   @Override

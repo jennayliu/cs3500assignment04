@@ -1,12 +1,13 @@
-package Model;
+package model;
 
 /**
  * This interface represents the operations offered by the image processing
  * model.
+ *
  */
-public interface ImageModel {
+public interface ImageRepo {
 
-
+  public void add(String name, ImageModel image);
   /**
    * This method takes in an Model.ImageFunctionObject and applies it to the image.
    */
