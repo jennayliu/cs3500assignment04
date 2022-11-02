@@ -1,4 +1,7 @@
-package model;
+package model.command;
+
+import model.PixelRGB;
+
 /**
  * This class is used to flip images vertically.
  */

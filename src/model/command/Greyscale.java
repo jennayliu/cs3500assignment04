@@ -1,4 +1,7 @@
-package model;
+package model.command;
+
+import model.ImageModel;
+import model.PixelRGB;
 
 /**
  * This class is used to greyscale images based on red, green, blue, value, intensity, or luma.
@@ -22,9 +25,9 @@ public class Greyscale implements ImageFunctionObject {
         // determines the greyscale color
         int newColor = setPixel(image[r][c]);
 
-        image[r][c].red = newColor;
-        image[r][c].green = newColor;
-        image[r][c].blue = newColor;
+        image[r][c].setRed(newColor);
+        image[r][c].setGreen(newColor);
+        image[r][c].setBlue(newColor);
       }
     }
 

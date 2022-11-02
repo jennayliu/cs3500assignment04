@@ -1,5 +1,7 @@
 package model;
 
+import model.command.ImageFunctionObject;
+
 /**
  * This interface represents the operations offered by the image processing
  * model.

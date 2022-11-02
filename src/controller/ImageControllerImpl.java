@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import model.command.BrightenDarken;
+import model.command.ImageFunctionObject;
 import model.ImageModel;
 import model.PixelRGB;
 
@@ -38,15 +40,49 @@ public class ImageControllerImpl implements ImageController {
   @Override
   public void control() throws IOException {
     Scanner sc = new Scanner(this.readable);
-    String command = sc.next();
-    switch(command) {
-      case("load"):
-        break;
-      case("save"):
-        break;
-      default:
-        this.appendable.append("Unknown command.");
+    boolean quit = false;
+    while (!quit){
+      if (sc.hasNextLine()) {
+
+        String command = sc.nextLine();
+
+        // split command into some tokens, on space we split
+        String[] commandArray = command.split(" ");
+
+
+        switch (commandArray[0]) {
+          case ("load"):
+            String imageFormat = commandArray[1].split("\\.")[1];
+            if (imageFormat.equals("ppm")) {
+              model.load(commandArray[1], commandArray[2]);
+            } // implement methods in later case, if it's not a ppm file
+            break;
+          case ("save"):
+            break;
+
+          case ("red-component"):
+
+          case ("green-component"):
+
+          case ("blue-component"):
+
+          case ("horizontal-flip"):
+
+          case ("vertical-flip"):
+
+          case ("brighten"):
+            ImageFunctionObject brighten = new BrightenDarken(Integer.parseInt(commandArray[1]),
+                    true);
+            model.process(brighten, commandArray[2], commandArray[3]);
+
+          default:
+            this.appendable.append("Unknown command.");
+        }
+      } else {
+        throw new IllegalArgumentException("Invalid: No input.");
+      }
     }
+
 
   }
 

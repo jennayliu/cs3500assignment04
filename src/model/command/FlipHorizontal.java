@@ -1,9 +1,11 @@
-package model;
+package model.command;
+
+import model.PixelRGB;
 
 /**
  * This class is used to flip images horizontally.
  */
-public class FlipHorizontal implements ImageFunctionObject{
+public class FlipHorizontal implements ImageFunctionObject {
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) {
 

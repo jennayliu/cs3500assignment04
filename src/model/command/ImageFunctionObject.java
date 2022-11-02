@@ -1,4 +1,6 @@
-package model;
+package model.command;
+
+import model.PixelRGB;
 
 /**
  * This class represents a function object that can be used in the Model.ImageModel to modify an image.

@@ -3,6 +3,8 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.command.ImageFunctionObject;
+
 /**
  * This is the implementation of the Model.ImageModel interface.
  */

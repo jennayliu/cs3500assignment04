@@ -48,4 +48,20 @@ public class PixelRGB implements Pixel {
   public int getMax() {
     return this.maxValue;
   }
+
+  public void setRed(int red) {
+    this.red = red;
+  }
+
+
+  public void setGreen(int green) {
+    this.green = green;
+  }
+
+
+  public void setBlue(int blue) {
+    this.blue = blue;
+  }
+
+
 }

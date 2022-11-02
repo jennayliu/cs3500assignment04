@@ -28,4 +28,10 @@ public interface Pixel {
    * @return The max value
    */
   public int getMax();
+
+  public void setRed();
+
+  public void setGreen();
+
+  public void setBlud();
 }
