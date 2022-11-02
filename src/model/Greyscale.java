@@ -19,7 +19,9 @@ public class Greyscale implements ImageFunctionObject {
   public PixelRGB[][] apply(PixelRGB[][] image) throws IllegalArgumentException {
     for (int r = 0; r < image[0].length; r++) {
       for (int c = 0; c < image.length; c ++) {
+        // determines the greyscale color
         int newColor = setPixel(image[r][c]);
+
         image[r][c].red = newColor;
         image[r][c].green = newColor;
         image[r][c].blue = newColor;
