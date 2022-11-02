@@ -1,17 +1,18 @@
 package controller;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import model.ImageFunctionObject;
-import model.ImageRepo;
+import model.ImageModel;
+import model.PixelRGB;
 
 /**
  * This class is the implementation of the ImageController.
  */
 public class ImageControllerImpl implements ImageController {
 
-  private final ImageRepo model;
+  private final ImageModel model;
   private final Readable readable;
   private final Appendable appendable;
 
@@ -22,7 +23,7 @@ public class ImageControllerImpl implements ImageController {
    * @param appendable The appendable to transmit outputs
    * @throws IllegalArgumentException If any of the fields are null
    */
-  public ImageControllerImpl(ImageRepo model, Readable readable, Appendable appendable)
+  public ImageControllerImpl(ImageModel model, Readable readable, Appendable appendable)
   throws IllegalArgumentException {
     if (model == null || readable == null || appendable == null) {
       throw new IllegalArgumentException("Can't have null fields.");
@@ -47,4 +48,20 @@ public class ImageControllerImpl implements ImageController {
     }
 
   }
+
+  private void save(PixelRGB[][] image, String filename) throws IOException {
+    FileWriter filewriter = new FileWriter(filename);
+    filewriter.append("P3" + System.lineSeparator());
+    for (int r = 0; r < image[0].length; r++) {
+      for (int c = 0; c < image.length; c ++) {
+        filewriter.append(image[r][c].getRed() + System.lineSeparator());
+        filewriter.append(image[r][c].getGreen() + System.lineSeparator());
+        filewriter.append(image[r][c].getBlue() + System.lineSeparator());
+      }
+    }
+
+
+
+  }
+
 }

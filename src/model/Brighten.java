@@ -15,12 +15,24 @@ public class Brighten extends Darken implements ImageFunctionObject {
     super(value);
   }
 
-  @Override
-  public void apply(PixelRGB[][] image) {
+  public PixelRGB[][] apply(PixelRGB[][] image) {
     for (int r = 0; r < image[0].length; r++) {
       for (int c = 0; c < image.length; c ++) {
         image[r][c].red = image[r][c].red + this.value;
+        image[r][c].green = image[r][c].green + this.value;
+        image[r][c].blue = image[r][c].blue + this.value;
+        if (image[r][c].red > image[r][c].getMax()) {
+          image[r][c].red = image[r][c].getMax();
+        }
+        if (image[r][c].green > image[r][c].getMax()) {
+          image[r][c].green = image[r][c].getMax();
+        }
+        if (image[r][c].blue > image[r][c].getMax()) {
+          image[r][c].blue = image[r][c].getMax();
+        }
       }
     }
+    return image;
   }
+
 }

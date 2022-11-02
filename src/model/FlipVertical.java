@@ -4,7 +4,8 @@ package model;
  */
 public class FlipVertical implements ImageFunctionObject {
   @Override
-  public void apply(PixelRGB[][] image) {
+  public PixelRGB[][] apply(PixelRGB[][] image) {
 
+    return image;
   }
 }

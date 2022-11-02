@@ -8,5 +8,5 @@ public interface ImageFunctionObject {
   /**
    * This method modifies an image. This modification is based on the implementation.
    */
-  public void apply(PixelRGB[][] image);
+  public PixelRGB[][] apply(PixelRGB[][] image);
 }

@@ -29,5 +29,23 @@ public class PixelRGB implements Pixel {
     this.maxValue = maxValue;
   }
 
+  @Override
+  public int getRed() {
+    return this.red;
+  }
 
+  @Override
+  public int getGreen() {
+    return this.green;
+  }
+
+  @Override
+  public int getBlue() {
+    return this.blue;
+  }
+
+  @Override
+  public int getMax() {
+    return this.maxValue;
+  }
 }
