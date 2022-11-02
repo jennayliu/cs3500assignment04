@@ -8,24 +8,15 @@ import model.PixelRGB;
 public class BrightenDarken implements ImageFunctionObject {
 
   private final int value;
-  private final boolean brightening; // THIS MIGHT BE BETTER REPRESENTED BY AN ENUM?
 
   /**
    * The constructor sets how much we're darkening the image by.
    * @param value How much we're darkening the image by
-   * @param brightening If true, we brighten. If false, we darken
    * @throws IllegalArgumentException If value is not positive
    */
-  public BrightenDarken(int value, boolean brightening) throws IllegalArgumentException {
+  public BrightenDarken(int value) throws IllegalArgumentException {
+    this.value = value;
 
-    // if brightening is false, this means we're darkening
-    // in other words, the value we're brightening by will be negative if we're darkening
-    this.brightening = brightening;
-    if (brightening) {
-      this.value = value;
-    } else {
-      this.value = value * -1;
-    }
 
   }
 

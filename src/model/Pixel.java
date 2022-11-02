@@ -29,9 +29,9 @@ public interface Pixel {
    */
   public int getMax();
 
-  public void setRed();
+  public void setRed(int red);
 
-  public void setGreen();
+  public void setGreen(int green);
 
-  public void setBlud();
+  public void setBlue(int blue);
 }

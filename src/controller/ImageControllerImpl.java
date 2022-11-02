@@ -71,8 +71,7 @@ public class ImageControllerImpl implements ImageController {
           case ("vertical-flip"):
 
           case ("brighten"):
-            ImageFunctionObject brighten = new BrightenDarken(Integer.parseInt(commandArray[1]),
-                    true);
+            ImageFunctionObject brighten = new BrightenDarken(Integer.parseInt(commandArray[1]));
             model.process(brighten, commandArray[2], commandArray[3]);
 
           default:
