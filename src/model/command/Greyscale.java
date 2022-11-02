@@ -20,8 +20,8 @@ public class Greyscale implements ImageFunctionObject {
 
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) throws IllegalArgumentException {
-    for (int r = 0; r < image[0].length; r++) {
-      for (int c = 0; c < image.length; c ++) {
+    for (int r = 0; r < image.length; r++) {
+      for (int c = 0; c < image[0].length; c ++) {
         // determines the greyscale color
         int newColor = setPixel(image[r][c]);
 

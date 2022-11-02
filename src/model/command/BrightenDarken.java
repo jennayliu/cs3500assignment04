@@ -22,8 +22,8 @@ public class BrightenDarken implements ImageFunctionObject {
 
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) {
-    for (int r = 0; r < image[0].length; r++) {
-      for (int c = 0; c < image.length; c ++) {
+    for (int r = 0; r < image.length; r++) {
+      for (int c = 0; c < image[0].length; c ++) {
         image[r][c].setRed(image[r][c].getRed() + this.value);
         image[r][c].setGreen(image[r][c].getGreen() + this.value);
         image[r][c].setBlue(image[r][c].getBlue() + this.value);

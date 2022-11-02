@@ -50,9 +50,9 @@ public class ImageModelImpl implements ImageModel {
 
   // this helper makes a copy of an image
   private PixelRGB[][] makeImageCopy(PixelRGB[][] image) {
-    PixelRGB[][] copy = new PixelRGB[image[0].length][image.length];
-    for (int r = 0; r < image[0].length; r++) {
-      for (int c = 0; c < image.length; c ++) {
+    PixelRGB[][] copy = new PixelRGB[image.length][image[0].length];
+    for (int r = 0; r < image.length; r++) {
+      for (int c = 0; c < image[0].length; c ++) {
         copy[r][c] = image[r][c];
       }
     }
