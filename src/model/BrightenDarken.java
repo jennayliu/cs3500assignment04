@@ -6,7 +6,7 @@ package model;
 public class BrightenDarken implements ImageFunctionObject {
 
   private final int value;
-  private final boolean brightening;
+  private final boolean brightening; // THIS MIGHT BE BETTER REPRESENTED BY AN ENUM?
 
   /**
    * The constructor sets how much we're darkening the image by.
