@@ -1,5 +1,9 @@
 import org.junit.Test;
 
+import java.io.StringReader;
+
+import controller.ImageController;
+import controller.ImageControllerImpl;
 import model.ImageModel;
 import model.ImageModelImpl;
 
@@ -23,4 +27,6 @@ public class ModelTests {
       }
     }
   }
+
+
 }
