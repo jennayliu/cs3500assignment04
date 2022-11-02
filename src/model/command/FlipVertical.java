@@ -11,6 +11,7 @@ public class FlipVertical implements ImageFunctionObject {
    */
   public FlipVertical() {}
 
+
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) {
 
