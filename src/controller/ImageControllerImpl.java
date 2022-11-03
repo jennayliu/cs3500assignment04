@@ -45,7 +45,7 @@ public class ImageControllerImpl implements ImageController {
   public void control() throws IOException {
     Scanner sc = new Scanner(this.readable);
 
-    if (sc.hasNextLine()) {
+    while (sc.hasNextLine()) {
 
       String command = sc.nextLine();
 
@@ -72,52 +72,59 @@ public class ImageControllerImpl implements ImageController {
           ImageFunctionObject redGreyscale = new Greyscale(ImageModel.RGBVIL.Red);
           model.process(redGreyscale, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully grayscale the image by red.");
+          break;
 
         case ("green-component"):
           ImageFunctionObject greenGreyscale = new Greyscale(ImageModel.RGBVIL.Green);
           model.process(greenGreyscale, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully grayscale the image by green.");
+          break;
 
         case ("blue-component"):
           ImageFunctionObject blueGreyscale = new Greyscale(ImageModel.RGBVIL.Blue);
           model.process(blueGreyscale, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully grayscale the image by blue.");
+          break;
 
         case ("value-component"):
           ImageFunctionObject valueGreyscale = new Greyscale(ImageModel.RGBVIL.Value);
           model.process(valueGreyscale, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully grayscale the image by value.");
+          break;
 
         case ("luma-component"):
           ImageFunctionObject lumaGreyscale = new Greyscale(ImageModel.RGBVIL.Luma);
           model.process(lumaGreyscale, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully grayscale the image by luma.");
+          break;
 
         case ("intensity-component"):
           ImageFunctionObject intensityGreyscale = new Greyscale(ImageModel.RGBVIL.Value);
           model.process(intensityGreyscale, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully grayscale the image by intensity.");
+          break;
 
         case ("horizontal-flip"):
           ImageFunctionObject horizontalFlip = new FlipHorizontal();
           model.process(horizontalFlip, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully flip horizontally the image.");
+          break;
 
         case ("vertical-flip"):
           ImageFunctionObject verticalFlip = new FlipVertical();
           model.process(verticalFlip, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully flip vertically the image.");
+          break;
 
         case ("brighten"):
           ImageFunctionObject brighten = new BrightenDarken(Integer.parseInt(commandArray[1]));
           model.process(brighten, commandArray[2], commandArray[3]);
           this.appendable.append("Successfully brighten the image.");
+          break;
 
         default:
           this.appendable.append("Unknown command.");
       }
-    } else {
-      throw new IllegalArgumentException("Invalid: No input.");
     }
   }
 
