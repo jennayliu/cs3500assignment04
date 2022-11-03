@@ -1,7 +1,5 @@
 package model;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.HashMap;

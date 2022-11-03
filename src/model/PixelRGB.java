@@ -13,9 +13,10 @@ public class PixelRGB implements Pixel {
 
   /**
    * The constructor which takes in a red, green, and blue value.
-   * @param red The red value from 0-255
+   *
+   * @param red   The red value from 0-255
    * @param green The green value from 0-255
-   * @param blue The blue value from 0-255
+   * @param blue  The blue value from 0-255
    * @throws IllegalArgumentException If any given value is out of range
    */
   public PixelRGB(int red, int green, int blue, int maxValue) throws IllegalArgumentException {
@@ -49,16 +50,17 @@ public class PixelRGB implements Pixel {
     return this.maxValue;
   }
 
+  @Override
   public void setRed(int red) {
     this.red = red;
   }
 
-
+  @Override
   public void setGreen(int green) {
     this.green = green;
   }
 
-
+  @Override
   public void setBlue(int blue) {
     this.blue = blue;
   }

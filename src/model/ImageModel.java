@@ -17,9 +17,10 @@ public interface ImageModel {
    */
   public void process(ImageFunctionObject modification, String imageName, String newName);
 
+  /**
+   * Some basic trait of a single image, use for grayscale.
+   */
   enum RGBVIL {Red, Green, Blue, Value, Intensity, Luma}
-
-  ;
 
   /**
    * Load an image from the specified path and refer it to henceforth
@@ -36,7 +37,7 @@ public interface ImageModel {
    *
    * @param filenameToSave the file path to save to
    * @param imageName      the image name that user want to save
-   * @throws IOException
+   * @throws IOException cannot save to the given file name
    */
   public void save(String filenameToSave, String imageName) throws IOException;
 

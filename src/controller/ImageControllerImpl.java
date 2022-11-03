@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -11,7 +9,7 @@ import model.command.FlipVertical;
 import model.command.Greyscale;
 import model.command.ImageFunctionObject;
 import model.ImageModel;
-import model.PixelRGB;
+
 
 /**
  * This class is the implementation of the ImageController.

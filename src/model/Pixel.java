@@ -33,9 +33,24 @@ public interface Pixel {
    */
   public int getMax();
 
+  /**
+   * This method set the red of pixel to give value.
+   *
+   * @param red the value of red
+   */
   public void setRed(int red);
 
+  /**
+   * This method set the green of pixel to give value.
+   *
+   * @param green the value of green
+   */
   public void setGreen(int green);
 
+  /**
+   * This method set the blue of pixel to give value.
+   *
+   * @param blue the value of blue
+   */
   public void setBlue(int blue);
 }

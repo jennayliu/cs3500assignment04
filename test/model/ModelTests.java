@@ -2,6 +2,7 @@ package model;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.NoSuchFileException;
@@ -346,5 +347,7 @@ public class ModelTests {
     assertEquals(model.getImage("checkerOriginal")[1][1].getMax(),
             model.getImage("checkerAfterSave")[1][1].getMax());
 
+    File file = new File("imagesForTest/TestingSaveImage.ppm");
+    file.delete();
   }
 }

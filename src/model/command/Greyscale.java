@@ -13,7 +13,7 @@ public class Greyscale implements ImageFunctionObject {
   /**
    * This constructor decides what kind of greyscale we're doing.
    *
-   * @param rgbvil
+   * @param rgbvil either red green blue value intensity or luma to greyscale
    */
   public Greyscale(ImageModel.RGBVIL rgbvil) {
     this.rgbvil = rgbvil;
