@@ -9,7 +9,9 @@ public class FlipVertical implements ImageFunctionObject {
   /**
    * The default constructor, since it needs no fields.
    */
-  public FlipVertical() {}
+  public FlipVertical() {
+    // there is no code as no fields are needed
+  }
 
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) {

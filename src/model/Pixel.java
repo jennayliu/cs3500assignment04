@@ -6,30 +6,30 @@ package model;
 public interface Pixel {
 
   /**
-   * This method returns the red value of the pixel.
+   * This method gets the red value of the pixel when called on.
    *
-   * @return The red value
+   * @return The value of red
    */
   public int getRed();
 
   /**
-   * This method returns the green value of the pixel.
+   * This method gets the green value of the pixel when called on.
    *
-   * @return The green value
+   * @return The value of green
    */
   public int getGreen();
 
   /**
-   * This method returns the green value of the pixel.
+   * This method gets the blue value of the pixel when called on.
    *
-   * @return The green value
+   * @return The value of blue
    */
   public int getBlue();
 
   /**
-   * This method returns the max value of the pixel.
+   * This method gets the max value of the pixel when called on.
    *
-   * @return The max value
+   * @return The value of the color most prominent
    */
   public int getMax();
 

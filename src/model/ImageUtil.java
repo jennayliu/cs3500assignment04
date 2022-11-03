@@ -98,7 +98,10 @@ public class ImageUtil {
     filewriter.close();
   }
 
-  //demo main
+  /**
+   * This is a demo main from the starter code. We decided to keep this method for now.
+   * @param args The inputs
+   */
   public static void main(String[] args) {
     String filename;
 

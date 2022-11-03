@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 import java.nio.file.NoSuchFileException;
 
 import model.command.BrightenDarken;
@@ -253,8 +252,8 @@ public class ModelTests {
   public void testGreyscaleIntensity() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
     model.load("imagesForTest/TestImageWith4Pixels.ppm", "checker");
-    ImageFunctionObject IntensityGrayscale = new Greyscale(ImageModel.RGBVIL.Intensity);
-    model.process(IntensityGrayscale, "checker", "GrayscaleIntensity");
+    ImageFunctionObject intensityGrayscale = new Greyscale(ImageModel.RGBVIL.Intensity);
+    model.process(intensityGrayscale, "checker", "GrayscaleIntensity");
 
     assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getRed());
     assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getGreen());
@@ -281,8 +280,8 @@ public class ModelTests {
   public void testGreyscaleLuma() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
     model.load("imagesForTest/TestImageWith4Pixels.ppm", "checker");
-    ImageFunctionObject IntensityGrayscale = new Greyscale(ImageModel.RGBVIL.Luma);
-    model.process(IntensityGrayscale, "checker", "GrayscaleLuma");
+    ImageFunctionObject intensityGrayscale = new Greyscale(ImageModel.RGBVIL.Luma);
+    model.process(intensityGrayscale, "checker", "GrayscaleLuma");
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getGreen());
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getBlue());

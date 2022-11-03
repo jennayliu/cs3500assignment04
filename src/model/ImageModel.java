@@ -20,7 +20,7 @@ public interface ImageModel {
   /**
    * Some basic trait of a single image, use for grayscale.
    */
-  enum RGBVIL {Red, Green, Blue, Value, Intensity, Luma}
+  enum RGBVIL { Red, Green, Blue, Value, Intensity, Luma }
 
   /**
    * Load an image from the specified path and refer it to henceforth
