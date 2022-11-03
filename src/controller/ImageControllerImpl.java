@@ -57,11 +57,14 @@ public class ImageControllerImpl implements ImageController {
       switch (commandArray[0]) {
         case ("load"):
           String imageFormat = commandArray[1].split("\\.")[1];
-          if (imageFormat.equals("ppm")) {
-            model.load(commandArray[1], commandArray[2]);
-          } // implement methods in later case, if it's not a ppm file
+
+          // if (imageFormat.equals("ppm")) {
+          model.load(commandArray[1], commandArray[2]);
+          // } implement methods in later case, if it's not a ppm file
           break;
+
         case ("save"):
+          model.save(commandArray[1], commandArray[2]);
           break;
 
         case ("red-component"):
@@ -108,19 +111,6 @@ public class ImageControllerImpl implements ImageController {
     }
   }
 
-  private void save(PixelRGB[][] image, String filename) throws IOException {
-    File newImage = new File(filename);
-    FileWriter filewriter = new FileWriter(newImage);
-    filewriter.write("P3" + System.lineSeparator());
-    for (int r = 0; r < image[0].length; r++) {
-      for (int c = 0; c < image.length; c++) {
-        filewriter.write(image[r][c].getRed() + System.lineSeparator());
-        filewriter.write(image[r][c].getGreen() + System.lineSeparator());
-        filewriter.write(image[r][c].getBlue() + System.lineSeparator());
-      }
-    }
-    filewriter.close();
 
-  }
 
 }

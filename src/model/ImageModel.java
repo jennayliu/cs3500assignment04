@@ -1,5 +1,7 @@
 package model;
 
+import java.io.IOException;
+
 import model.command.ImageFunctionObject;
 
 /**
@@ -9,19 +11,32 @@ import model.command.ImageFunctionObject;
  */
 public interface ImageModel {
 
-  public void add(String name, PixelRGB[][] image);
   /**
    * This method takes in an Model.ImageFunctionObject and applies it to the image.
    * Then, it adds the modified image to the HashMap with a new name.
    */
   public void process(ImageFunctionObject modification, String imageName, String newName);
 
-  // may or may not be needed
   enum RGBVIL { Red, Green, Blue, Value, Intensity, Luma};
 
+  /**
+   * Load an image from the specified path and refer it to henceforth
+   * in the program by the given image name.
+   *
+   * @param filename the file path to load from
+   * @param newName the new image name for the program
+   */
   public void load(String filename, String newName);
 
-  public void save(String imageName, String newName);
+  /**
+   * Save the image with the given name to the specified path
+   * which should include the name of the file.
+   *
+   * @param filenameToSave the file path to save to
+   * @param imageName the image name that user want to save
+   * @throws IOException
+   */
+  public void save(String filenameToSave, String imageName) throws IOException;
 
   public PixelRGB[][] getImage(String imageName);
 

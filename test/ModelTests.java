@@ -9,6 +9,7 @@ import model.ImageModelImpl;
 import model.command.BrightenDarken;
 import model.command.FlipHorizontal;
 import model.command.FlipVertical;
+import model.command.Greyscale;
 import model.command.ImageFunctionObject;
 
 import static org.junit.Assert.assertEquals;
@@ -90,6 +91,22 @@ public class ModelTests {
     model.load("1black1white.ppm", "checker");
     ImageFunctionObject flipH = new FlipVertical();
   }
+
+
+  public void testGreyscaleRed(){
+    ImageModel modelOriginal = new ImageModelImpl();
+    modelOriginal.load("Koala.ppm", "checker");
+
+    ImageModel modelExpected = new ImageModelImpl();
+    modelExpected.load("koala-red-greyscale.png", "");
+
+    ImageFunctionObject redGrayscale = new Greyscale(ImageModel.RGBVIL.Red);
+    modelOriginal.process(redGrayscale, "checker", "koalaGrayscaleRed");
+
+
+
+  }
+
 
 
 }

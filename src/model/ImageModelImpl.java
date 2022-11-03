@@ -1,5 +1,8 @@
 package model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,10 +24,7 @@ public class ImageModelImpl implements ImageModel {
     this.loadedImages = new HashMap<>();
   }
 
-  @Override
-  public void add(String name, PixelRGB[][] image) {
 
-  }
 
   @Override
   public void process(ImageFunctionObject modification, String imageName, String newName) {
@@ -38,8 +38,8 @@ public class ImageModelImpl implements ImageModel {
   }
 
   @Override
-  public void save(String imageName, String newName) {
-
+  public void save(String filenameToSave, String imageName) throws IOException {
+    ImageUtil.writePPM(this.loadedImages.get(imageName), filenameToSave);
   }
 
   @Override
