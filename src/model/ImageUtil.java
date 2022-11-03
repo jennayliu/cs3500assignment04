@@ -22,15 +22,12 @@ public class ImageUtil {
   public static PixelRGB[][] readPPM(String filename) {
     Scanner sc;
 
-    // new
-    PixelRGB[][] image;
-
     try {
       sc = new Scanner(new FileInputStream(filename));
     } catch (FileNotFoundException e) {
       System.out.println("File " + filename + " not found!");
       // changed to return an empty pixel array
-      return new PixelRGB[0][0];
+      return null;
     }
     StringBuilder builder = new StringBuilder();
     //read the file line by line, and populate a string. This will throw away any comment lines

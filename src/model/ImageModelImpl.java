@@ -18,13 +18,10 @@ public class ImageModelImpl implements ImageModel {
 
   /**
    * This constructor takes in an image and a function object.
-   * @param image The image, represented by an image class
-   * @param function The Model.ImageFunctionObject which decides what to do with the image
    */
   public ImageModelImpl() {
     this.loadedImages = new HashMap<>();
   }
-
 
 
   @Override
@@ -34,10 +31,10 @@ public class ImageModelImpl implements ImageModel {
   }
 
   @Override
-  public void load(String filename, String newName) throws NoSuchFileException{
-    if (ImageUtil.readPPM(filename) == null){
+  public void load(String filename, String newName) throws NoSuchFileException {
+    if (ImageUtil.readPPM(filename) == null) {
       throw new NoSuchFileException("Invalid: no such file exist");
-    } else{
+    } else {
       this.loadedImages.put(newName, ImageUtil.readPPM(filename));
     }
 
@@ -58,7 +55,7 @@ public class ImageModelImpl implements ImageModel {
   private PixelRGB[][] makeImageCopy(PixelRGB[][] image) {
     PixelRGB[][] copy = new PixelRGB[image.length][image[0].length];
     for (int r = 0; r < image.length; r++) {
-      for (int c = 0; c < image[0].length; c ++) {
+      for (int c = 0; c < image[0].length; c++) {
         copy[r][c] = image[r][c];
       }
     }
