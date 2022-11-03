@@ -25,7 +25,7 @@ public class ModelTests {
     ImageModel model = new ImageModelImpl();
     model.load("black.ppm", "black");
     for (int r = 0; r < model.getImage("black")[0].length; r++) {
-      for (int c = 0; c < model.getImage("black").length; c ++) {
+      for (int c = 0; c < model.getImage("black").length; c++) {
         assertEquals(0, model.getImage("black")[r][c].getRed());
         assertEquals(0, model.getImage("black")[r][c].getGreen());
         assertEquals(0, model.getImage("black")[r][c].getBlue());
@@ -92,21 +92,60 @@ public class ModelTests {
     ImageFunctionObject flipH = new FlipVertical();
   }
 
+  /*
+  TestImageWith4Pixels.ppm
+  Width of image: 2
+  Height of image: 2
+  Maximum value of a color in this file (usually 255): 255
+  Color of pixel (0,0): 101,90,58
+  Color of pixel (1,0): 103,92,62
+  Color of pixel (0,1): 110,95,66
+  Color of pixel (1,1): 146,118,96
+  */
 
-  public void testGreyscaleRed(){
-    ImageModel modelOriginal = new ImageModelImpl();
-    modelOriginal.load("Koala.ppm", "checker");
-
-    ImageModel modelExpected = new ImageModelImpl();
-    modelExpected.load("koala-red-greyscale.png", "");
-
+  @Test
+  public void testGreyscaleRed() {
+    ImageModel model = new ImageModelImpl();
+    model.load("TestImageWith4Pixels.ppm", "checker");
     ImageFunctionObject redGrayscale = new Greyscale(ImageModel.RGBVIL.Red);
-    modelOriginal.process(redGrayscale, "checker", "koalaGrayscaleRed");
+    model.process(redGrayscale, "checker", "GrayscaleRed");
 
-
-
+    assertEquals(101, model.getImage("GrayscaleRed")[0][0].getRed());
+    assertEquals(101, model.getImage("GrayscaleRed")[0][0].getGreen());
+    assertEquals(101, model.getImage("GrayscaleRed")[0][0].getBlue());
+    assertEquals(146, model.getImage("GrayscaleRed")[1][1].getRed());
+    assertEquals(146, model.getImage("GrayscaleRed")[1][1].getGreen());
+    assertEquals(146, model.getImage("GrayscaleRed")[1][1].getBlue());
   }
 
+  @Test
+  public void testGreyscaleGreen() {
+    ImageModel model = new ImageModelImpl();
+    model.load("TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject greenGrayscale = new Greyscale(ImageModel.RGBVIL.Green);
+    model.process(greenGrayscale, "checker", "GrayscaleGreen");
 
+    assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getRed());
+    assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getGreen());
+    assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getBlue());
+    assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getRed());
+    assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getGreen());
+    assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getBlue());
+  }
+
+  @Test
+  public void testGreyscaleBlue() {
+    ImageModel model = new ImageModelImpl();
+    model.load("TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject blueGrayscale = new Greyscale(ImageModel.RGBVIL.Blue);
+    model.process(blueGrayscale, "checker", "GrayscaleBlue");
+
+    assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getRed());
+    assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getGreen());
+    assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getBlue());
+    assertEquals(96, model.getImage("GrayscaleBlue")[1][1].getRed());
+    assertEquals(96, model.getImage("GrayscaleBlue")[1][1].getGreen());
+    assertEquals(96, model.getImage("GrayscaleBlue")[1][1].getBlue());
+  }
 
 }
