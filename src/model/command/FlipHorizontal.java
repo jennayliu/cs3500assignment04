@@ -10,7 +10,8 @@ public class FlipHorizontal implements ImageFunctionObject {
   /**
    * The default constructor, since it needs no fields.
    */
-  public FlipHorizontal() {}
+  public FlipHorizontal() {
+  }
 
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) {

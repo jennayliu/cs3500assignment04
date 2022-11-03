@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,8 +34,13 @@ public class ImageModelImpl implements ImageModel {
   }
 
   @Override
-  public void load(String filename, String newName) {
-    this.loadedImages.put(newName, ImageUtil.readPPM(filename));
+  public void load(String filename, String newName) throws NoSuchFileException{
+    if (ImageUtil.readPPM(filename) == null){
+      throw new NoSuchFileException("Invalid: no such file exist");
+    } else{
+      this.loadedImages.put(newName, ImageUtil.readPPM(filename));
+    }
+
   }
 
   @Override

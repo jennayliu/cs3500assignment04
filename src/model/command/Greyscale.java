@@ -12,6 +12,7 @@ public class Greyscale implements ImageFunctionObject {
 
   /**
    * This constructor decides what kind of greyscale we're doing.
+   *
    * @param rgbvil
    */
   public Greyscale(ImageModel.RGBVIL rgbvil) {
@@ -21,7 +22,7 @@ public class Greyscale implements ImageFunctionObject {
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) throws IllegalArgumentException {
     for (int r = 0; r < image.length; r++) {
-      for (int c = 0; c < image[0].length; c ++) {
+      for (int c = 0; c < image[0].length; c++) {
         // determines the greyscale color
         int newColor = setPixel(image[r][c]);
 
@@ -37,7 +38,7 @@ public class Greyscale implements ImageFunctionObject {
   // this helper method determines what value to set the pixel's RGB as based on this.rgbvil
   private int setPixel(PixelRGB pixel) {
     int greyValue = 0;
-    switch(this.rgbvil) {
+    switch (this.rgbvil) {
       case Red:
         greyValue = pixel.getRed();
         break;
