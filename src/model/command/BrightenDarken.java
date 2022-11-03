@@ -14,7 +14,7 @@ public class BrightenDarken implements ImageFunctionObject {
    * @param value How much we're darkening the image by
    * @throws IllegalArgumentException If value is not positive
    */
-  public BrightenDarken(int value) throws IllegalArgumentException {
+  public BrightenDarken(int value) {
     this.value = value;
 
 

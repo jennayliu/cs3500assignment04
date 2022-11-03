@@ -48,30 +48,38 @@ public class ModelTests {
     assertEquals(1, model.getImage("checker-bright")[0][0].getRed());
     assertEquals(1, model.getImage("checker-bright")[0][0].getGreen());
     assertEquals(1, model.getImage("checker-bright")[0][0].getBlue());
+    assertEquals(255, model.getImage("checker-bright")[0][0].getMax());
     assertEquals(255, model.getImage("checker-bright")[0][1].getRed());
     assertEquals(255, model.getImage("checker-bright")[0][1].getGreen());
     assertEquals(255, model.getImage("checker-bright")[0][1].getBlue());
+    assertEquals(255, model.getImage("checker-bright")[0][1].getMax());
     assertEquals(1, model.getImage("checker-bright")[1][0].getRed());
     assertEquals(1, model.getImage("checker-bright")[1][0].getGreen());
     assertEquals(1, model.getImage("checker-bright")[1][0].getBlue());
+    assertEquals(255, model.getImage("checker-bright")[1][0].getMax());
     assertEquals(255, model.getImage("checker-bright")[1][1].getRed());
     assertEquals(255, model.getImage("checker-bright")[1][1].getGreen());
     assertEquals(255, model.getImage("checker-bright")[1][1].getBlue());
+    assertEquals(255, model.getImage("checker-bright")[1][1].getMax());
     // the after state for darkening
     ImageFunctionObject darken = new BrightenDarken(-1);
     model.process(darken, "checker", "checker-dark");
     assertEquals(0, model.getImage("checker-dark")[0][0].getRed());
     assertEquals(0, model.getImage("checker-dark")[0][0].getGreen());
     assertEquals(0, model.getImage("checker-dark")[0][0].getBlue());
+    assertEquals(255, model.getImage("checker-dark")[0][0].getMax());
     assertEquals(254, model.getImage("checker-dark")[0][1].getRed());
     assertEquals(254, model.getImage("checker-dark")[0][1].getGreen());
     assertEquals(254, model.getImage("checker-dark")[0][1].getBlue());
+    assertEquals(255, model.getImage("checker-dark")[0][1].getMax());
     assertEquals(0, model.getImage("checker-dark")[1][0].getRed());
     assertEquals(0, model.getImage("checker-dark")[1][0].getGreen());
     assertEquals(0, model.getImage("checker-dark")[1][0].getBlue());
+    assertEquals(255, model.getImage("checker-dark")[0][1].getMax());
     assertEquals(254, model.getImage("checker-dark")[1][1].getRed());
     assertEquals(254, model.getImage("checker-dark")[1][1].getGreen());
     assertEquals(254, model.getImage("checker-dark")[1][1].getBlue());
+    assertEquals(255, model.getImage("checker-dark")[1][1].getMax());
   }
 
   @Test
@@ -83,9 +91,11 @@ public class ModelTests {
     assertEquals(255, model.getImage("checkerH")[0][0].getRed());
     assertEquals(255, model.getImage("checkerH")[0][0].getGreen());
     assertEquals(255, model.getImage("checkerH")[0][0].getBlue());
+    assertEquals(255, model.getImage("checkerH")[0][0].getMax());
     assertEquals(0, model.getImage("checkerH")[0][1].getRed());
     assertEquals(0, model.getImage("checkerH")[0][1].getGreen());
     assertEquals(0, model.getImage("checkerH")[0][1].getBlue());
+    assertEquals(255, model.getImage("checkerH")[0][1].getMax());
   }
 
   @Test
@@ -97,9 +107,11 @@ public class ModelTests {
     assertEquals(255, model.getImage("checkerV")[0][0].getRed());
     assertEquals(255, model.getImage("checkerV")[0][0].getGreen());
     assertEquals(255, model.getImage("checkerV")[0][0].getBlue());
+    assertEquals(255, model.getImage("checkerV")[0][0].getMax());
     assertEquals(0, model.getImage("checkerV")[1][0].getRed());
     assertEquals(0, model.getImage("checkerV")[1][0].getGreen());
     assertEquals(0, model.getImage("checkerV")[1][0].getBlue());
+    assertEquals(255, model.getImage("checkerV")[1][0].getMax());
   }
 
   /*
@@ -123,9 +135,11 @@ public class ModelTests {
     assertEquals(101, model.getImage("GrayscaleRed")[0][0].getRed());
     assertEquals(101, model.getImage("GrayscaleRed")[0][0].getGreen());
     assertEquals(101, model.getImage("GrayscaleRed")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleRed")[0][0].getMax());
     assertEquals(146, model.getImage("GrayscaleRed")[1][1].getRed());
     assertEquals(146, model.getImage("GrayscaleRed")[1][1].getGreen());
     assertEquals(146, model.getImage("GrayscaleRed")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleRed")[1][1].getMax());
   }
 
   @Test
@@ -138,9 +152,11 @@ public class ModelTests {
     assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getRed());
     assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getGreen());
     assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleGreen")[0][0].getMax());
     assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getRed());
     assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getGreen());
     assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleGreen")[1][1].getMax());
   }
 
   @Test
@@ -153,9 +169,11 @@ public class ModelTests {
     assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getRed());
     assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getGreen());
     assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleBlue")[0][0].getMax());
     assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getRed());
     assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getGreen());
     assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleBlue")[1][1].getMax());
   }
 
   @Test
@@ -169,21 +187,25 @@ public class ModelTests {
     assertEquals(101, model.getImage("GrayscaleValue")[0][0].getRed());
     assertEquals(101, model.getImage("GrayscaleValue")[0][0].getGreen());
     assertEquals(101, model.getImage("GrayscaleValue")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleValue")[0][0].getMax());
 
     // when value of green is the biggest in single pixel
     assertEquals(120, model.getImage("GrayscaleValue")[0][1].getRed());
     assertEquals(120, model.getImage("GrayscaleValue")[0][1].getGreen());
     assertEquals(120, model.getImage("GrayscaleValue")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleValue")[0][1].getMax());
 
     // when value of blue is the biggest in single pixel
     assertEquals(150, model.getImage("GrayscaleValue")[1][1].getRed());
     assertEquals(150, model.getImage("GrayscaleValue")[1][1].getGreen());
     assertEquals(150, model.getImage("GrayscaleValue")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleValue")[1][1].getMax());
 
     // when value three pixels are same
     assertEquals(110, model.getImage("GrayscaleValue")[1][0].getRed());
     assertEquals(110, model.getImage("GrayscaleValue")[1][0].getGreen());
     assertEquals(110, model.getImage("GrayscaleValue")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleValue")[1][0].getMax());
   }
 
   @Test
@@ -196,10 +218,12 @@ public class ModelTests {
     assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getRed());
     assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getGreen());
     assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleIntensity")[0][0].getMax());
 
     assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getRed());
     assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getGreen());
     assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleIntensity")[1][1].getMax());
   }
 
   @Test
@@ -211,10 +235,12 @@ public class ModelTests {
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getGreen());
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][0].getMax());
 
     assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getRed());
     assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getGreen());
     assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][0].getMax());
   }
 
 }
