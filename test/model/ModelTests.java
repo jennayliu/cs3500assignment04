@@ -277,5 +277,6 @@ public class ModelTests {
             model.getImage("checkerAfterSave")[1][1].getBlue());
     assertEquals(model.getImage("checkerOriginal")[1][1].getMax(),
             model.getImage("checkerAfterSave")[1][1].getMax());
+
   }
 }
