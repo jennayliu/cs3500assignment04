@@ -20,26 +20,55 @@ public class ImageControllerImplTest {
   @Test
   public void testControllerLoad() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load 1black1whiteVertical.ppm checker");
+    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checkerO" +
+            System.lineSeparator() + "save imagesForTest/TestingSaveImage.ppm checkerO" +
+            System.lineSeparator() + "load imagesForTest/TestingSaveImage.ppm checker");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
     controller.control();
 
-    assertEquals(0, model.getImage("checker")[0][0].getRed());
-    assertEquals(0, model.getImage("checker")[0][0].getGreen());
-    assertEquals(0, model.getImage("checker")[0][0].getBlue());
-    assertEquals(255, model.getImage("checker")[0][0].getMax());
+    assertEquals(model.getImage("checkerO")[0][0].getRed(),
+            model.getImage("checker")[0][0].getRed());
+    assertEquals(model.getImage("checkerO")[0][0].getGreen(),
+            model.getImage("checker")[0][0].getGreen());
+    assertEquals(model.getImage("checkerO")[0][0].getBlue(),
+            model.getImage("checker")[0][0].getBlue());
+    assertEquals(model.getImage("checkerO")[0][0].getMax(),
+            model.getImage("checker")[0][0].getMax());
 
-    assertEquals(255, model.getImage("checker")[1][0].getRed());
-    assertEquals(255, model.getImage("checker")[1][0].getGreen());
-    assertEquals(255, model.getImage("checker")[1][0].getBlue());
-    assertEquals(255, model.getImage("checker")[1][0].getMax());
+    assertEquals(model.getImage("checkerO")[0][1].getRed(),
+            model.getImage("checker")[0][1].getRed());
+    assertEquals(model.getImage("checkerO")[0][1].getGreen(),
+            model.getImage("checker")[0][1].getGreen());
+    assertEquals(model.getImage("checkerO")[0][1].getBlue(),
+            model.getImage("checker")[0][1].getBlue());
+    assertEquals(model.getImage("checkerO")[0][1].getMax(),
+            model.getImage("checker")[0][1].getMax());
+
+    assertEquals(model.getImage("checkerO")[1][0].getRed(),
+            model.getImage("checker")[1][0].getRed());
+    assertEquals(model.getImage("checkerO")[1][0].getGreen(),
+            model.getImage("checker")[1][0].getGreen());
+    assertEquals(model.getImage("checkerO")[1][0].getBlue(),
+            model.getImage("checker")[1][0].getBlue());
+    assertEquals(model.getImage("checkerO")[1][0].getMax(),
+            model.getImage("checker")[1][0].getMax());
+
+    assertEquals(model.getImage("checkerO")[1][1].getRed(),
+            model.getImage("checker")[1][1].getRed());
+    assertEquals(model.getImage("checkerO")[1][1].getGreen(),
+            model.getImage("checker")[1][1].getGreen());
+    assertEquals(model.getImage("checkerO")[1][1].getBlue(),
+            model.getImage("checker")[1][1].getBlue());
+    assertEquals(model.getImage("checkerO")[1][1].getMax(),
+            model.getImage("checker")[1][1].getMax());
   }
 
   @Test
   public void testControllerSave() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load 1black1whiteVertical.ppm checker");
+    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker");
+
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
     controller.control();
@@ -58,8 +87,8 @@ public class ImageControllerImplTest {
   @Test
   public void testFlipH() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load 1black1white.ppm checker " + System.lineSeparator()
-            + "horizontal-flip checker checkerH");
+    Readable input = new StringReader("load imagesForTest/1black1white.ppm checker "
+            + System.lineSeparator() + "horizontal-flip checker checkerH");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
     controller.control();
@@ -80,8 +109,8 @@ public class ImageControllerImplTest {
   @Test
   public void testFlipV() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load 1black1whiteVertical.ppm checker " + System.lineSeparator()
-            + "vertical-flip checker checkerV");
+    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker"
+            + System.lineSeparator() + "vertical-flip checker checkerV");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
     controller.control();
@@ -101,8 +130,8 @@ public class ImageControllerImplTest {
   @Test
   public void testBrighten() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load 1black1whiteVertical.ppm checker " + System.lineSeparator()
-            + "brighten 10 checker checkerB");
+    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker"
+            + System.lineSeparator() + "brighten 10 checker checkerB");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
     controller.control();
@@ -122,8 +151,8 @@ public class ImageControllerImplTest {
   @Test
   public void testDarken() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load 1black1whiteVertical.ppm checker " + System.lineSeparator()
-            + "brighten -10 checker checkerB");
+    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker"
+            + System.lineSeparator() + "brighten -10 checker checkerB");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
     controller.control();
@@ -140,5 +169,191 @@ public class ImageControllerImplTest {
             output.toString());
   }
 
+  @Test
+  public void testGreyscaleRed() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+            + System.lineSeparator() + "red-component checker GrayscaleRed");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(101, model.getImage("GrayscaleRed")[0][0].getRed());
+    assertEquals(101, model.getImage("GrayscaleRed")[0][0].getGreen());
+    assertEquals(101, model.getImage("GrayscaleRed")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleRed")[0][0].getMax());
+
+    assertEquals(103, model.getImage("GrayscaleRed")[0][1].getRed());
+    assertEquals(103, model.getImage("GrayscaleRed")[0][1].getGreen());
+    assertEquals(103, model.getImage("GrayscaleRed")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleRed")[0][1].getMax());
+
+    assertEquals(110, model.getImage("GrayscaleRed")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleRed")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleRed")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleRed")[1][0].getMax());
+
+    assertEquals(146, model.getImage("GrayscaleRed")[1][1].getRed());
+    assertEquals(146, model.getImage("GrayscaleRed")[1][1].getGreen());
+    assertEquals(146, model.getImage("GrayscaleRed")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleRed")[1][1].getMax());
+    assertEquals("Successfully load the image.Successfully grayscale the image by red.",
+            output.toString());
+  }
+
+  @Test
+  public void testGreyscaleGreen() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+            + System.lineSeparator() + "green-component checker GrayscaleGreen");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getRed());
+    assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getGreen());
+    assertEquals(90, model.getImage("GrayscaleGreen")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleGreen")[0][0].getMax());
+
+    assertEquals(120, model.getImage("GrayscaleGreen")[0][1].getRed());
+    assertEquals(120, model.getImage("GrayscaleGreen")[0][1].getGreen());
+    assertEquals(120, model.getImage("GrayscaleGreen")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleGreen")[0][1].getMax());
+
+    assertEquals(110, model.getImage("GrayscaleGreen")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleGreen")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleGreen")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleGreen")[1][0].getMax());
+
+    assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getRed());
+    assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getGreen());
+    assertEquals(118, model.getImage("GrayscaleGreen")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleGreen")[1][1].getMax());
+    assertEquals("Successfully load the image.Successfully grayscale the image by green.",
+            output.toString());
+  }
+
+  @Test
+  public void testGreyscaleBlue() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+            + System.lineSeparator() + "blue-component checker GrayscaleBlue");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getRed());
+    assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getGreen());
+    assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleBlue")[0][0].getMax());
+
+    assertEquals(62, model.getImage("GrayscaleBlue")[0][1].getRed());
+    assertEquals(62, model.getImage("GrayscaleBlue")[0][1].getGreen());
+    assertEquals(62, model.getImage("GrayscaleBlue")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleBlue")[0][1].getMax());
+
+    assertEquals(110, model.getImage("GrayscaleBlue")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleBlue")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleBlue")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleBlue")[1][0].getMax());
+
+    assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getRed());
+    assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getGreen());
+    assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleBlue")[1][1].getMax());
+    assertEquals("Successfully load the image.Successfully grayscale the image by blue.",
+            output.toString());
+  }
+
+  @Test
+  public void testGreyscaleValue() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+            + System.lineSeparator() + "value-component checker GrayscaleValue");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(101, model.getImage("GrayscaleValue")[0][0].getRed());
+    assertEquals(101, model.getImage("GrayscaleValue")[0][0].getGreen());
+    assertEquals(101, model.getImage("GrayscaleValue")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleValue")[0][0].getMax());
+
+    // when value of green is the biggest in single pixel
+    assertEquals(120, model.getImage("GrayscaleValue")[0][1].getRed());
+    assertEquals(120, model.getImage("GrayscaleValue")[0][1].getGreen());
+    assertEquals(120, model.getImage("GrayscaleValue")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleValue")[0][1].getMax());
+
+    // when value of blue is the biggest in single pixel
+    assertEquals(150, model.getImage("GrayscaleValue")[1][1].getRed());
+    assertEquals(150, model.getImage("GrayscaleValue")[1][1].getGreen());
+    assertEquals(150, model.getImage("GrayscaleValue")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleValue")[1][1].getMax());
+
+    // when value three pixels are same
+    assertEquals(110, model.getImage("GrayscaleValue")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleValue")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleValue")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleValue")[1][0].getMax());
+    assertEquals("Successfully load the image.Successfully grayscale the image by value.",
+            output.toString());
+  }
+
+  public void testGreyscaleIntensity() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+            + System.lineSeparator() + "intensity-component checker GrayscaleIntensity");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getRed());
+    assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getGreen());
+    assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleIntensity")[0][0].getMax());
+
+    assertEquals(95, model.getImage("GrayscaleIntensity")[0][1].getRed());
+    assertEquals(95, model.getImage("GrayscaleIntensity")[0][1].getGreen());
+    assertEquals(95, model.getImage("GrayscaleIntensity")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleIntensity")[0][1].getMax());
+
+    assertEquals(110, model.getImage("GrayscaleIntensity")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleIntensity")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleIntensity")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleIntensity")[1][0].getMax());
+
+    assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getRed());
+    assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getGreen());
+    assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleIntensity")[1][1].getMax());
+    assertEquals("Successfully load the image.Successfully " +
+            "grayscale the image by intensity.", output.toString());
+  }
+
+  public void testGreyscaleLuma() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+            + System.lineSeparator() + "luma-component checker GrayscaleLuma");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getGreen());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][0].getMax());
+
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getRed());
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getGreen());
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][1].getMax());
+
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[1][0].getMax());
+
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getRed());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getGreen());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[1][1].getMax());
+    assertEquals("Successfully load the image.Successfully grayscale the image by luma.",
+            output.toString());
+  }
 
 }
