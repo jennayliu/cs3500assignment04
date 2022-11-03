@@ -88,10 +88,18 @@ public class ModelTests {
     assertEquals(0, model.getImage("checkerH")[0][1].getBlue());
   }
 
+  @Test
   public void testFlipV() {
     ImageModel model = new ImageModelImpl();
-    model.load("1black1white.ppm", "checker");
-    ImageFunctionObject flipH = new FlipVertical();
+    model.load("1black1whiteVertical.ppm", "checker");
+    ImageFunctionObject flipV = new FlipVertical();
+    model.process(flipV, "checker", "checkerV");
+    assertEquals(255, model.getImage("checkerV")[0][0].getRed());
+    assertEquals(255, model.getImage("checkerV")[0][0].getGreen());
+    assertEquals(255, model.getImage("checkerV")[0][0].getBlue());
+    assertEquals(0, model.getImage("checkerV")[1][0].getRed());
+    assertEquals(0, model.getImage("checkerV")[1][0].getGreen());
+    assertEquals(0, model.getImage("checkerV")[1][0].getBlue());
   }
 
   /*
