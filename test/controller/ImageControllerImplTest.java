@@ -97,4 +97,48 @@ public class ImageControllerImplTest {
     assertEquals("Successfully load the image.Successfully flip vertically the image.",
             output.toString());
   }
+
+  @Test
+  public void testBrighten() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load 1black1whiteVertical.ppm checker " + System.lineSeparator()
+            + "brighten 10 checker checkerB");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(10, model.getImage("checkerB")[0][0].getRed());
+    assertEquals(10, model.getImage("checkerB")[0][0].getGreen());
+    assertEquals(10, model.getImage("checkerB")[0][0].getBlue());
+    assertEquals(255, model.getImage("checkerB")[0][0].getMax());
+
+    assertEquals(255, model.getImage("checkerB")[1][0].getRed());
+    assertEquals(255, model.getImage("checkerB")[1][0].getGreen());
+    assertEquals(255, model.getImage("checkerB")[1][0].getBlue());
+    assertEquals(255, model.getImage("checkerB")[1][0].getMax());
+    assertEquals("Successfully load the image.Successfully brighten the image.",
+            output.toString());
+  }
+
+  @Test
+  public void testDarken() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load 1black1whiteVertical.ppm checker " + System.lineSeparator()
+            + "brighten -10 checker checkerB");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(0, model.getImage("checkerB")[0][0].getRed());
+    assertEquals(0, model.getImage("checkerB")[0][0].getGreen());
+    assertEquals(0, model.getImage("checkerB")[0][0].getBlue());
+    assertEquals(255, model.getImage("checkerB")[0][0].getMax());
+
+    assertEquals(245, model.getImage("checkerB")[1][0].getRed());
+    assertEquals(245, model.getImage("checkerB")[1][0].getGreen());
+    assertEquals(245, model.getImage("checkerB")[1][0].getBlue());
+    assertEquals(255, model.getImage("checkerB")[1][0].getMax());
+    assertEquals("Successfully load the image.Successfully brighten the image.",
+            output.toString());
+  }
+
+
 }

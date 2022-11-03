@@ -61,5 +61,5 @@ vertical-flip (image-name, new-image-name)
 Brighten the image based on an amount. You can input
 a negative value to darken the image instead.
 ```
-brighten (image-name, new-image-name, amount)
+brighten (amount, image-name, new-image-name)
 ```
