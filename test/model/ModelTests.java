@@ -1,3 +1,5 @@
+package model;
+
 import org.junit.Test;
 
 import java.io.StringReader;
@@ -98,9 +100,9 @@ public class ModelTests {
   Height of image: 2
   Maximum value of a color in this file (usually 255): 255
   Color of pixel (0,0): 101,90,58
-  Color of pixel (1,0): 103,92,62
-  Color of pixel (0,1): 110,95,66
-  Color of pixel (1,1): 146,118,96
+  Color of pixel (1,0): 103,120,62
+  Color of pixel (0,1): 110,110,110
+  Color of pixel (1,1): 146,118,150
   */
 
   @Test
@@ -143,9 +145,68 @@ public class ModelTests {
     assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getRed());
     assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getGreen());
     assertEquals(58, model.getImage("GrayscaleBlue")[0][0].getBlue());
-    assertEquals(96, model.getImage("GrayscaleBlue")[1][1].getRed());
-    assertEquals(96, model.getImage("GrayscaleBlue")[1][1].getGreen());
-    assertEquals(96, model.getImage("GrayscaleBlue")[1][1].getBlue());
+    assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getRed());
+    assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getGreen());
+    assertEquals(150, model.getImage("GrayscaleBlue")[1][1].getBlue());
+  }
+
+  @Test
+  public void testGreyscaleValue() {
+    ImageModel model = new ImageModelImpl();
+    model.load("TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject valueGrayscale = new Greyscale(ImageModel.RGBVIL.Value);
+    model.process(valueGrayscale, "checker", "GrayscaleValue");
+
+    // when value of red is the biggest in single pixel
+    assertEquals(101, model.getImage("GrayscaleValue")[0][0].getRed());
+    assertEquals(101, model.getImage("GrayscaleValue")[0][0].getGreen());
+    assertEquals(101, model.getImage("GrayscaleValue")[0][0].getBlue());
+
+    // when value of green is the biggest in single pixel
+    assertEquals(120, model.getImage("GrayscaleValue")[0][1].getRed());
+    assertEquals(120, model.getImage("GrayscaleValue")[0][1].getGreen());
+    assertEquals(120, model.getImage("GrayscaleValue")[0][1].getBlue());
+
+    // when value of blue is the biggest in single pixel
+    assertEquals(150, model.getImage("GrayscaleValue")[1][1].getRed());
+    assertEquals(150, model.getImage("GrayscaleValue")[1][1].getGreen());
+    assertEquals(150, model.getImage("GrayscaleValue")[1][1].getBlue());
+
+    // when value three pixels are same
+    assertEquals(110, model.getImage("GrayscaleValue")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleValue")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleValue")[1][0].getBlue());
+  }
+
+  @Test
+  public void testGreyscaleIntensity() {
+    ImageModel model = new ImageModelImpl();
+    model.load("TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject IntensityGrayscale = new Greyscale(ImageModel.RGBVIL.Intensity);
+    model.process(IntensityGrayscale, "checker", "GrayscaleIntensity");
+
+    assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getRed());
+    assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getGreen());
+    assertEquals(83, model.getImage("GrayscaleIntensity")[0][0].getBlue());
+
+    assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getRed());
+    assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getGreen());
+    assertEquals(138, model.getImage("GrayscaleIntensity")[1][1].getBlue());
+  }
+
+  @Test
+  public void testGreyscaleLuma() {
+    ImageModel model = new ImageModelImpl();
+    model.load("TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject IntensityGrayscale = new Greyscale(ImageModel.RGBVIL.Luma);
+    model.process(IntensityGrayscale, "checker", "GrayscaleLuma");
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getGreen());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getBlue());
+
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getRed());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getGreen());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getBlue());
   }
 
 }
