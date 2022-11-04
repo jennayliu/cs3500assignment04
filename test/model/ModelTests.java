@@ -24,7 +24,7 @@ public class ModelTests {
   @Test
   public void testLoad() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/black.ppm", "black");
+    model.load("res/black.ppm", "black");
     for (int r = 0; r < model.getImage("black")[0].length; r++) {
       for (int c = 0; c < model.getImage("black").length; c++) {
         assertEquals(0, model.getImage("black")[r][c].getRed());
@@ -47,7 +47,7 @@ public class ModelTests {
   @Test
   public void testBrightenDarken() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/checkerboardbw.ppm", "checker");
+    model.load("res/checkerboardbw.ppm", "checker");
 
     // the after state for brightening
     ImageFunctionObject brighten = new BrightenDarken(1);
@@ -92,7 +92,7 @@ public class ModelTests {
   @Test
   public void testFlipH() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/1black1white.ppm", "checker");
+    model.load("res/1black1white.ppm", "checker");
     ImageFunctionObject flipH = new FlipHorizontal();
     model.process(flipH, "checker", "checkerH");
     assertEquals(255, model.getImage("checkerH")[0][0].getRed());
@@ -108,7 +108,7 @@ public class ModelTests {
   @Test
   public void testFlipV() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/1black1whiteVertical.ppm", "checker");
+    model.load("res/1black1whiteVertical.ppm", "checker");
     ImageFunctionObject flipV = new FlipVertical();
     model.process(flipV, "checker", "checkerV");
     assertEquals(255, model.getImage("checkerV")[0][0].getRed());
@@ -135,7 +135,7 @@ public class ModelTests {
   @Test
   public void testGreyscaleRed() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/TestImageWith4Pixels.ppm", "checker");
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
     ImageFunctionObject redGrayscale = new Greyscale(ImageModel.RGBVIL.Red);
     model.process(redGrayscale, "checker", "GrayscaleRed");
 
@@ -163,7 +163,7 @@ public class ModelTests {
   @Test
   public void testGreyscaleGreen() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/TestImageWith4Pixels.ppm", "checker");
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
     ImageFunctionObject greenGrayscale = new Greyscale(ImageModel.RGBVIL.Green);
     model.process(greenGrayscale, "checker", "GrayscaleGreen");
 
@@ -191,7 +191,7 @@ public class ModelTests {
   @Test
   public void testGreyscaleBlue() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/TestImageWith4Pixels.ppm", "checker");
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
     ImageFunctionObject blueGrayscale = new Greyscale(ImageModel.RGBVIL.Blue);
     model.process(blueGrayscale, "checker", "GrayscaleBlue");
 
@@ -219,7 +219,7 @@ public class ModelTests {
   @Test
   public void testGreyscaleValue() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/TestImageWith4Pixels.ppm", "checker");
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
     ImageFunctionObject valueGrayscale = new Greyscale(ImageModel.RGBVIL.Value);
     model.process(valueGrayscale, "checker", "GrayscaleValue");
 
@@ -252,7 +252,7 @@ public class ModelTests {
   @Test
   public void testGreyscaleIntensity() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/TestImageWith4Pixels.ppm", "checker");
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
     ImageFunctionObject IntensityGrayscale = new Greyscale(ImageModel.RGBVIL.Intensity);
     model.process(IntensityGrayscale, "checker", "GrayscaleIntensity");
 
@@ -280,7 +280,7 @@ public class ModelTests {
   @Test
   public void testGreyscaleLuma() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/TestImageWith4Pixels.ppm", "checker");
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
     ImageFunctionObject IntensityGrayscale = new Greyscale(ImageModel.RGBVIL.Luma);
     model.process(IntensityGrayscale, "checker", "GrayscaleLuma");
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
@@ -307,9 +307,9 @@ public class ModelTests {
   @Test
   public void testSave() throws IOException {
     ImageModel model = new ImageModelImpl();
-    model.load("imagesForTest/TestImageWith4Pixels.ppm", "checkerOriginal");
-    model.save("imagesForTest/TestingSaveImage.ppm", "checkerOriginal");
-    model.load("imagesForTest/TestingSaveImage.ppm", "checkerAfterSave");
+    model.load("res/TestImageWith4Pixels.ppm", "checkerOriginal");
+    model.save("res/TestingSaveImage.ppm", "checkerOriginal");
+    model.load("res/TestingSaveImage.ppm", "checkerAfterSave");
 
     assertEquals(model.getImage("checkerOriginal")[0][0].getRed(),
             model.getImage("checkerAfterSave")[0][0].getRed());
@@ -347,7 +347,7 @@ public class ModelTests {
     assertEquals(model.getImage("checkerOriginal")[1][1].getMax(),
             model.getImage("checkerAfterSave")[1][1].getMax());
 
-    File file = new File("imagesForTest/TestingSaveImage.ppm");
+    File file = new File("res/TestingSaveImage.ppm");
     file.delete();
   }
 }

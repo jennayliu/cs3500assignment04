@@ -20,7 +20,7 @@ public class ImageControllerImplTest {
   @Test
   public void testControllerLoad() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker");
+    Readable input = new StringReader("load res/1black1whiteVertical.ppm checker");
 
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -41,9 +41,9 @@ public class ImageControllerImplTest {
   @Test
   public void testControllerSave() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checkerO" +
-            System.lineSeparator() + "save imagesForTest/TestingSaveImage.ppm checkerO" +
-            System.lineSeparator() + "load imagesForTest/TestingSaveImage.ppm checker");
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checkerO" +
+            System.lineSeparator() + "save res/TestingSaveImage.ppm checkerO" +
+            System.lineSeparator() + "load res/TestingSaveImage.ppm checker");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
     controller.control();
@@ -84,14 +84,14 @@ public class ImageControllerImplTest {
     assertEquals(model.getImage("checkerO")[1][1].getMax(),
             model.getImage("checker")[1][1].getMax());
 
-    File file = new File("imagesForTest/TestingSaveImage.ppm");
+    File file = new File("res/TestingSaveImage.ppm");
     file.delete();
   }
 
   @Test
   public void testFlipH() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/1black1white.ppm checker "
+    Readable input = new StringReader("load res/1black1white.ppm checker "
             + System.lineSeparator() + "horizontal-flip checker checkerH");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -113,7 +113,7 @@ public class ImageControllerImplTest {
   @Test
   public void testFlipV() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker"
+    Readable input = new StringReader("load res/1black1whiteVertical.ppm checker"
             + System.lineSeparator() + "vertical-flip checker checkerV");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -134,7 +134,7 @@ public class ImageControllerImplTest {
   @Test
   public void testBrighten() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker"
+    Readable input = new StringReader("load res/1black1whiteVertical.ppm checker"
             + System.lineSeparator() + "brighten 10 checker checkerB");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -155,7 +155,7 @@ public class ImageControllerImplTest {
   @Test
   public void testDarken() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker"
+    Readable input = new StringReader("load res/1black1whiteVertical.ppm checker"
             + System.lineSeparator() + "brighten -10 checker checkerB");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -176,7 +176,7 @@ public class ImageControllerImplTest {
   @Test
   public void testGreyscaleRed() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checker"
             + System.lineSeparator() + "red-component checker GrayscaleRed");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -207,7 +207,7 @@ public class ImageControllerImplTest {
   @Test
   public void testGreyscaleGreen() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checker"
             + System.lineSeparator() + "green-component checker GrayscaleGreen");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -238,7 +238,7 @@ public class ImageControllerImplTest {
   @Test
   public void testGreyscaleBlue() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checker"
             + System.lineSeparator() + "blue-component checker GrayscaleBlue");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -269,7 +269,7 @@ public class ImageControllerImplTest {
   @Test
   public void testGreyscaleValue() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checker"
             + System.lineSeparator() + "value-component checker GrayscaleValue");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -302,7 +302,7 @@ public class ImageControllerImplTest {
 
   public void testGreyscaleIntensity() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checker"
             + System.lineSeparator() + "intensity-component checker GrayscaleIntensity");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -332,7 +332,7 @@ public class ImageControllerImplTest {
 
   public void testGreyscaleLuma() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/TestImageWith4Pixels.ppm checker"
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checker"
             + System.lineSeparator() + "luma-component checker GrayscaleLuma");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
@@ -359,14 +359,14 @@ public class ImageControllerImplTest {
     assertEquals("Successfully load the image.Successfully grayscale the image by luma.",
             output.toString());
 
-    File file = new File("imagesForTest/TestingSaveImage.ppm");
+    File file = new File("res/TestingSaveImage.ppm");
     file.delete();
   }
 
   @Test
   public void testModifyTwice() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load imagesForTest/1black1whiteVertical.ppm checker"
+    Readable input = new StringReader("load res/1black1whiteVertical.ppm checker"
             + System.lineSeparator() + "vertical-flip checker checkerV"
             + System.lineSeparator() + "brighten 10 checker checkerB");
 
