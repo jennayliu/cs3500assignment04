@@ -11,6 +11,7 @@ public class FlipHorizontal implements ImageFunctionObject {
    * The default constructor, since it needs no fields.
    */
   public FlipHorizontal() {
+    // there is no code as no fields are needed
   }
 
   @Override

@@ -58,70 +58,70 @@ public class ImageControllerImpl implements ImageController {
           // if (imageFormat.equals("ppm")) {
           model.load(commandArray[1], commandArray[2]);
           // } implement methods in later case, if it's not a ppm file
-          this.appendable.append("Successfully load the image.");
+          this.appendable.append("Successfully load the image.\n");
           break;
 
         case ("save"):
           model.save(commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully save the image.");
+          this.appendable.append("Successfully save the image.\n");
           break;
 
         case ("red-component"):
           ImageFunctionObject redGreyscale = new Greyscale(ImageModel.RGBVIL.Red);
           model.process(redGreyscale, commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully grayscale the image by red.");
+          this.appendable.append("Successfully grayscale the image by red.\n");
           break;
 
         case ("green-component"):
           ImageFunctionObject greenGreyscale = new Greyscale(ImageModel.RGBVIL.Green);
           model.process(greenGreyscale, commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully grayscale the image by green.");
+          this.appendable.append("Successfully grayscale the image by green.\n");
           break;
 
         case ("blue-component"):
           ImageFunctionObject blueGreyscale = new Greyscale(ImageModel.RGBVIL.Blue);
           model.process(blueGreyscale, commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully grayscale the image by blue.");
+          this.appendable.append("Successfully grayscale the image by blue.\n");
           break;
 
         case ("value-component"):
           ImageFunctionObject valueGreyscale = new Greyscale(ImageModel.RGBVIL.Value);
           model.process(valueGreyscale, commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully grayscale the image by value.");
+          this.appendable.append("Successfully grayscale the image by value.\n");
           break;
 
         case ("luma-component"):
           ImageFunctionObject lumaGreyscale = new Greyscale(ImageModel.RGBVIL.Luma);
           model.process(lumaGreyscale, commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully grayscale the image by luma.");
+          this.appendable.append("Successfully grayscale the image by luma.\n");
           break;
 
         case ("intensity-component"):
           ImageFunctionObject intensityGreyscale = new Greyscale(ImageModel.RGBVIL.Value);
           model.process(intensityGreyscale, commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully grayscale the image by intensity.");
+          this.appendable.append("Successfully grayscale the image by intensity.\n");
           break;
 
         case ("horizontal-flip"):
           ImageFunctionObject horizontalFlip = new FlipHorizontal();
           model.process(horizontalFlip, commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully flip horizontally the image.");
+          this.appendable.append("Successfully flip horizontally the image.\n");
           break;
 
         case ("vertical-flip"):
           ImageFunctionObject verticalFlip = new FlipVertical();
           model.process(verticalFlip, commandArray[1], commandArray[2]);
-          this.appendable.append("Successfully flip vertically the image.");
+          this.appendable.append("Successfully flip vertically the image.\n");
           break;
 
         case ("brighten"):
           ImageFunctionObject brighten = new BrightenDarken(Integer.parseInt(commandArray[1]));
           model.process(brighten, commandArray[2], commandArray[3]);
-          this.appendable.append("Successfully brighten the image.");
+          this.appendable.append("Successfully brighten the image.\n");
           break;
 
         default:
-          this.appendable.append("Unknown command.");
+          this.appendable.append("Unknown command.\n");
       }
     }
   }
