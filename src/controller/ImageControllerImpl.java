@@ -53,11 +53,7 @@ public class ImageControllerImpl implements ImageController {
 
       switch (commandArray[0]) {
         case ("load"):
-          String imageFormat = commandArray[1].split("\\.")[1];
-
-          // if (imageFormat.equals("ppm")) {
           model.load(commandArray[1], commandArray[2]);
-          // } implement methods in later case, if it's not a ppm file
           this.appendable.append("Successfully load the image.\n");
           break;
 
@@ -125,7 +121,6 @@ public class ImageControllerImpl implements ImageController {
       }
     }
   }
-
 
 
 }

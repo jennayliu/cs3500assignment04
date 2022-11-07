@@ -31,6 +31,7 @@ public interface ImageModel {
    */
   public void load(String filename, String newName) throws NoSuchFileException;
 
+
   /**
    * Save the image with the given name to the specified path
    * which should include the name of the file.

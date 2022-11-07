@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,6 +24,30 @@ public class ImageUtilTests {
     assertEquals(255, image[0][1].getGreen());
     assertEquals(255, image[0][1].getBlue());
     assertEquals(255, image[0][1].getMax());
+  }
+
+  @Test
+  public void testReadImage() throws NoSuchFileException {
+    PixelRGB[][] image = ImageUtil.readImage("res/4Pixels_PNG.png");
+    assertEquals(101, image[0][0].getRed());
+    assertEquals(90, image[0][0].getGreen());
+    assertEquals(58, image[0][0].getBlue());
+    assertEquals(255, image[0][0].getMax());
+
+    assertEquals(103, image[1][0].getRed());
+    assertEquals(120, image[1][0].getGreen());
+    assertEquals(62, image[1][0].getBlue());
+    assertEquals(255, image[1][0].getMax());
+
+    assertEquals(110, image[0][1].getRed());
+    assertEquals(110, image[0][1].getGreen());
+    assertEquals(110, image[0][1].getBlue());
+    assertEquals(255, image[0][1].getMax());
+
+    assertEquals(146, image[1][1].getRed());
+    assertEquals(118, image[1][1].getGreen());
+    assertEquals(150, image[1][1].getBlue());
+    assertEquals(255, image[1][1].getMax());
   }
 
   // test writePPM method

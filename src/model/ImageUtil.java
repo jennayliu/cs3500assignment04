@@ -1,11 +1,16 @@
 package model;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
+
+import javax.imageio.ImageIO;
 
 
 /**
@@ -26,7 +31,6 @@ public class ImageUtil {
       sc = new Scanner(new FileInputStream(filename));
     } catch (FileNotFoundException e) {
       System.out.println("File " + filename + " not found!");
-      // changed to return an empty pixel array
       return null;
     }
     StringBuilder builder = new StringBuilder();
@@ -98,8 +102,50 @@ public class ImageUtil {
     filewriter.close();
   }
 
+  public static PixelRGB[][] readImage(String filename) throws NoSuchFileException {
+    FileInputStream inputFile = null;
+    BufferedImage input = null;
+
+    try{
+      inputFile = new FileInputStream(filename);
+    }
+    catch (FileNotFoundException e){
+      System.out.println("File " + filename + " not found!");
+      return null;
+    }
+
+    try{
+      input = ImageIO.read(inputFile);
+      inputFile.close();
+    }
+    catch (IOException e){
+      System.out.println("Invalid: cannot read file.");
+      return null;
+    }
+
+    int width = input.getWidth();
+    System.out.println("Width of image: " + width);
+    int height = input.getHeight();
+    System.out.println("Height of image: " + height);
+
+
+    PixelRGB[][] pixels = new PixelRGB[height][width];
+
+    for (int i = 0; i < input.getHeight(); i++) {
+      for (int j = 0; j < input.getWidth(); j++) {
+        int color = input.getRGB(i, j);
+        Color c = new Color(color);
+        pixels[i][j] = new PixelRGB(c.getRed(), c.getGreen(), c.getBlue(), 255);
+      }
+    }
+
+    return pixels;
+
+  }
+
   /**
    * This is a demo main from the starter code. We decided to keep this method for now.
+   *
    * @param args The inputs
    */
   public static void main(String[] args) {

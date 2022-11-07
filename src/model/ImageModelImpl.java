@@ -30,10 +30,19 @@ public class ImageModelImpl implements ImageModel {
 
   @Override
   public void load(String filename, String newName) throws NoSuchFileException {
-    if (ImageUtil.readPPM(filename) == null) {
-      throw new NoSuchFileException("Invalid: no such file exist");
+    String imageFormat = filename.split("\\.")[1];
+    if (imageFormat.equals("ppm")) {
+      if (ImageUtil.readPPM(filename) == null) {
+        throw new NoSuchFileException("Invalid: no such file exist");
+      } else {
+        this.loadedImages.put(newName, ImageUtil.readPPM(filename));
+      }
     } else {
-      this.loadedImages.put(newName, ImageUtil.readPPM(filename));
+      if (ImageUtil.readImage(filename) == null) {
+        throw new NoSuchFileException("Invalid: no such file exist");
+      } else {
+        this.loadedImages.put(newName, ImageUtil.readPPM(filename));
+      }
     }
 
   }
