@@ -7,6 +7,8 @@ import java.util.Map;
 
 import model.command.ImageFunctionObject;
 
+import static model.command.Blur.makeImageCopy2;
+
 /**
  * This is the implementation of the Model.ImageModel interface.
  */
@@ -60,13 +62,7 @@ public class ImageModelImpl implements ImageModel {
 
   // this helper makes a copy of an image
   private PixelRGB[][] makeImageCopy(PixelRGB[][] image) {
-    PixelRGB[][] copy = new PixelRGB[image.length][image[0].length];
-    for (int r = 0; r < image.length; r++) {
-      for (int c = 0; c < image[0].length; c++) {
-        copy[r][c] = image[r][c];
-      }
-    }
-    return copy;
+    return makeImageCopy2(image);
   }
 
 }
