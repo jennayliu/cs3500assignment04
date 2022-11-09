@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class ImageControllerImplTest {
 
   @Test
-  public void testControllerLoad() throws IOException {
+  public void testControllerLoadPPM() throws IOException {
     ImageModel model = new ImageModelImpl();
     Readable input = new StringReader("load res/1black1whiteVertical.ppm checker");
 
@@ -37,9 +37,39 @@ public class ImageControllerImplTest {
     assertEquals(255, model.getImage("checker")[1][0].getMax());
   }
 
+  @Test
+  public void testControllerLoadImage() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load res/4Pixels_PNG.png checker");
+
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+
+    assertEquals(101, model.getImage("checker")[0][0].getRed());
+    assertEquals(90, model.getImage("checker")[0][0].getGreen());
+    assertEquals(58, model.getImage("checker")[0][0].getBlue());
+    assertEquals(255, model.getImage("checker")[0][0].getMax());
+
+    assertEquals(103, model.getImage("checker")[0][1].getRed());
+    assertEquals(120, model.getImage("checker")[0][1].getGreen());
+    assertEquals(62, model.getImage("checker")[0][1].getBlue());
+    assertEquals(255, model.getImage("checker")[0][1].getMax());
+
+    assertEquals(110, model.getImage("checker")[1][0].getRed());
+    assertEquals(110, model.getImage("checker")[1][0].getGreen());
+    assertEquals(110, model.getImage("checker")[1][0].getBlue());
+    assertEquals(255, model.getImage("checker")[1][0].getMax());
+
+    assertEquals(146, model.getImage("checker")[1][1].getRed());
+    assertEquals(118, model.getImage("checker")[1][1].getGreen());
+    assertEquals(150, model.getImage("checker")[1][1].getBlue());
+    assertEquals(255, model.getImage("checker")[1][1].getMax());
+  }
+
   // test for controller load
   @Test
-  public void testControllerSave() throws IOException {
+  public void testControllerSavePPM() throws IOException {
     ImageModel model = new ImageModelImpl();
     Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checkerO" +
             System.lineSeparator() + "save res/TestingSaveImage.ppm checkerO" +
@@ -86,6 +116,57 @@ public class ImageControllerImplTest {
 
     File file = new File("res/TestingSaveImage.ppm");
     file.delete();
+  }
+
+  @Test
+  public void testControllerSaveImage() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checkerO" +
+            System.lineSeparator() + "save res/TestingSaveImagePNG.png checkerO" +
+            System.lineSeparator() + "load res/TestingSaveImagePNG.png checker");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+
+    assertEquals(model.getImage("checkerO")[0][0].getRed(),
+            model.getImage("checker")[0][0].getRed());
+    assertEquals(model.getImage("checkerO")[0][0].getGreen(),
+            model.getImage("checker")[0][0].getGreen());
+    assertEquals(model.getImage("checkerO")[0][0].getBlue(),
+            model.getImage("checker")[0][0].getBlue());
+    assertEquals(model.getImage("checkerO")[0][0].getMax(),
+            model.getImage("checker")[0][0].getMax());
+
+    assertEquals(model.getImage("checkerO")[0][1].getRed(),
+            model.getImage("checker")[0][1].getRed());
+    assertEquals(model.getImage("checkerO")[0][1].getGreen(),
+            model.getImage("checker")[0][1].getGreen());
+    assertEquals(model.getImage("checkerO")[0][1].getBlue(),
+            model.getImage("checker")[0][1].getBlue());
+    assertEquals(model.getImage("checkerO")[0][1].getMax(),
+            model.getImage("checker")[0][1].getMax());
+
+    assertEquals(model.getImage("checkerO")[1][0].getRed(),
+            model.getImage("checker")[1][0].getRed());
+    assertEquals(model.getImage("checkerO")[1][0].getGreen(),
+            model.getImage("checker")[1][0].getGreen());
+    assertEquals(model.getImage("checkerO")[1][0].getBlue(),
+            model.getImage("checker")[1][0].getBlue());
+    assertEquals(model.getImage("checkerO")[1][0].getMax(),
+            model.getImage("checker")[1][0].getMax());
+
+    assertEquals(model.getImage("checkerO")[1][1].getRed(),
+            model.getImage("checker")[1][1].getRed());
+    assertEquals(model.getImage("checkerO")[1][1].getGreen(),
+            model.getImage("checker")[1][1].getGreen());
+    assertEquals(model.getImage("checkerO")[1][1].getBlue(),
+            model.getImage("checker")[1][1].getBlue());
+    assertEquals(model.getImage("checkerO")[1][1].getMax(),
+            model.getImage("checker")[1][1].getMax());
+
+    File file = new File("res/TestingSaveImagePNG.png");
+    file.delete();
+
   }
 
   @Test
