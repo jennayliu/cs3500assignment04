@@ -6,11 +6,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 
+import model.command.Blur;
 import model.command.BrightenDarken;
 import model.command.FlipHorizontal;
 import model.command.FlipVertical;
 import model.command.Greyscale;
 import model.command.ImageFunctionObject;
+import model.command.Sharpen;
 import model.command.Transform;
 
 import static org.junit.Assert.assertEquals;
@@ -424,4 +426,58 @@ public class ModelTests {
     assertEquals(122, model.getImage("sepia")[1][1].getBlue());
     assertEquals(255, model.getImage("sepia")[1][1].getMax());
   }
+  @Test
+  public void testBlur() throws NoSuchFileException {
+    ImageModel model = new ImageModelImpl();
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject lumaGrayscale = new Blur();
+    model.process(lumaGrayscale, "checker", "blur");
+    assertEquals(35, model.getImage("blur")[0][0].getRed());
+    assertEquals(36, model.getImage("blur")[0][0].getGreen());
+    assertEquals(30, model.getImage("blur")[0][0].getBlue());
+    assertEquals(255, model.getImage("blur")[0][0].getMax());
+
+    assertEquals(29, model.getImage("blur")[0][1].getRed());
+    assertEquals(26, model.getImage("blur")[0][1].getGreen());
+    assertEquals(29, model.getImage("blur")[0][1].getBlue());
+    assertEquals(255, model.getImage("blur")[0][1].getMax());
+
+    assertEquals(24, model.getImage("blur")[1][0].getRed());
+    assertEquals(20, model.getImage("blur")[1][0].getGreen());
+    assertEquals(24, model.getImage("blur")[1][0].getBlue());
+    assertEquals(255, model.getImage("blur")[1][0].getMax());
+
+    assertEquals(8, model.getImage("blur")[1][1].getRed());
+    assertEquals(8, model.getImage("blur")[1][1].getGreen());
+    assertEquals(8, model.getImage("blur")[1][1].getBlue());
+    assertEquals(255, model.getImage("blur")[1][1].getMax());
+  }
+
+  @Test
+  public void testSharpen() throws NoSuchFileException {
+    ImageModel model = new ImageModelImpl();
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject lumaGrayscale = new Sharpen();
+    model.process(lumaGrayscale, "checker", "sharpen");
+    assertEquals(190, model.getImage("sharpen")[0][0].getRed());
+    assertEquals(255, model.getImage("sharpen")[0][0].getGreen());
+    assertEquals(138, model.getImage("sharpen")[0][0].getBlue());
+    assertEquals(255, model.getImage("sharpen")[0][0].getMax());
+
+    assertEquals(214, model.getImage("sharpen")[0][1].getRed());
+    assertEquals(255, model.getImage("sharpen")[0][1].getGreen());
+    assertEquals(161, model.getImage("sharpen")[0][1].getBlue());
+    assertEquals(255, model.getImage("sharpen")[0][1].getMax());
+
+    assertEquals(247, model.getImage("sharpen")[1][0].getRed());
+    assertEquals(255, model.getImage("sharpen")[1][0].getGreen());
+    assertEquals(222, model.getImage("sharpen")[1][0].getBlue());
+    assertEquals(255, model.getImage("sharpen")[1][0].getMax());
+
+    assertEquals(255, model.getImage("sharpen")[1][1].getRed());
+    assertEquals(255, model.getImage("sharpen")[1][1].getGreen());
+    assertEquals(255, model.getImage("sharpen")[1][1].getBlue());
+    assertEquals(255, model.getImage("sharpen")[1][1].getMax());
+  }
+
 }

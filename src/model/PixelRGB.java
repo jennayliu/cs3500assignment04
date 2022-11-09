@@ -52,16 +52,32 @@ public class PixelRGB implements Pixel {
 
   @Override
   public void setRed(int red) {
+    if (red > this.maxValue) {
+      red = this.maxValue;
+    } else if (red < 0) {
+      red = 0;
+    }
     this.red = red;
   }
 
   @Override
   public void setGreen(int green) {
+    if (green > this.maxValue) {
+      green = this.maxValue;
+    } else if (green < 0) {
+      green = 0;
+    }
     this.green = green;
   }
 
   @Override
   public void setBlue(int blue) {
+    if (blue > this.maxValue) {
+      blue = this.maxValue;
+    } else if (blue < 0) {
+      blue = 0;
+    }
+
     this.blue = blue;
   }
 

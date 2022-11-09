@@ -128,7 +128,7 @@ public class ImageControllerImpl implements ImageController {
           greyscaleMatrix[1][2] = 0.0722;
           greyscaleMatrix[2][2] = 0.0722;
           ImageFunctionObject greyscaleTrans = new Transform(greyscaleMatrix);
-          model.process(greyscaleTrans, commandArray[2], commandArray[3]);
+          model.process(greyscaleTrans, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully greyscale the image.\n");
 
           break;
@@ -145,7 +145,7 @@ public class ImageControllerImpl implements ImageController {
           sepiaMatrix[2][2] = 0.131;
 
           ImageFunctionObject sepiaTrans = new Transform(sepiaMatrix);
-          model.process(sepiaTrans, commandArray[2], commandArray[3]);
+          model.process(sepiaTrans, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully sepia the image.\n");
 
           break;

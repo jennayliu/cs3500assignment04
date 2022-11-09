@@ -40,6 +40,7 @@ public class Blur implements ImageFunctionObject {
 
         try {
           p1 = copy[r - 1][c - 1];
+
         } catch (IndexOutOfBoundsException e) {
 
         }

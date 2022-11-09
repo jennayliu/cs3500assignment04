@@ -404,4 +404,36 @@ public class ImageControllerImplTest {
     assertEquals("Successfully load the image.\nSuccessfully flip vertically the image."
             + "\nSuccessfully brighten the image.\n", output.toString());
   }
+
+  @Test
+  public void testGreyscale() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("load res/TestImageWith4Pixels.ppm checker"
+            + System.lineSeparator() + "greyscale checker GrayscaleLuma");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getGreen());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][0].getMax());
+
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getRed());
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getGreen());
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][1].getMax());
+
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[1][0].getMax());
+
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getRed());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getGreen());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[1][1].getMax());
+    assertEquals("Successfully load the image."
+                    + "\nSuccessfully greyscale the image.\n",
+            output.toString());
+  }
 }
