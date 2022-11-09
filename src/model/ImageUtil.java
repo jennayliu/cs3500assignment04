@@ -136,9 +136,9 @@ public class ImageUtil {
 
     for (int i = 0; i < input.getHeight(); i++) {
       for (int j = 0; j < input.getWidth(); j++) {
-        int color = input.getRGB(i, j);
+        int color = input.getRGB(j, i);
         Color c = new Color(color);
-        pixels[i][j] = new PixelRGB(c.getRed(), c.getGreen(), c.getBlue(), 255);
+        pixels[i][j] = new PixelRGB(c.getRed(), c.getGreen(), c.getBlue(),255);
       }
     }
 
@@ -154,14 +154,14 @@ public class ImageUtil {
    */
   public static void makeImageOutput(PixelRGB[][] image, String filename) {
 
-    BufferedImage outputImage = new BufferedImage(image.length, image[0].length,
+    BufferedImage outputImage = new BufferedImage(image[0].length, image.length,
             BufferedImage.TYPE_INT_RGB);
 
     for (int r = 0; r < image.length; r++) {
       for (int c = 0; c < image[0].length; c++) {
         Pixel pixel = image[r][c];
         Color color = new Color(pixel.getRed(), pixel.getGreen(), pixel.getBlue());
-        outputImage.setRGB(r, c, color.getRGB());
+        outputImage.setRGB(c, r, color.getRGB());
       }
     }
     try {

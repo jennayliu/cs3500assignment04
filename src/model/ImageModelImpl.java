@@ -47,7 +47,7 @@ public class ImageModelImpl implements ImageModel {
       if (ImageUtil.readImage(filename) == null) {
         throw new NoSuchFileException("Invalid: no such file exist");
       } else {
-        this.loadedImages.put(newName, ImageUtil.readPPM(filename));
+        this.loadedImages.put(newName, ImageUtil.readImage(filename));
       }
     }
 
