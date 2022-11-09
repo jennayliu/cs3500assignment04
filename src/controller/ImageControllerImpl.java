@@ -7,6 +7,7 @@ import model.command.BrightenDarken;
 import model.command.FlipHorizontal;
 import model.command.FlipVertical;
 import model.command.Greyscale;
+import model.command.Transform;
 import model.command.ImageFunctionObject;
 import model.ImageModel;
 
@@ -114,6 +115,39 @@ public class ImageControllerImpl implements ImageController {
           ImageFunctionObject brighten = new BrightenDarken(Integer.parseInt(commandArray[1]));
           model.process(brighten, commandArray[2], commandArray[3]);
           this.appendable.append("Successfully brighten the image.\n");
+          break;
+        case ("greyscale"):
+          double[][] greyscaleMatrix = new double[3][3];
+          greyscaleMatrix[0][0] = 0.2126;
+          greyscaleMatrix[1][0] = 0.2126;
+          greyscaleMatrix[2][0] = 0.2126;
+          greyscaleMatrix[0][1] = 0.7151;
+          greyscaleMatrix[1][1] = 0.7152;
+          greyscaleMatrix[2][1] = 0.7152;
+          greyscaleMatrix[0][2] = 0.0722;
+          greyscaleMatrix[1][2] = 0.0722;
+          greyscaleMatrix[2][2] = 0.0722;
+          ImageFunctionObject greyscaleTrans = new Transform(greyscaleMatrix);
+          model.process(greyscaleTrans, commandArray[2], commandArray[3]);
+          this.appendable.append("Successfully greyscale the image.\n");
+
+          break;
+        case ("sepia"):
+          double[][] sepiaMatrix = new double[3][3];
+          sepiaMatrix[0][0] = 0.393;
+          sepiaMatrix[1][0] = 0.769;
+          sepiaMatrix[2][0] = 0.189;
+          sepiaMatrix[0][1] = 0.349;
+          sepiaMatrix[1][1] = 0.686;
+          sepiaMatrix[2][1] = 0.168;
+          sepiaMatrix[0][2] = 0.272;
+          sepiaMatrix[1][2] = 0.534;
+          sepiaMatrix[2][2] = 0.131;
+
+          ImageFunctionObject sepiaTrans = new Transform(sepiaMatrix);
+          model.process(sepiaTrans, commandArray[2], commandArray[3]);
+          this.appendable.append("Successfully sepia the image.\n");
+
           break;
 
         default:

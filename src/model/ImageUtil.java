@@ -102,23 +102,26 @@ public class ImageUtil {
     filewriter.close();
   }
 
-  public static PixelRGB[][] readImage(String filename) throws NoSuchFileException {
+  /**
+   * @param filename
+   * @return
+   * @throws NoSuchFileException
+   */
+  public static PixelRGB[][] readImage(String filename) {
     FileInputStream inputFile = null;
     BufferedImage input = null;
 
-    try{
+    try {
       inputFile = new FileInputStream(filename);
-    }
-    catch (FileNotFoundException e){
+    } catch (FileNotFoundException e) {
       System.out.println("File " + filename + " not found!");
       return null;
     }
 
-    try{
+    try {
       input = ImageIO.read(inputFile);
       inputFile.close();
-    }
-    catch (IOException e){
+    } catch (IOException e) {
       System.out.println("Invalid: cannot read file.");
       return null;
     }
@@ -143,8 +146,36 @@ public class ImageUtil {
 
   }
 
+
+  /**
+   * @param image
+   * @param filename
+   * @throws IllegalArgumentException
+   */
+  public static void makeImageOutput(PixelRGB[][] image, String filename) {
+
+    BufferedImage outputImage = new BufferedImage(image.length, image[0].length,
+            BufferedImage.TYPE_INT_RGB);
+
+    for (int r = 0; r < image.length; r++) {
+      for (int c = 0; c < image[0].length; c++) {
+        Pixel pixel = image[r][c];
+        Color color = new Color(pixel.getRed(), pixel.getGreen(), pixel.getBlue());
+        outputImage.setRGB(r, c, color.getRGB());
+      }
+    }
+    try {
+      ImageIO.write(outputImage, filename.split("\\.")[1], new File(filename));
+
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Invalid: " + e.getMessage());
+    }
+  }
+
+
   /**
    * This method makes a copy of an image.
+   *
    * @param image The image to copy
    * @return A copy of an image
    */

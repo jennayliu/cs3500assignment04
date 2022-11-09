@@ -55,7 +55,18 @@ public class ImageModelImpl implements ImageModel {
 
   @Override
   public void save(String filenameToSave, String imageName) throws IOException {
-    ImageUtil.writePPM(this.loadedImages.get(imageName), filenameToSave);
+    String imageFormat = "";
+    try{
+      imageFormat = filenameToSave.split("\\.")[1];
+    } catch (ArrayIndexOutOfBoundsException e){
+      throw new IllegalArgumentException("Invalid: invalid file name.");
+    }
+    if (imageFormat.equals("ppm")) {
+      ImageUtil.writePPM(this.loadedImages.get(imageName), filenameToSave);
+    } else {
+      ImageUtil.makeImageOutput(this.loadedImages.get(imageName), filenameToSave);
+    }
+
   }
 
   @Override
