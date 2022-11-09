@@ -1,8 +1,7 @@
 package model.command;
 
+import model.ImageUtil;
 import model.PixelRGB;
-
-import static model.command.Blur.makeImageCopy2;
 
 /**
  * This class is used to sharpen images.
@@ -25,7 +24,7 @@ public class Sharpen implements ImageFunctionObject {
       for (int c = 0; c < image[0].length; c++) {
 
         // we don't change this copy
-        PixelRGB[][] copy = makeImageCopy2(image);
+        PixelRGB[][] copy = ImageUtil.makeImageCopy(image);
 
         // the logic behind this code is we set the values to be 0 at default if the pixel does not exist
         // (aka if the pixel is out of bounds)

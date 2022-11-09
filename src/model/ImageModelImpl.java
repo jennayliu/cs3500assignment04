@@ -7,8 +7,6 @@ import java.util.Map;
 
 import model.command.ImageFunctionObject;
 
-import static model.command.Blur.makeImageCopy2;
-
 /**
  * This is the implementation of the Model.ImageModel interface.
  */
@@ -26,13 +24,19 @@ public class ImageModelImpl implements ImageModel {
 
   @Override
   public void process(ImageFunctionObject modification, String imageName, String newName) {
-    PixelRGB[][] copy = makeImageCopy(loadedImages.get(imageName));
+    PixelRGB[][] copy = ImageUtil.makeImageCopy(loadedImages.get(imageName));
     this.loadedImages.put(newName, modification.apply(copy));
   }
 
   @Override
   public void load(String filename, String newName) throws NoSuchFileException {
-    String imageFormat = filename.split("\\.")[1];
+    String imageFormat = "";
+    try{
+      imageFormat = filename.split("\\.")[1];
+    } catch (ArrayIndexOutOfBoundsException e){
+      throw new NoSuchFileException("Filename" + filename + "not found.");
+    }
+
     if (imageFormat.equals("ppm")) {
       if (ImageUtil.readPPM(filename) == null) {
         throw new NoSuchFileException("Invalid: no such file exist");
@@ -56,13 +60,6 @@ public class ImageModelImpl implements ImageModel {
 
   @Override
   public PixelRGB[][] getImage(String imageName) {
-
-    return makeImageCopy(loadedImages.get(imageName));
+    return ImageUtil.makeImageCopy(loadedImages.get(imageName));
   }
-
-  // this helper makes a copy of an image
-  private PixelRGB[][] makeImageCopy(PixelRGB[][] image) {
-    return makeImageCopy2(image);
-  }
-
 }

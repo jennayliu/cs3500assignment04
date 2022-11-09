@@ -1,5 +1,6 @@
 package model.command;
 
+import model.ImageUtil;
 import model.PixelRGB;
 
 /**
@@ -24,7 +25,7 @@ public class Blur implements ImageFunctionObject {
       for (int c = 0; c < image[0].length; c++) {
 
         // we don't change this copy
-        PixelRGB[][] copy = makeImageCopy2(image);
+        PixelRGB[][] copy = ImageUtil.makeImageCopy(image);
 
         // the logic behind this code is we set the values to be 0 at default if the pixel does not exist
         // (aka if the pixel is out of bounds)
@@ -93,15 +94,5 @@ public class Blur implements ImageFunctionObject {
       }
     }
     return image;
-  }
-
-  public static PixelRGB[][] makeImageCopy2(PixelRGB[][] image) {
-    PixelRGB[][] copy = new PixelRGB[image.length][image[0].length];
-    for (int r = 0; r < image.length; r++) {
-      for (int c = 0; c < image[0].length; c++) {
-        copy[r][c] = image[r][c];
-      }
-    }
-    return copy;
   }
 }

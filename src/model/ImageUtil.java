@@ -144,6 +144,21 @@ public class ImageUtil {
   }
 
   /**
+   * This method makes a copy of an image.
+   * @param image The image to copy
+   * @return A copy of an image
+   */
+  public static PixelRGB[][] makeImageCopy(PixelRGB[][] image) {
+    PixelRGB[][] copy = new PixelRGB[image.length][image[0].length];
+    for (int r = 0; r < image.length; r++) {
+      for (int c = 0; c < image[0].length; c++) {
+        copy[r][c] = image[r][c];
+      }
+    }
+    return copy;
+  }
+
+  /**
    * This is a demo main from the starter code. We decided to keep this method for now.
    *
    * @param args The inputs
