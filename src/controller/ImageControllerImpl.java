@@ -121,7 +121,7 @@ public class ImageControllerImpl implements ImageController {
           greyscaleMatrix[0][0] = 0.2126;
           greyscaleMatrix[1][0] = 0.2126;
           greyscaleMatrix[2][0] = 0.2126;
-          greyscaleMatrix[0][1] = 0.7151;
+          greyscaleMatrix[0][1] = 0.7152;
           greyscaleMatrix[1][1] = 0.7152;
           greyscaleMatrix[2][1] = 0.7152;
           greyscaleMatrix[0][2] = 0.0722;
@@ -135,13 +135,13 @@ public class ImageControllerImpl implements ImageController {
         case ("sepia"):
           double[][] sepiaMatrix = new double[3][3];
           sepiaMatrix[0][0] = 0.393;
-          sepiaMatrix[1][0] = 0.769;
-          sepiaMatrix[2][0] = 0.189;
-          sepiaMatrix[0][1] = 0.349;
+          sepiaMatrix[1][0] = 0.349;
+          sepiaMatrix[2][0] = 0.272;
+          sepiaMatrix[0][1] = 0.769;
           sepiaMatrix[1][1] = 0.686;
-          sepiaMatrix[2][1] = 0.168;
-          sepiaMatrix[0][2] = 0.272;
-          sepiaMatrix[1][2] = 0.534;
+          sepiaMatrix[2][1] = 0.534;
+          sepiaMatrix[0][2] = 0.189;
+          sepiaMatrix[1][2] = 0.168;
           sepiaMatrix[2][2] = 0.131;
 
           ImageFunctionObject sepiaTrans = new Transform(sepiaMatrix);

@@ -11,6 +11,7 @@ import model.command.FlipHorizontal;
 import model.command.FlipVertical;
 import model.command.Greyscale;
 import model.command.ImageFunctionObject;
+import model.command.Transform;
 
 import static org.junit.Assert.assertEquals;
 
@@ -348,5 +349,79 @@ public class ModelTests {
 
     File file = new File("res/TestingSaveImage.ppm");
     file.delete();
+  }
+
+  @Test
+  public void testGreyscale() throws NoSuchFileException {
+    ImageModel model = new ImageModelImpl();
+    double[][] greyscaleMatrix = new double[3][3];
+    greyscaleMatrix[0][0] = 0.2126;
+    greyscaleMatrix[1][0] = 0.2126;
+    greyscaleMatrix[2][0] = 0.2126;
+    greyscaleMatrix[0][1] = 0.7152;
+    greyscaleMatrix[1][1] = 0.7152;
+    greyscaleMatrix[2][1] = 0.7152;
+    greyscaleMatrix[0][2] = 0.0722;
+    greyscaleMatrix[1][2] = 0.0722;
+    greyscaleMatrix[2][2] = 0.0722;
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject lumaGrayscale = new Transform(greyscaleMatrix);
+    model.process(lumaGrayscale, "checker", "GrayscaleLuma");
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getGreen());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][0].getMax());
+
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getRed());
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getGreen());
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][1].getMax());
+
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[1][0].getMax());
+
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getRed());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getGreen());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[1][1].getMax());
+  }
+
+  @Test
+  public void testSepia() throws NoSuchFileException {
+    ImageModel model = new ImageModelImpl();
+    double[][] sepiaMatrix = new double[3][3];
+    sepiaMatrix[0][0] = 0.393;
+    sepiaMatrix[1][0] = 0.349;
+    sepiaMatrix[2][0] = 0.272;
+    sepiaMatrix[0][1] = 0.769;
+    sepiaMatrix[1][1] = 0.686;
+    sepiaMatrix[2][1] = 0.534;
+    sepiaMatrix[0][2] = 0.189;
+    sepiaMatrix[1][2] = 0.168;
+    sepiaMatrix[2][2] = 0.131;
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
+    ImageFunctionObject lumaGrayscale = new Transform(sepiaMatrix);
+    model.process(lumaGrayscale, "checker", "sepia");
+    assertEquals(119, model.getImage("sepia")[0][0].getRed());
+    assertEquals(106, model.getImage("sepia")[0][0].getGreen());
+    assertEquals(83, model.getImage("sepia")[0][0].getBlue());
+    assertEquals(255, model.getImage("sepia")[0][0].getMax());
+
+    assertEquals(144, model.getImage("sepia")[0][1].getRed());
+    assertEquals(128, model.getImage("sepia")[0][1].getGreen());
+    assertEquals(100, model.getImage("sepia")[0][1].getBlue());
+    assertEquals(255, model.getImage("sepia")[0][1].getMax());
+
+    assertEquals(148, model.getImage("sepia")[1][0].getRed());
+    assertEquals(132, model.getImage("sepia")[1][0].getGreen());
+    assertEquals(103, model.getImage("sepia")[1][0].getBlue());
+    assertEquals(255, model.getImage("sepia")[1][0].getMax());
+
+    assertEquals(176, model.getImage("sepia")[1][1].getRed());
+    assertEquals(157, model.getImage("sepia")[1][1].getGreen());
+    assertEquals(122, model.getImage("sepia")[1][1].getBlue());
+    assertEquals(255, model.getImage("sepia")[1][1].getMax());
   }
 }
