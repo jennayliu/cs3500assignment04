@@ -36,6 +36,31 @@ public class ModelTests {
     }
   }
 
+  @Test
+  public void testLoadPNG() throws NoSuchFileException {
+    ImageModel model = new ImageModelImpl();
+    model.load("res/4Pixels_PNG.png", "checker");
+    assertEquals(101, model.getImage("checker")[0][0].getRed());
+    assertEquals(90, model.getImage("checker")[0][0].getGreen());
+    assertEquals(58, model.getImage("checker")[0][0].getBlue());
+    assertEquals(255, model.getImage("checker")[0][0].getMax());
+
+    assertEquals(103, model.getImage("checker")[0][1].getRed());
+    assertEquals(120, model.getImage("checker")[0][1].getGreen());
+    assertEquals(62, model.getImage("checker")[0][1].getBlue());
+    assertEquals(255, model.getImage("checker")[0][1].getMax());
+
+    assertEquals(110, model.getImage("checker")[1][0].getRed());
+    assertEquals(110, model.getImage("checker")[1][0].getGreen());
+    assertEquals(110, model.getImage("checker")[1][0].getBlue());
+    assertEquals(255, model.getImage("checker")[1][0].getMax());
+
+    assertEquals(146, model.getImage("checker")[1][1].getRed());
+    assertEquals(118, model.getImage("checker")[1][1].getGreen());
+    assertEquals(150, model.getImage("checker")[1][1].getBlue());
+    assertEquals(255, model.getImage("checker")[1][1].getMax());
+  }
+
 
   @Test(expected = NoSuchFileException.class)
   public void testLoadException() throws NoSuchFileException {
@@ -430,26 +455,26 @@ public class ModelTests {
   public void testBlur() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
     model.load("res/TestImageWith4Pixels.ppm", "checker");
-    ImageFunctionObject lumaGrayscale = new Blur();
-    model.process(lumaGrayscale, "checker", "blur");
+    ImageFunctionObject blur = new Blur();
+    model.process(blur, "checker", "blur");
     assertEquals(61, model.getImage("blur")[0][0].getRed());
-    assertEquals(36, model.getImage("blur")[0][0].getGreen());
-    assertEquals(30, model.getImage("blur")[0][0].getBlue());
+    assertEquals(58, model.getImage("blur")[0][0].getGreen());
+    assertEquals(45, model.getImage("blur")[0][0].getBlue());
     assertEquals(255, model.getImage("blur")[0][0].getMax());
 
-    assertEquals(29, model.getImage("blur")[0][1].getRed());
-    assertEquals(26, model.getImage("blur")[0][1].getGreen());
-    assertEquals(29, model.getImage("blur")[0][1].getBlue());
+    assertEquals(63, model.getImage("blur")[0][1].getRed());
+    assertEquals(62, model.getImage("blur")[0][1].getGreen());
+    assertEquals(48, model.getImage("blur")[0][1].getBlue());
     assertEquals(255, model.getImage("blur")[0][1].getMax());
 
-    assertEquals(24, model.getImage("blur")[1][0].getRed());
-    assertEquals(20, model.getImage("blur")[1][0].getGreen());
-    assertEquals(24, model.getImage("blur")[1][0].getBlue());
+    assertEquals(64, model.getImage("blur")[1][0].getRed());
+    assertEquals(61, model.getImage("blur")[1][0].getGreen());
+    assertEquals(57, model.getImage("blur")[1][0].getBlue());
     assertEquals(255, model.getImage("blur")[1][0].getMax());
 
-    assertEquals(8, model.getImage("blur")[1][1].getRed());
-    assertEquals(8, model.getImage("blur")[1][1].getGreen());
-    assertEquals(8, model.getImage("blur")[1][1].getBlue());
+    assertEquals(69, model.getImage("blur")[1][1].getRed());
+    assertEquals(63, model.getImage("blur")[1][1].getGreen());
+    assertEquals(62, model.getImage("blur")[1][1].getBlue());
     assertEquals(255, model.getImage("blur")[1][1].getMax());
   }
 
@@ -457,8 +482,8 @@ public class ModelTests {
   public void testSharpen() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
     model.load("res/TestImageWith4Pixels.ppm", "checker");
-    ImageFunctionObject lumaGrayscale = new Sharpen();
-    model.process(lumaGrayscale, "checker", "sharpen");
+    ImageFunctionObject sharp = new Sharpen();
+    model.process(sharp, "checker", "sharpen");
     assertEquals(190, model.getImage("sharpen")[0][0].getRed());
     assertEquals(177, model.getImage("sharpen")[0][0].getGreen());
     assertEquals(138, model.getImage("sharpen")[0][0].getBlue());
@@ -480,4 +505,57 @@ public class ModelTests {
     assertEquals(255, model.getImage("sharpen")[1][1].getMax());
   }
 
+  @Test
+  public void testSavePNG() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    model.load("res/TestImageWith4Pixels.ppm", "checkerOriginal");
+    model.save("res/TestingSaveImage.png", "checkerOriginal");
+    model.load("res/TestingSaveImage.png", "checkerAfterSave");
+
+    assertEquals(model.getImage("checkerOriginal")[0][0].getRed(),
+            model.getImage("checkerAfterSave")[0][0].getRed());
+    assertEquals(model.getImage("checkerOriginal")[0][0].getGreen(),
+            model.getImage("checkerAfterSave")[0][0].getGreen());
+    assertEquals(model.getImage("checkerOriginal")[0][0].getBlue(),
+            model.getImage("checkerAfterSave")[0][0].getBlue());
+    assertEquals(model.getImage("checkerOriginal")[0][0].getMax(),
+            model.getImage("checkerAfterSave")[0][0].getMax());
+
+    assertEquals(model.getImage("checkerOriginal")[0][1].getRed(),
+            model.getImage("checkerAfterSave")[0][1].getRed());
+    assertEquals(model.getImage("checkerOriginal")[0][1].getGreen(),
+            model.getImage("checkerAfterSave")[0][1].getGreen());
+    assertEquals(model.getImage("checkerOriginal")[0][1].getBlue(),
+            model.getImage("checkerAfterSave")[0][1].getBlue());
+    assertEquals(model.getImage("checkerOriginal")[0][1].getMax(),
+            model.getImage("checkerAfterSave")[0][1].getMax());
+
+    assertEquals(model.getImage("checkerOriginal")[1][0].getRed(),
+            model.getImage("checkerAfterSave")[1][0].getRed());
+    assertEquals(model.getImage("checkerOriginal")[1][0].getGreen(),
+            model.getImage("checkerAfterSave")[1][0].getGreen());
+    assertEquals(model.getImage("checkerOriginal")[1][0].getBlue(),
+            model.getImage("checkerAfterSave")[1][0].getBlue());
+    assertEquals(model.getImage("checkerOriginal")[1][0].getMax(),
+            model.getImage("checkerAfterSave")[1][0].getMax());
+
+    assertEquals(model.getImage("checkerOriginal")[1][1].getRed(),
+            model.getImage("checkerAfterSave")[1][1].getRed());
+    assertEquals(model.getImage("checkerOriginal")[1][1].getGreen(),
+            model.getImage("checkerAfterSave")[1][1].getGreen());
+    assertEquals(model.getImage("checkerOriginal")[1][1].getBlue(),
+            model.getImage("checkerAfterSave")[1][1].getBlue());
+    assertEquals(model.getImage("checkerOriginal")[1][1].getMax(),
+            model.getImage("checkerAfterSave")[1][1].getMax());
+
+    File file = new File("res/TestingSaveImage.png");
+    file.delete();
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testSaveException() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    model.load("res/TestImageWith4Pixels.ppm", "checkerOriginal");
+    model.save("res/TestingSaveImage", "checkerOriginal");
+  }
 }
