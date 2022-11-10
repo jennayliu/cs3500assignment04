@@ -103,9 +103,11 @@ public class ImageUtil {
   }
 
   /**
-   * @param filename
-   * @return
-   * @throws NoSuchFileException
+   * Read an image file in the format other than PPM (png/bmp/jpg), and print the colors.
+   *
+   * @param filename the filename of the image to read
+   * @return a image for ImageModel in PixelRGB[][] format
+   * @throws NoSuchFileException if the file is not found
    */
   public static PixelRGB[][] readImage(String filename) {
     FileInputStream inputFile = null;
@@ -148,9 +150,10 @@ public class ImageUtil {
 
 
   /**
-   * @param image
-   * @param filename
-   * @throws IllegalArgumentException
+   * Write a image from PixelRGB[][] format to png/jpg/bmp format.
+   *
+   * @param image image to output as a file
+   * @param filename the filename of the png/jpg/bmp file
    */
   public static void makeImageOutput(PixelRGB[][] image, String filename) {
 
@@ -183,11 +186,14 @@ public class ImageUtil {
     PixelRGB[][] copy = new PixelRGB[image.length][image[0].length];
     for (int r = 0; r < image.length; r++) {
       for (int c = 0; c < image[0].length; c++) {
-        copy[r][c] = image[r][c];
+        copy[r][c] = new PixelRGB(image[r][c].getRed(), image[r][c].getGreen(),
+                image[r][c].getBlue(), image[r][c].getMax());
       }
     }
     return copy;
   }
+
+
 
   /**
    * This is a demo main from the starter code. We decided to keep this method for now.

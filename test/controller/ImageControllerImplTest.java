@@ -517,4 +517,64 @@ public class ImageControllerImplTest {
                     + "\nSuccessfully greyscale the image.\n",
             output.toString());
   }
+
+//  @Test
+//  public void testSepia() throws IOException {
+//    ImageModel model = new ImageModelImpl();
+//    Readable input = new StringReader("load mouseImage.png checker"
+//            + System.lineSeparator() + "blur checker sepiaChecker"
+//            + System.lineSeparator() + "save testBlur.png sepiaChecker");
+//    Appendable output = new StringBuilder("");
+//    ImageController controller = new ImageControllerImpl(model, input, output);
+//    controller.control();
+//
+//  }
+
+
+  @Test
+  public void testFileScript() throws IOException {
+    ImageModel model = new ImageModelImpl();
+    Readable input = new StringReader("-file testScript.txt");
+    Appendable output = new StringBuilder("");
+    ImageController controller = new ImageControllerImpl(model, input, output);
+    controller.control();
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getGreen());
+    assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][0].getMax());
+
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getRed());
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getGreen());
+    assertEquals(112, model.getImage("GrayscaleLuma")[0][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[0][1].getMax());
+
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getRed());
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getGreen());
+    assertEquals(110, model.getImage("GrayscaleLuma")[1][0].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[1][0].getMax());
+
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getRed());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getGreen());
+    assertEquals(126, model.getImage("GrayscaleLuma")[1][1].getBlue());
+    assertEquals(255, model.getImage("GrayscaleLuma")[1][1].getMax());
+    assertEquals("Successfully load the file.\n" +
+            "Successfully load the image.\n" +
+            "Successfully brighten the image.\n" +
+            "Successfully grayscale the image by red.\n" +
+            "Successfully grayscale the image by green.\n" +
+            "Successfully grayscale the image by blue.\n" +
+            "Successfully grayscale the image by value.\n" +
+            "Successfully grayscale the image by intensity.\n" +
+            "Successfully grayscale the image by luma.\n" +
+            "Successfully flip horizontally the image.\n" +
+            "Successfully flip vertically the image.\n" +
+            "Successfully greyscale the image.\n" +
+            "Successfully sepia the image.\n" +
+            "Successfully blur the image.\n" +
+            "Successfully sharpen the image.\n" +
+            "Successfully save the image.\n", output.toString());
+
+    File file = new File("res/TestFileScriptImage.png");
+    file.delete();
+  }
 }

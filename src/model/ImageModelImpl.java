@@ -8,7 +8,7 @@ import java.util.Map;
 import model.command.ImageFunctionObject;
 
 /**
- * This is the implementation of the Model.ImageModel interface.
+ * This class represents the loaded images, where images can be stored and modified.
  */
 public class ImageModelImpl implements ImageModel {
 

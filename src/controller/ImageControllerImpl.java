@@ -1,12 +1,17 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.Scanner;
 
+import model.command.Blur;
 import model.command.BrightenDarken;
 import model.command.FlipHorizontal;
 import model.command.FlipVertical;
 import model.command.Greyscale;
+import model.command.Sharpen;
 import model.command.Transform;
 import model.command.ImageFunctionObject;
 import model.ImageModel;
@@ -116,6 +121,7 @@ public class ImageControllerImpl implements ImageController {
           model.process(brighten, commandArray[2], commandArray[3]);
           this.appendable.append("Successfully brighten the image.\n");
           break;
+
         case ("greyscale"):
           double[][] greyscaleMatrix = new double[3][3];
           greyscaleMatrix[0][0] = 0.2126;
@@ -132,6 +138,7 @@ public class ImageControllerImpl implements ImageController {
           this.appendable.append("Successfully greyscale the image.\n");
 
           break;
+
         case ("sepia"):
           double[][] sepiaMatrix = new double[3][3];
           sepiaMatrix[0][0] = 0.393;
@@ -148,6 +155,23 @@ public class ImageControllerImpl implements ImageController {
           model.process(sepiaTrans, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully sepia the image.\n");
 
+          break;
+
+        case("blur"):
+          ImageFunctionObject blur = new Blur();
+          model.process(blur, commandArray[1], commandArray[2]);
+          this.appendable.append("Successfully blur the image.\n");
+          break;
+
+        case("sharpening"):
+          ImageFunctionObject sharpening = new Sharpen();
+          model.process(sharpening, commandArray[1], commandArray[2]);
+          this.appendable.append("Successfully sharpen the image.\n");
+          break;
+
+        case ("-file"):
+          sc = new Scanner(new FileInputStream(commandArray[1]));
+          this.appendable.append("Successfully load the file.\n");
           break;
 
         default:

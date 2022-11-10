@@ -81,6 +81,35 @@ public class ImageUtilTests {
   }
 
   @Test
+  public void testMakeImageOutput() throws IOException {
+    PixelRGB[][] image = ImageUtil.readImage("res/4Pixels_PNG.png");
+    ImageUtil.makeImageOutput(image, "res/testMakeOutput.bmp");
+    PixelRGB[][] checkerImage = ImageUtil.readImage("res/testMakeOutput.bmp");
+    assertEquals(image[0][0].getRed(), checkerImage[0][0].getRed());
+    assertEquals(image[0][0].getGreen(), checkerImage[0][0].getGreen());
+    assertEquals(image[0][0].getBlue(), checkerImage[0][0].getBlue());
+    assertEquals(image[0][0].getMax(), checkerImage[0][0].getMax());
+
+    assertEquals(image[0][1].getRed(), checkerImage[0][1].getRed());
+    assertEquals(image[0][1].getGreen(), checkerImage[0][1].getGreen());
+    assertEquals(image[0][1].getBlue(), checkerImage[0][1].getBlue());
+    assertEquals(image[0][1].getMax(), checkerImage[0][1].getMax());
+
+    assertEquals(image[1][0].getRed(), checkerImage[1][0].getRed());
+    assertEquals(image[1][0].getGreen(), checkerImage[1][0].getGreen());
+    assertEquals(image[1][0].getBlue(), checkerImage[1][0].getBlue());
+    assertEquals(image[1][0].getMax(), checkerImage[1][0].getMax());
+
+    assertEquals(image[1][1].getRed(), checkerImage[1][1].getRed());
+    assertEquals(image[1][1].getGreen(), checkerImage[1][1].getGreen());
+    assertEquals(image[1][1].getBlue(), checkerImage[1][1].getBlue());
+    assertEquals(image[1][1].getMax(), checkerImage[1][1].getMax());
+
+    File file = new File("res/testMakeOutput.bmp");
+    file.delete();
+  }
+
+  @Test
   public void testMakeImageCopy() {
     PixelRGB[][] makeCopyOfMe = ImageUtil.readPPM("res/1black1white.ppm");
     PixelRGB[][] image = ImageUtil.makeImageCopy(makeCopyOfMe);
