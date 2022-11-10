@@ -1,9 +1,7 @@
 package controller;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.Scanner;
 
 import model.command.Blur;

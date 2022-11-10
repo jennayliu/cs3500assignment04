@@ -1,6 +1,5 @@
 package model.command;
 
-import model.ImageUtil;
 import model.PixelRGB;
 
 /**
@@ -24,8 +23,8 @@ public class Blur implements ImageFunctionObject {
     for (int r = 0; r < image.length; r++) {
       for (int c = 0; c < image[0].length; c++) {
 
-        // the logic behind this code is we set the values to be 0 at default if the pixel does not exist
-        // (aka if the pixel is out of bounds)
+        // the logic behind this code is we set the values to be 0 at
+        // default if the pixel does not exist (aka if the pixel is out of bounds)
         PixelRGB p1 = new PixelRGB(0, 0, 0, 255);
         PixelRGB p2 = new PixelRGB(0, 0, 0, 255);
         PixelRGB p3 = new PixelRGB(0, 0, 0, 255);

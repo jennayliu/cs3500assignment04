@@ -31,9 +31,9 @@ public class ImageModelImpl implements ImageModel {
   @Override
   public void load(String filename, String newName) throws NoSuchFileException {
     String imageFormat = "";
-    try{
+    try {
       imageFormat = filename.split("\\.")[1];
-    } catch (ArrayIndexOutOfBoundsException e){
+    } catch (ArrayIndexOutOfBoundsException e) {
       throw new NoSuchFileException("Filename" + filename + "not found.");
     }
 
@@ -56,9 +56,9 @@ public class ImageModelImpl implements ImageModel {
   @Override
   public void save(String filenameToSave, String imageName) throws IOException {
     String imageFormat = "";
-    try{
+    try {
       imageFormat = filenameToSave.split("\\.")[1];
-    } catch (ArrayIndexOutOfBoundsException e){
+    } catch (ArrayIndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Invalid: invalid file name.");
     }
     if (imageFormat.equals("ppm")) {

@@ -451,6 +451,7 @@ public class ModelTests {
     assertEquals(122, model.getImage("sepia")[1][1].getBlue());
     assertEquals(255, model.getImage("sepia")[1][1].getMax());
   }
+
   @Test
   public void testBlur() throws NoSuchFileException {
     ImageModel model = new ImageModelImpl();
@@ -557,5 +558,14 @@ public class ModelTests {
     ImageModel model = new ImageModelImpl();
     model.load("res/TestImageWith4Pixels.ppm", "checkerOriginal");
     model.save("res/TestingSaveImage", "checkerOriginal");
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTransformException() throws NoSuchFileException {
+    ImageModel model = new ImageModelImpl();
+    model.load("res/TestImageWith4Pixels.ppm", "checker");
+    double[][] array = new double[1][1];
+    array[0][0] = 1.0;
+    ImageFunctionObject badTransform = new Transform(array);
   }
 }

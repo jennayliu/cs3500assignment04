@@ -2,11 +2,24 @@ package model.command;
 
 import model.PixelRGB;
 
+/**
+ * This class takes in a 3x3 matrix and uses it to alter each pixel of an image.
+ */
 public class Transform implements ImageFunctionObject {
 
   double[][] calculateMatrix;
 
-  public Transform(double[][] calculateMatrix) {
+  /**
+   * This constructor takes in a 3x3 matrix and enforces it.
+   * @param calculateMatrix A 3x3 matrix, represented as a double[][]
+   * @throws IllegalArgumentException If the matrix is not 3x3
+   */
+  public Transform(double[][] calculateMatrix) throws IllegalArgumentException {
+
+    if (calculateMatrix.length != 3 || calculateMatrix[0].length != 3) {
+      throw new IllegalArgumentException("Must be a 3x3 matrix.");
+    }
+
     this.calculateMatrix = calculateMatrix;
   }
 

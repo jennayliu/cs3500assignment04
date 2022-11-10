@@ -1,6 +1,5 @@
 package model.command;
 
-import model.ImageUtil;
 import model.PixelRGB;
 
 /**
