@@ -619,7 +619,7 @@ public class ImageControllerImplTest {
   @Test
   public void testFileScript() throws IOException {
     ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("-file testScript.txt");
+    Readable input = new StringReader("-file res/testScript.txt");
     Appendable output = new StringBuilder("");
     ImageController controller = new ImageControllerImpl(model, input, output);
     controller.control();
