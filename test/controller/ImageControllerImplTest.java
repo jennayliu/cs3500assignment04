@@ -663,12 +663,5 @@ public class ImageControllerImplTest {
     file.delete();
   }
 
-  @Test
-  public void testS() throws IOException {
-    ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("-file HelperScript.txt");
-    Appendable output = new StringBuilder("");
-    ImageController controller = new ImageControllerImpl(model, input, output);
-    controller.control();
-  }
+
 }
