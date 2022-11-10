@@ -528,17 +528,6 @@ public class ImageControllerImplTest {
             output.toString());
   }
 
-  @Test
-  public void testSepia() throws IOException {
-    ImageModel model = new ImageModelImpl();
-    Readable input = new StringReader("load res/PhotoTestOriginal.png checker"
-            + System.lineSeparator() + "sharpen checker sepiaChecker"
-            + System.lineSeparator() + "save res/PhotoTestSharpen.png sepiaChecker");
-    Appendable output = new StringBuilder("");
-    ImageController controller = new ImageControllerImpl(model, input, output);
-    controller.control();
-
-  }
 
   @Test
   public void testSepia() throws IOException {
