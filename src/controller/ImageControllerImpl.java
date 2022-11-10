@@ -45,6 +45,7 @@ public class ImageControllerImpl implements ImageController {
 
   @Override
   public void control() throws IOException {
+    System.out.println("Welcome!");
     Scanner sc = new Scanner(this.readable);
 
     while (sc.hasNextLine()) {
