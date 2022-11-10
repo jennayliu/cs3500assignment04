@@ -521,9 +521,9 @@ public class ImageControllerImplTest {
 //  @Test
 //  public void testSepia() throws IOException {
 //    ImageModel model = new ImageModelImpl();
-//    Readable input = new StringReader("load mouseImage.png checker"
-//            + System.lineSeparator() + "blur checker sepiaChecker"
-//            + System.lineSeparator() + "save testBlur.png sepiaChecker");
+//    Readable input = new StringReader("load manhattan-smallOrigin.png checker"
+//            + System.lineSeparator() + "sharpen checker sepiaChecker"
+//            + System.lineSeparator() + "save manhattan-smallShapen.png sepiaChecker");
 //    Appendable output = new StringBuilder("");
 //    ImageController controller = new ImageControllerImpl(model, input, output);
 //    controller.control();

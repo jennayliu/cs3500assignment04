@@ -163,7 +163,7 @@ public class ImageControllerImpl implements ImageController {
           this.appendable.append("Successfully blur the image.\n");
           break;
 
-        case("sharpening"):
+        case("sharpen"):
           ImageFunctionObject sharpening = new Sharpen();
           model.process(sharpening, commandArray[1], commandArray[2]);
           this.appendable.append("Successfully sharpen the image.\n");

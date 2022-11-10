@@ -18,14 +18,11 @@ public class Blur implements ImageFunctionObject {
   @Override
   public PixelRGB[][] apply(PixelRGB[][] image) {
 
-
+    PixelRGB[][] newImage = new PixelRGB[image.length][image[0].length];
     // this for loop scans all the pixels of an image, but it also has different cases for
     // each pixel on the "sides" of the image
     for (int r = 0; r < image.length; r++) {
       for (int c = 0; c < image[0].length; c++) {
-
-        // we don't change this copy
-        PixelRGB[][] copy = ImageUtil.makeImageCopy(image);
 
         // the logic behind this code is we set the values to be 0 at default if the pixel does not exist
         // (aka if the pixel is out of bounds)
@@ -39,61 +36,66 @@ public class Blur implements ImageFunctionObject {
         PixelRGB p8 = new PixelRGB(0, 0, 0, 255);
 
         try {
-          p1 = copy[r - 1][c - 1];
+          p1 = image[r - 1][c - 1];
 
         } catch (IndexOutOfBoundsException e) {
-
+          p1 = new PixelRGB(0, 0, 0, 255);
         }
         try {
-          p2 = copy[r - 1][c];
+          p2 = image[r - 1][c];
         } catch (IndexOutOfBoundsException e) {
-
+          p2 = new PixelRGB(0, 0, 0, 255);
         }
         try {
-          p3 = copy[r - 1][c + 1];
+          p3 = image[r - 1][c + 1];
         } catch (IndexOutOfBoundsException e) {
-
+          p3 = new PixelRGB(0, 0, 0, 255);
         }
         try {
-          p4 = copy[r][c - 1];
+          p4 = image[r][c - 1];
         } catch (IndexOutOfBoundsException e) {
-
+          p4 = new PixelRGB(0, 0, 0, 255);
         }
         try {
-          p5 = copy[r][c + 1];
+          p5 = image[r][c + 1];
         } catch (IndexOutOfBoundsException e) {
-
+          p5 = new PixelRGB(0, 0, 0, 255);
         }
         try {
-          p6 = copy[r + 1][c - 1];
+          p6 = image[r + 1][c - 1];
         } catch (IndexOutOfBoundsException e) {
-
+          p6 = new PixelRGB(0, 0, 0, 255);
         }
         try {
-          p7 = copy[r + 1][c];
+          p7 = image[r + 1][c];
         } catch (IndexOutOfBoundsException e) {
-
+          p7 = new PixelRGB(0, 0, 0, 255);
         }
         try {
-          p8 = copy[r + 1][c + 1];
+          p8 = image[r + 1][c + 1];
         } catch (IndexOutOfBoundsException e) {
-
+          p8 = new PixelRGB(0, 0, 0, 255);
         }
 
-        image[r][c].setRed((int) (0.0625 * p1.getRed() + 0.125 * p2.getRed() + 0.0625 * p3.getRed()
-                + 0.125 * p4.getRed() + 0.125 * p5.getRed()
-                + 0.0625 * p6.getRed() + 0.125 * p7.getRed() + 0.0625 * p8.getRed()));
-        image[r][c].setGreen((int) (0.0625 * p1.getGreen()
-                + 0.125 * p2.getGreen() + 0.0625 * p3.getGreen()
-                + 0.125 * p4.getGreen() + 0.125 * p5.getGreen()
-                + 0.0625 * p6.getGreen() + 0.125 * p7.getGreen() + 0.0625 * p8.getGreen()));
-        image[r][c].setBlue((int) (0.0625 * p1.getBlue()
-                + 0.125 * p2.getBlue() + 0.0625 * p3.getBlue()
-                + 0.125 * p4.getBlue() + 0.125 * p5.getBlue()
-                + 0.0625 * p6.getBlue() + 0.125 * p7.getBlue() + 0.0625 * p8.getBlue()));
-
+        newImage[r][c] = new PixelRGB(
+                (int) (0.0625 * p1.getRed()
+                        + 0.125 * p2.getRed() + 0.0625 * p3.getRed()
+                        + 0.125 * p4.getRed() + 0.125 * p5.getRed()
+                        + 0.0625 * p6.getRed() + 0.125 * p7.getRed()
+                        + 0.0625 * p8.getRed() + 0.25 * image[r][c].getRed()),
+                (int) (0.0625 * p1.getGreen()
+                        + 0.125 * p2.getGreen() + 0.0625 * p3.getGreen()
+                        + 0.125 * p4.getGreen() + 0.125 * p5.getGreen()
+                        + 0.0625 * p6.getGreen() + 0.125 * p7.getGreen()
+                        + 0.0625 * p8.getGreen() + 0.25 * image[r][c].getGreen()),
+                (int) (0.0625 * p1.getBlue()
+                        + 0.125 * p2.getBlue() + 0.0625 * p3.getBlue()
+                        + 0.125 * p4.getBlue() + 0.125 * p5.getBlue()
+                        + 0.0625 * p6.getBlue() + 0.125 * p7.getBlue()
+                        + 0.0625 * p8.getBlue() + 0.25 * image[r][c].getBlue()),
+                image[r][c].getMax());
       }
     }
-    return image;
+    return newImage;
   }
 }

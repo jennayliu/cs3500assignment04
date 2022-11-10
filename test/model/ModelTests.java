@@ -432,7 +432,7 @@ public class ModelTests {
     model.load("res/TestImageWith4Pixels.ppm", "checker");
     ImageFunctionObject lumaGrayscale = new Blur();
     model.process(lumaGrayscale, "checker", "blur");
-    assertEquals(35, model.getImage("blur")[0][0].getRed());
+    assertEquals(61, model.getImage("blur")[0][0].getRed());
     assertEquals(36, model.getImage("blur")[0][0].getGreen());
     assertEquals(30, model.getImage("blur")[0][0].getBlue());
     assertEquals(255, model.getImage("blur")[0][0].getMax());
@@ -460,23 +460,23 @@ public class ModelTests {
     ImageFunctionObject lumaGrayscale = new Sharpen();
     model.process(lumaGrayscale, "checker", "sharpen");
     assertEquals(190, model.getImage("sharpen")[0][0].getRed());
-    assertEquals(255, model.getImage("sharpen")[0][0].getGreen());
+    assertEquals(177, model.getImage("sharpen")[0][0].getGreen());
     assertEquals(138, model.getImage("sharpen")[0][0].getBlue());
     assertEquals(255, model.getImage("sharpen")[0][0].getMax());
 
-    assertEquals(214, model.getImage("sharpen")[0][1].getRed());
-    assertEquals(255, model.getImage("sharpen")[0][1].getGreen());
-    assertEquals(161, model.getImage("sharpen")[0][1].getBlue());
+    assertEquals(192, model.getImage("sharpen")[0][1].getRed());
+    assertEquals(199, model.getImage("sharpen")[0][1].getGreen());
+    assertEquals(141, model.getImage("sharpen")[0][1].getBlue());
     assertEquals(255, model.getImage("sharpen")[0][1].getMax());
 
-    assertEquals(247, model.getImage("sharpen")[1][0].getRed());
-    assertEquals(255, model.getImage("sharpen")[1][0].getGreen());
-    assertEquals(222, model.getImage("sharpen")[1][0].getBlue());
+    assertEquals(197, model.getImage("sharpen")[1][0].getRed());
+    assertEquals(192, model.getImage("sharpen")[1][0].getGreen());
+    assertEquals(177, model.getImage("sharpen")[1][0].getBlue());
     assertEquals(255, model.getImage("sharpen")[1][0].getMax());
 
-    assertEquals(255, model.getImage("sharpen")[1][1].getRed());
-    assertEquals(255, model.getImage("sharpen")[1][1].getGreen());
-    assertEquals(255, model.getImage("sharpen")[1][1].getBlue());
+    assertEquals(224, model.getImage("sharpen")[1][1].getRed());
+    assertEquals(198, model.getImage("sharpen")[1][1].getGreen());
+    assertEquals(207, model.getImage("sharpen")[1][1].getBlue());
     assertEquals(255, model.getImage("sharpen")[1][1].getMax());
   }
 
