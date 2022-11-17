@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 
 /**
- * An Implementation for view interface, use for future.
+ *
  */
 public class ImageViewImpl implements ImageView {
   private final Appendable appendable;

@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 
 /**
- * Interface of view.
+ *
  */
 public interface ImageView {
 
