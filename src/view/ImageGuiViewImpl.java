@@ -2,6 +2,7 @@ package view;
 
 import java.awt.*;
 import java.io.File;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -89,11 +90,15 @@ public class ImageGuiViewImpl implements ImageGuiView {
       //get the selected file
       File image = fc.getSelectedFile();
 
-      if(image != null){
+      if (image != null) {
         String imagePath = image.getAbsolutePath();
         String imageName = image.getName();
-        for ( ViewEvents listener : listeners ){
-          listener.loadEvent(imageName);
+        for ( ViewEvents listener : listeners ) {
+          try {
+            listener.loadEvent(imageName, imagePath);
+          } catch (NoSuchFileException ex) {
+            throw new RuntimeException("Image not found.");
+          }
         }
       } else {
         throw new IllegalArgumentException("Invalid image");

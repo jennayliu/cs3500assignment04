@@ -2,8 +2,12 @@ package controller;
 
 
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 
 import model.ImageModel;
+import model.command.BrightenDarken;
+import model.command.Greyscale;
+import model.command.ImageFunctionObject;
 import view.ImageGuiView;
 import view.ViewEvents;
 
@@ -40,17 +44,56 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   }
 
   @Override
-  public void saveEvent(String name, String path) {
+  public void saveEvent(String name, String path) throws IOException {
+    this.model.save(path, name);
+  }
+
+  @Override
+  public void loadEvent(String name, String path) throws NoSuchFileException {
+    this.model.load(path, name);
+  }
+
+  @Override
+  public void brightenEvent(int amount, String imageName, String newName) {
+    ImageFunctionObject functionObject = new BrightenDarken(amount);
+    this.model.process(functionObject, imageName, newName);
+  }
+
+  @Override
+  public void ComponentEvent(ImageModel.RGBVIL rgbvil, String imageName, String newName) {
+    ImageFunctionObject functionObject = new Greyscale(rgbvil);
+    this.model.process(functionObject, imageName, newName);
+  }
+
+  @Override
+  public void BlurEvent(String imageName, String newName) {
 
   }
 
   @Override
-  public void loadEvent(String name) {
+  public void FlipHEvent(String imageName, String newName) {
 
   }
 
   @Override
-  public void brightenEvent(int amount) {
+  public void FlipVEvent(String imageName, String newName) {
 
   }
+
+  @Override
+  public void SharpenEvent(String imageName, String newName) {
+
+  }
+
+  @Override
+  public void SepiaEvent(String imageName, String newName) {
+
+  }
+
+  @Override
+  public void GreyscaleEvent(String imageName, String newName) {
+
+  }
+
+
 }
