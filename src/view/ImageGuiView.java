@@ -1,6 +1,7 @@
 package view;
 
 import controller.ImageGuiControllerImpl;
+import model.PixelRGB;
 
 public interface ImageGuiView {
 
@@ -14,5 +15,7 @@ public interface ImageGuiView {
    * Set the controller of the image gui.
    * @param
    */
-  void addViewListener(ViewEvents listener);
+  public void addViewListener(ViewEvents listener);
+
+  public void showCenterImage(String imageName, PixelRGB[][] image);
 }

@@ -3,6 +3,8 @@ import java.io.InputStreamReader;
 
 import controller.ImageController;
 import controller.ImageControllerImpl;
+import controller.ImageGuiController;
+import controller.ImageGuiControllerImpl;
 import model.ImageModel;
 import model.ImageModelImpl;
 import view.ImageGuiView;
@@ -17,13 +19,16 @@ public class Main {
    * @param args input from the user
    */
   public static void main(String[] args) throws IOException {
+    // setting up view for guiController
     ImageGuiView view = new ImageGuiViewImpl();
-    view.initialize();
-
     ImageModel model = new ImageModelImpl();
     Readable rd = new InputStreamReader(System.in);
     Appendable ap = System.out;
+
     ImageController controller = new ImageControllerImpl(model, rd, ap);
+    // Start the guiController, initialize the main frame in side the constructor
+    ImageGuiController guiController = new ImageGuiControllerImpl(model, view);
+
     controller.control();
 
   }

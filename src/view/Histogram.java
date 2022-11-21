@@ -22,7 +22,7 @@ public class Histogram extends JPanel {
     if (type == ImageModel.RGBVIL.Value || type == ImageModel.RGBVIL.Luma) {
       throw new IllegalArgumentException("Must be red, green, blue, or intensity");
     }
-
+    this.maxHeight = 1080;
     this.type = type;
     this.data = data;
   }

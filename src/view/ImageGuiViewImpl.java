@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
@@ -10,22 +11,31 @@ import javax.swing.*;
 
 import controller.ImageGuiController;
 import controller.ImageGuiControllerImpl;
+import model.ImageModel;
+import model.Pixel;
+import model.PixelRGB;
 
 public class ImageGuiViewImpl implements ImageGuiView {
 
   private final int width;
   private final int height;
-
   private final JFrame baseFrame;
-  private ImageGuiController controller;
+
+  private final JPanel rightPanel;
+  private final JPanel leftPanel;
+  private final JPanel centerPanel;
 
   private final java.util.List<ViewEvents> listeners;
 
   public ImageGuiViewImpl() {
-    this.listeners  = new ArrayList<>();
+    this.listeners = new ArrayList<>();
     this.width = 1920;
     this.height = 1080;
     this.baseFrame = new JFrame("Image Processor");
+
+    this.centerPanel = new JPanel();
+    this.leftPanel = new JPanel();
+    this.rightPanel = new JPanel();
   }
 
   @Override
@@ -49,19 +59,42 @@ public class ImageGuiViewImpl implements ImageGuiView {
     mainPanel.setSize(1920, 1080);
 
     mainPanel.setLayout(new BorderLayout());
-    JPanel leftPanel = new JPanel();
-    leftPanel.setPreferredSize(new Dimension(this.width / 7, this.height));
 
-    JPanel rightPanel = new JPanel();
+    this.leftPanel.setPreferredSize(new Dimension(this.width / 7, this.height));
+    this.initialLeftPanel(this.leftPanel);
 
 
-    this.initialLeftPanel(leftPanel);
+    this.rightPanel.setPreferredSize(new Dimension(this.width / 7, this.height));
+    this.initialRightPanel(this.rightPanel);
 
-    JPanel centerPanel = new JPanel();
+
+    this.centerPanel.setPreferredSize(new Dimension(this.width * 5 / 7, this.height * 3 / 2));
+    this.initialCenterPanel(this.centerPanel);
 
     mainPanel.add(leftPanel, BorderLayout.WEST);
     mainPanel.add(rightPanel, BorderLayout.EAST);
-    mainPanel.add(centerPanel);
+    mainPanel.add(centerPanel, BorderLayout.CENTER);
+  }
+
+  /**
+   * This method creates the picture reveal panel(on the center), which is use to show the picture.
+   *
+   * @param centerPanel the center panel for placing the picture to modify
+   */
+  private void initialCenterPanel(JPanel centerPanel) {
+    centerPanel.setBackground(Color.LIGHT_GRAY);
+    centerPanel.setBorder(BorderFactory.createTitledBorder("Click \"Load\" Button to load"));
+
+  }
+
+  /**
+   * This method creates the histogram panel(on the right), which is use to show the histogram.
+   *
+   * @param rightPanel the right panel for placing the picture to modify
+   */
+  private void initialRightPanel(JPanel rightPanel) {
+    rightPanel.setBorder(BorderFactory.createTitledBorder("Histogram"));
+
   }
 
   /**
@@ -79,9 +112,10 @@ public class ImageGuiViewImpl implements ImageGuiView {
     // This part is for Load & Save
     JPanel loadSavePanel = new JPanel();
     loadSavePanel.setBorder(BorderFactory.createTitledBorder("Load & Save"));
-    loadSavePanel.setLayout(new GridLayout(1,2));
+    loadSavePanel.setLayout(new GridLayout(1, 2));
     leftPanel.add(loadSavePanel);
 
+    // This Button is for Load
     JButton loadButton = new JButton("Load");
     loadButton.addActionListener(e -> {
       JFileChooser fc = new JFileChooser();
@@ -93,7 +127,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
       if (image != null) {
         String imagePath = image.getAbsolutePath();
         String imageName = image.getName();
-        for ( ViewEvents listener : listeners ) {
+        for (ViewEvents listener : listeners) {
           try {
             listener.loadEvent(imageName, imagePath);
           } catch (NoSuchFileException ex) {
@@ -105,6 +139,8 @@ public class ImageGuiViewImpl implements ImageGuiView {
       }
 
     });
+
+    // This Button is for Save
     JButton saveButton = new JButton("Save");
     loadSavePanel.add(loadButton);
     loadSavePanel.add(saveButton);
@@ -112,10 +148,10 @@ public class ImageGuiViewImpl implements ImageGuiView {
     // This part is for brighten & darken
     JPanel brightenPanel = new JPanel();
     brightenPanel.setBorder(BorderFactory.createTitledBorder("Brighten & Darken"));
-    brightenPanel.setLayout(new GridLayout(2,1));
+    brightenPanel.setLayout(new GridLayout(2, 1));
     leftPanel.add(brightenPanel);
 
-    JSlider brightenSlider = new JSlider(-255, 255,0);
+    JSlider brightenSlider = new JSlider(-255, 255, 0);
     brightenSlider.setPaintTicks(true);
     brightenSlider.setMajorTickSpacing(51);
     brightenSlider.setMinorTickSpacing(10);
@@ -151,27 +187,55 @@ public class ImageGuiViewImpl implements ImageGuiView {
     leftPanel.add(flipPanel);
 
     JButton verFlipButton = new JButton("Vertical Flip");
+
     JButton hoFlipButton = new JButton("Horizontal Flip");
+
     //OKButton.addActionListener(new MyAction());
     flipPanel.add(verFlipButton);
     flipPanel.add(hoFlipButton);
 
-    // This part is for flip
+    // This part is for Sepia
     JPanel sepiaPenal = new JPanel();
     sepiaPenal.setBorder(BorderFactory.createTitledBorder("Sepia"));
     sepiaPenal.setLayout(new GridLayout(1, 1));
     leftPanel.add(sepiaPenal);
-
+    // create Button for sepia
     JButton sepiaButton = new JButton("Sepia");
-    //OKButton.addActionListener(new MyAction());
-    sepiaPenal.add(sepiaButton);
-
+//    sepiaButton.addActionListener(e -> {
+//      for (ViewEvents listener : listeners) {
+//          listener.SepiaEvent(imageName);
+//        }
+//      }
+//    };
+//    sepiaPenal.add(sepiaButton);
 
   }
 
-  public void setController (ImageGuiController controller){
-    this.controller = controller;
+  @Override
+  public void showCenterImage(String imageName, PixelRGB[][] image){
+    centerPanel.setBorder(BorderFactory.createTitledBorder("Image: " + imageName));
+    try {
+      BufferedImage showingImage = new BufferedImage(image[0].length, image.length,
+              BufferedImage.TYPE_INT_RGB);
+      for (int r = 0; r < image.length; r++) {
+        for (int c = 0; c < image[0].length; c++) {
+          Pixel pixel = image[r][c];
+          Color color = new Color(pixel.getRed(), pixel.getGreen(), pixel.getBlue());
+          showingImage.setRGB(c, r, color.getRGB());
+        }
+      }
+
+      Icon icon=new ImageIcon(showingImage);
+      JLabel imageLabel = new JLabel(icon, JLabel.CENTER);
+      this.centerPanel.add(imageLabel);
+      this.baseFrame.repaint();
+      this.baseFrame.revalidate();
+    } catch (IllegalArgumentException e) {
+
+    }
+      return;
   }
+
 
 }
 
