@@ -2,8 +2,13 @@ package view;
 
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Objects;
 
 import javax.swing.*;
+
+import controller.ImageGuiController;
+import controller.ImageGuiControllerImpl;
 
 public class ImageGuiViewImpl implements ImageGuiView {
 
@@ -11,11 +16,12 @@ public class ImageGuiViewImpl implements ImageGuiView {
   private final int height;
 
   private final JFrame baseFrame;
+  private ImageGuiController controller;
 
-
+  private final java.util.List<ViewEvents> listeners;
 
   public ImageGuiViewImpl() {
-
+    this.listeners  = new ArrayList<>();
     this.width = 1920;
     this.height = 1080;
     this.baseFrame = new JFrame("Image Processor");
@@ -31,6 +37,11 @@ public class ImageGuiViewImpl implements ImageGuiView {
     baseFrame.add(mainPanel);
 
     this.baseFrame.setVisible(true);
+  }
+
+  @Override
+  public void addViewListener(ViewEvents listener) {
+    this.listeners.add(Objects.requireNonNull(listener));
   }
 
   private void initializePanel(JPanel mainPanel) {
@@ -81,6 +92,9 @@ public class ImageGuiViewImpl implements ImageGuiView {
       if(image != null){
         String imagePath = image.getAbsolutePath();
         String imageName = image.getName();
+        for ( ViewEvents listener : listeners ){
+          listener.loadEvent(imageName);
+        }
       } else {
         throw new IllegalArgumentException("Invalid image");
       }
@@ -148,6 +162,10 @@ public class ImageGuiViewImpl implements ImageGuiView {
     sepiaPenal.add(sepiaButton);
 
 
+  }
+
+  public void setController (ImageGuiController controller){
+    this.controller = controller;
   }
 
 }

@@ -5,10 +5,8 @@ import controller.ImageController;
 import controller.ImageControllerImpl;
 import model.ImageModel;
 import model.ImageModelImpl;
-import swing.SwingFeaturesFrame;
 import view.ImageGuiView;
 import view.ImageGuiViewImpl;
-import view.ImageView;
 
 /**
  * The main class.
