@@ -15,14 +15,18 @@ public class Histogram extends JPanel {
 
   private final int maxHeight;
 
-  // data is set in a away such that the number of 0 value color pixels is in data[0],
+  // colorAmounts (int[256]) is set in a away such that the number of 0 value color pixels is in data[0],
   // the number of 1 value color pixels is in data[1]... etc
   private final int[] colorAmounts;
   private final Color color;
 
   public Histogram(int[] colorAmounts, Color color) throws IllegalArgumentException {
     super();
-    this.maxHeight = 1080;
+    if (colorAmounts.length != 256) {
+      throw new IllegalArgumentException("Must be 256 in length");
+    }
+
+    this.maxHeight = 270;
     this.colorAmounts = colorAmounts;
     this.color = color;
   }
@@ -44,8 +48,7 @@ public class Histogram extends JPanel {
     // we loop through all the color values, determine the amount of each color value, and plot
     // them on a bar graph.
     for (int i = 0; i < this.colorAmounts.length; i++) {
-
-      g2d.fillRect(i * 5, 0, 5, this.colorAmounts[i]);
+      g2d.fillRect(i * 5, 0, 5, this.colorAmounts[i] / 10);
     }
 
   }
