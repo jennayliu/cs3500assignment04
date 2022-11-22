@@ -65,6 +65,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   public void brightenEvent(int amount, String imageName, String newName) {
     ImageFunctionObject functionObject = new BrightenDarken(amount);
     this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
 
   }
 
@@ -72,30 +73,35 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   public void ComponentEvent(ImageModel.RGBVIL rgbvil, String imageName, String newName) {
     ImageFunctionObject functionObject = new Greyscale(rgbvil);
     this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
   }
 
   @Override
   public void BlurEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new Blur();
     this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
   }
 
   @Override
   public void FlipHEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new FlipHorizontal();
     this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
   }
 
   @Override
   public void FlipVEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new FlipVertical();
     this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
   }
 
   @Override
   public void SharpenEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new Sharpen();
     this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
   }
 
   @Override
@@ -113,7 +119,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new Transform(sepiaMatrix);
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
-    this.view.makeHistograms(this.model.getImage(newName));
+
   }
 
   @Override
@@ -130,6 +136,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     greyscaleMatrix[2][2] = 0.0722;
     ImageFunctionObject functionObject = new Transform(greyscaleMatrix);
     this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
   }
 
 

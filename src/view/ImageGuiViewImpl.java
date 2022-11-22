@@ -3,6 +3,7 @@ package view;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +41,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
     this.leftPanel = new JPanel();
     this.rightPanel = new JPanel();
 
-    this.currentName = "";
+    this.currentName = null;
   }
 
   @Override
@@ -150,6 +151,26 @@ public class ImageGuiViewImpl implements ImageGuiView {
 
     // This Button is for Save
     JButton saveButton = new JButton("Save");
+    saveButton.addActionListener(e -> {
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Choose a place to save");
+        fc.showSaveDialog(null);
+        File file = fc.getSelectedFile();
+        String imagePath = file.getAbsolutePath();
+        for (ViewEvents listener : listeners) {
+          try {
+            listener.saveEvent(this.currentName, imagePath);
+          } catch (IOException ie) {
+            throw new IllegalStateException("Image not found.");
+          }
+        }
+
+      }
+    });
     loadSavePanel.add(loadButton);
     loadSavePanel.add(saveButton);
 
@@ -159,7 +180,9 @@ public class ImageGuiViewImpl implements ImageGuiView {
     brightenPanel.setLayout(new GridLayout(2, 1));
     leftPanel.add(brightenPanel);
 
+    // make a slider for brighten or darken
     JSlider brightenSlider = new JSlider(-255, 255, 0);
+
     brightenSlider.setPaintTicks(true);
     brightenSlider.setMajorTickSpacing(51);
     brightenSlider.setMinorTickSpacing(10);
@@ -167,6 +190,18 @@ public class ImageGuiViewImpl implements ImageGuiView {
     brightenPanel.add(brightenSlider);
 
     JButton brightenButton = new JButton("Brighten");
+    brightenButton.addActionListener(e -> {
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+        String newName = this.currentName.split("\\.")[0] + "Brighten";
+        for (ViewEvents listener : listeners) {
+          listener.brightenEvent(brightenSlider.getValue(), this.currentName, newName);
+        }
+
+        this.currentName = newName;
+      }
+    });
     brightenPanel.add(brightenButton);
 
     // This part is for GreyScale
@@ -175,17 +210,66 @@ public class ImageGuiViewImpl implements ImageGuiView {
     greyScalePanel.setLayout(new GridLayout(2, 1));
     leftPanel.add(greyScalePanel);
 
-    String[] options = {"N/A", "Red Component", "Green Component", "Blue Component",
-            "Value Component", "Intensity Component", "Luma Component", "Greyscale"};
-    JComboBox<String> combobox = new JComboBox<String>();
-    combobox.setActionCommand("Greyscale options");
+    String[] options = {"Normal Greyscale", "Red Component", "Green Component", "Blue Component",
+            "Value Component", "Intensity Component", "Luma Component"};
+    JComboBox<String> greyScaleCombobox = new JComboBox<String>();
+    greyScaleCombobox.setActionCommand("Greyscale options");
     for (int i = 0; i < options.length; i++) {
-      combobox.addItem(options[i]);
+      greyScaleCombobox.addItem(options[i]);
     }
-    greyScalePanel.add(combobox);
+    greyScalePanel.add(greyScaleCombobox);
 
     JButton greyScaleButton = new JButton("Greyscale");
-    //OKButton.addActionListener(new MyAction());
+    greyScaleButton.addActionListener(e -> {
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+        if (greyScaleCombobox.getSelectedItem().equals("Normal Greyscale")) {
+          String newName = this.currentName.split("\\.")[0] + "NormalGreyscale";
+          for (ViewEvents listener : listeners) {
+            listener.GreyscaleEvent(this.currentName, newName);
+          }
+          this.currentName = newName;
+        } else if (greyScaleCombobox.getSelectedItem().equals("Red Component")) {
+          String newName = this.currentName.split("\\.")[0] + "RedComponent";
+          for (ViewEvents listener : listeners) {
+            listener.ComponentEvent(ImageModel.RGBVIL.Red, this.currentName, newName);
+          }
+          this.currentName = newName;
+        } else if (greyScaleCombobox.getSelectedItem().equals("Green Component")) {
+          String newName = this.currentName.split("\\.")[0] + "GreenComponent";
+          for (ViewEvents listener : listeners) {
+            listener.ComponentEvent(ImageModel.RGBVIL.Green, this.currentName, newName);
+          }
+          this.currentName = newName;
+        } else if (greyScaleCombobox.getSelectedItem().equals("Blue Component")) {
+          String newName = this.currentName.split("\\.")[0] + "BlueComponent";
+          for (ViewEvents listener : listeners) {
+            listener.ComponentEvent(ImageModel.RGBVIL.Blue, this.currentName, newName);
+          }
+          this.currentName = newName;
+        } else if (greyScaleCombobox.getSelectedItem().equals("Value Component")) {
+          String newName = this.currentName.split("\\.")[0] + "ValueComponent";
+          for (ViewEvents listener : listeners) {
+            listener.ComponentEvent(ImageModel.RGBVIL.Value, this.currentName, newName);
+          }
+          this.currentName = newName;
+        } else if (greyScaleCombobox.getSelectedItem().equals("Intensity Component")) {
+          String newName = this.currentName.split("\\.")[0] + "IntensityComponent";
+          for (ViewEvents listener : listeners) {
+            listener.ComponentEvent(ImageModel.RGBVIL.Intensity, this.currentName, newName);
+          }
+          this.currentName = newName;
+        } else if (greyScaleCombobox.getSelectedItem().equals("Luma Component")) {
+          String newName = this.currentName.split("\\.")[0] + "LumaComponent";
+          for (ViewEvents listener : listeners) {
+            listener.ComponentEvent(ImageModel.RGBVIL.Luma, this.currentName, newName);
+          }
+          this.currentName = newName;
+        }
+      }
+    });
+
     greyScalePanel.add(greyScaleButton);
 
     // This part is for flip
@@ -195,13 +279,33 @@ public class ImageGuiViewImpl implements ImageGuiView {
     leftPanel.add(flipPanel);
 
     JButton verFlipButton = new JButton("Vertical Flip");
+    verFlipButton.addActionListener(e -> {
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+        String newName = this.currentName.split("\\.")[0] + "FlipVertical";
+        for (ViewEvents listener : listeners) {
+          listener.FlipVEvent(this.currentName, newName);
+        }
+        this.currentName = newName;
+      }
+    });
 
     JButton hoFlipButton = new JButton("Horizontal Flip");
+    hoFlipButton.addActionListener(e -> {
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+        String newName = this.currentName.split("\\.")[0] + "FlipHorizontal";
+        for (ViewEvents listener : listeners) {
+          listener.FlipHEvent(this.currentName, newName);
+        }
 
-    //OKButton.addActionListener(new MyAction());
+        this.currentName = newName;
+      }
+    });
+
     flipPanel.add(verFlipButton);
-
-
     flipPanel.add(hoFlipButton);
 
 
@@ -213,15 +317,62 @@ public class ImageGuiViewImpl implements ImageGuiView {
     // create Button for sepia
     JButton sepiaButton = new JButton("Sepia");
     sepiaButton.addActionListener(e -> {
-      for (ViewEvents listener : listeners) {
-        listener.SepiaEvent(this.currentName,
-                this.currentName.split("\\.")[0] + "Sepia");
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+        String newName = this.currentName.split("\\.")[0] + "Sepia";
+        for (ViewEvents listener : listeners) {
+          listener.SepiaEvent(this.currentName, newName);
+
+        }
+        this.currentName = newName;
       }
-      this.currentName = this.currentName.split("\\.")[0] + "Sepia";
     });
     sepiaPenal.add(sepiaButton);
 
+    // This part is for Sharpen
+    JPanel sharpenPenal = new JPanel();
+    sharpenPenal.setBorder(BorderFactory.createTitledBorder("Sharpen"));
+    sharpenPenal.setLayout(new GridLayout(1, 1));
+    leftPanel.add(sharpenPenal);
+    // create Button for sharpen
+    JButton sharpenButton = new JButton("Sharpen");
+    sharpenButton.addActionListener(e -> {
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+        String newName = this.currentName.split("\\.")[0] + "Sharpen";
+        for (ViewEvents listener : listeners) {
+          listener.SharpenEvent(this.currentName, newName);
+        }
+        this.currentName = newName;
+      }
+    });
+    sharpenPenal.add(sharpenButton);
+
+    // This part is for Blur
+    JPanel blurPanel = new JPanel();
+    blurPanel.setBorder(BorderFactory.createTitledBorder("Blur"));
+    blurPanel.setLayout(new GridLayout(1, 1));
+    leftPanel.add(blurPanel);
+    // create Button for sepia
+    JButton blurButton = new JButton("Blur");
+    blurButton.addActionListener(e -> {
+      if (this.currentName == null) {
+        throw new IllegalArgumentException("currently No image");
+      } else {
+        String newName = this.currentName.split("\\.")[0] + "Blur";
+        for (ViewEvents listener : listeners) {
+          listener.BlurEvent(this.currentName, newName);
+
+        }
+        this.currentName = newName;
+      }
+    });
+    blurPanel.add(blurButton);
+
   }
+
 
   @Override
   public void showCenterImage(String imageName, PixelRGB[][] image) {
