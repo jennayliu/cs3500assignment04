@@ -5,10 +5,14 @@ import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 
 import model.ImageModel;
+import model.command.Blur;
 import model.command.BrightenDarken;
 import model.command.FlipHorizontal;
+import model.command.FlipVertical;
 import model.command.Greyscale;
 import model.command.ImageFunctionObject;
+import model.command.Sharpen;
+import model.command.Transform;
 import view.ImageGuiView;
 import view.ViewEvents;
 
@@ -72,7 +76,8 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
 
   @Override
   public void BlurEvent(String imageName, String newName) {
-
+    ImageFunctionObject functionObject = new Blur();
+    this.model.process(functionObject, imageName, newName);
   }
 
   @Override
@@ -83,22 +88,46 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
 
   @Override
   public void FlipVEvent(String imageName, String newName) {
-
+    ImageFunctionObject functionObject = new FlipVertical();
+    this.model.process(functionObject, imageName, newName);
   }
 
   @Override
   public void SharpenEvent(String imageName, String newName) {
-
+    ImageFunctionObject functionObject = new Sharpen();
+    this.model.process(functionObject, imageName, newName);
   }
 
   @Override
   public void SepiaEvent(String imageName, String newName) {
-
+    double[][] sepiaMatrix = new double[3][3];
+    sepiaMatrix[0][0] = 0.393;
+    sepiaMatrix[1][0] = 0.349;
+    sepiaMatrix[2][0] = 0.272;
+    sepiaMatrix[0][1] = 0.769;
+    sepiaMatrix[1][1] = 0.686;
+    sepiaMatrix[2][1] = 0.534;
+    sepiaMatrix[0][2] = 0.189;
+    sepiaMatrix[1][2] = 0.168;
+    sepiaMatrix[2][2] = 0.131;
+    ImageFunctionObject functionObject = new Transform(sepiaMatrix);
+    this.model.process(functionObject, imageName, newName);
   }
 
   @Override
   public void GreyscaleEvent(String imageName, String newName) {
-
+    double[][] greyscaleMatrix = new double[3][3];
+    greyscaleMatrix[0][0] = 0.2126;
+    greyscaleMatrix[1][0] = 0.2126;
+    greyscaleMatrix[2][0] = 0.2126;
+    greyscaleMatrix[0][1] = 0.7152;
+    greyscaleMatrix[1][1] = 0.7152;
+    greyscaleMatrix[2][1] = 0.7152;
+    greyscaleMatrix[0][2] = 0.0722;
+    greyscaleMatrix[1][2] = 0.0722;
+    greyscaleMatrix[2][2] = 0.0722;
+    ImageFunctionObject functionObject = new Transform(greyscaleMatrix);
+    this.model.process(functionObject, imageName, newName);
   }
 
 

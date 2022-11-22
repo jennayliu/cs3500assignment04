@@ -95,6 +95,9 @@ public class ImageGuiViewImpl implements ImageGuiView {
   private void initialRightPanel(JPanel rightPanel) {
     rightPanel.setBorder(BorderFactory.createTitledBorder("Histogram"));
 
+
+    // Histogram redHist = new Histogram(Color.red);
+
   }
 
   /**
