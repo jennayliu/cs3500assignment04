@@ -48,7 +48,7 @@ public class Histogram extends JPanel {
     // we loop through all the color values, determine the amount of each color value, and plot
     // them on a bar graph.
     for (int i = 0; i < this.colorAmounts.length; i++) {
-      g2d.fillRect(i * 5, 0, 5, this.colorAmounts[i] / 10);
+      g2d.fillRect(i * 5, 0, 1, this.colorAmounts[i]);
     }
 
   }

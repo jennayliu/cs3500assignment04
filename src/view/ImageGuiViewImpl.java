@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.swing.*;
@@ -99,8 +100,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
   private void initialRightPanel(JPanel rightPanel) {
     rightPanel.setBorder(BorderFactory.createTitledBorder("Histogram"));
 
-
-    // Histogram redHist = new Histogram(Color.red);
+    makeHistograms(null);
 
   }
 
@@ -221,12 +221,12 @@ public class ImageGuiViewImpl implements ImageGuiView {
     });
     sepiaPenal.add(sepiaButton);
 
-}
+  }
 
   @Override
   public void showCenterImage(String imageName, PixelRGB[][] image) {
     centerPanel.setBorder(BorderFactory.createTitledBorder("Image: " + imageName));
-    if (imageName == null || image ==null ){
+    if (imageName == null || image == null) {
       throw new IllegalArgumentException("Null name or cannot get a image");
     }
     try {
@@ -251,6 +251,55 @@ public class ImageGuiViewImpl implements ImageGuiView {
       throw new IllegalStateException("cannot show the image");
     }
     return;
+  }
+
+  public void makeHistograms(PixelRGB[][] image) {
+    if (image == null) {
+      // no need to display histograms if there is no image!
+      return;
+    }
+
+    // all arrays initialized to 0
+    int[] redData = new int[256];
+    int[] greenData = new int[256];
+    int[] blueData = new int[256];
+    int[] intensityData = new int[256];
+//    Arrays.fill(redData, 0);
+//    Arrays.fill(greenData, 0);
+//    Arrays.fill(blueData, 0);
+//    Arrays.fill(intensityData, 0);
+
+    // loop through the image to get the color data
+    for (int r = 0; r < image.length - 1; r++) {
+      for (int c = 0; c < image[0].length - 1; c++) {
+
+        int redValue = image[r][c].getRed();
+        redData[redValue] = redData[redValue] + 1;
+
+        int greenValue = image[r][c].getGreen();
+        greenData[greenValue] = greenData[greenValue] + 1;
+
+        int blueValue = image[r][c].getBlue();
+        blueData[blueValue] = blueData[blueValue] + 1;
+
+        int intensityValue = (redValue + greenValue + blueValue) / 3;
+        intensityData[intensityValue] = intensityData[intensityValue] + 1;
+      }
+    }
+
+
+    // The red, green, and blue histograms will be of their respective colors.
+    // The intensity histogram will be yellow for no particular reason.
+    Histogram redHist = new Histogram(redData, Color.red);
+    Histogram greenHist = new Histogram(greenData, Color.blue);
+    Histogram blueHist = new Histogram(blueData, Color.green);
+    Histogram intensityHist = new Histogram(intensityData, Color.yellow);
+
+    // finally, add the histograms to the panel for display
+    this.rightPanel.add(redHist);
+    this.rightPanel.add(greenHist);
+    this.rightPanel.add(blueHist);
+    this.rightPanel.add(intensityHist);
   }
 
 

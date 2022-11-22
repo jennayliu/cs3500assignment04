@@ -18,4 +18,10 @@ public interface ImageGuiView {
   public void addViewListener(ViewEvents listener);
 
   public void showCenterImage(String imageName, PixelRGB[][] image);
+
+  /**
+   * This method makes and displays the histograms for red, green, blue, and intensity.
+   * @param image The image to make histograms of
+   */
+  public void makeHistograms(PixelRGB[][] image);
 }

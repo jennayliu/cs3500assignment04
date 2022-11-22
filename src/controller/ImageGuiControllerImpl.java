@@ -113,7 +113,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new Transform(sepiaMatrix);
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
-
+    this.view.makeHistograms(this.model.getImage(newName));
   }
 
   @Override
