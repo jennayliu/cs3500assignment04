@@ -200,7 +200,10 @@ public class ImageGuiViewImpl implements ImageGuiView {
 
     //OKButton.addActionListener(new MyAction());
     flipPanel.add(verFlipButton);
+
+
     flipPanel.add(hoFlipButton);
+
 
     // This part is for Sepia
     JPanel sepiaPenal = new JPanel();
@@ -214,6 +217,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
         listener.SepiaEvent(this.currentName,
                 this.currentName.split("\\.")[0] + "Sepia");
       }
+      this.currentName = this.currentName.split("\\.")[0] + "Sepia";
     });
     sepiaPenal.add(sepiaButton);
 
@@ -222,6 +226,9 @@ public class ImageGuiViewImpl implements ImageGuiView {
   @Override
   public void showCenterImage(String imageName, PixelRGB[][] image) {
     centerPanel.setBorder(BorderFactory.createTitledBorder("Image: " + imageName));
+    if (imageName == null || image ==null ){
+      throw new IllegalArgumentException("Null name or cannot get a image");
+    }
     try {
       BufferedImage showingImage = new BufferedImage(image[0].length, image.length,
               BufferedImage.TYPE_INT_RGB);
@@ -235,6 +242,8 @@ public class ImageGuiViewImpl implements ImageGuiView {
 
       Icon icon = new ImageIcon(showingImage);
       JLabel imageLabel = new JLabel(icon, JLabel.CENTER);
+      // remove all previous things on screen
+      this.centerPanel.removeAll();
       this.centerPanel.add(imageLabel);
       this.baseFrame.repaint();
       this.baseFrame.revalidate();
