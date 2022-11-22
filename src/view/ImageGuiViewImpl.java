@@ -27,6 +27,8 @@ public class ImageGuiViewImpl implements ImageGuiView {
 
   private final java.util.List<ViewEvents> listeners;
 
+  private String currentName;
+
   public ImageGuiViewImpl() {
     this.listeners = new ArrayList<>();
     this.width = 1920;
@@ -36,6 +38,8 @@ public class ImageGuiViewImpl implements ImageGuiView {
     this.centerPanel = new JPanel();
     this.leftPanel = new JPanel();
     this.rightPanel = new JPanel();
+
+    this.currentName = "";
   }
 
   @Override
@@ -130,6 +134,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
       if (image != null) {
         String imagePath = image.getAbsolutePath();
         String imageName = image.getName();
+        this.currentName = imageName;
         for (ViewEvents listener : listeners) {
           try {
             listener.loadEvent(imageName, imagePath);
@@ -204,18 +209,18 @@ public class ImageGuiViewImpl implements ImageGuiView {
     leftPanel.add(sepiaPenal);
     // create Button for sepia
     JButton sepiaButton = new JButton("Sepia");
-//    sepiaButton.addActionListener(e -> {
-//      for (ViewEvents listener : listeners) {
-//          listener.SepiaEvent(imageName);
-//        }
-//      }
-//    };
-//    sepiaPenal.add(sepiaButton);
+    sepiaButton.addActionListener(e -> {
+      for (ViewEvents listener : listeners) {
+        listener.SepiaEvent(this.currentName,
+                this.currentName.split("\\.")[0] + "Sepia");
+      }
+    });
+    sepiaPenal.add(sepiaButton);
 
-  }
+}
 
   @Override
-  public void showCenterImage(String imageName, PixelRGB[][] image){
+  public void showCenterImage(String imageName, PixelRGB[][] image) {
     centerPanel.setBorder(BorderFactory.createTitledBorder("Image: " + imageName));
     try {
       BufferedImage showingImage = new BufferedImage(image[0].length, image.length,
@@ -228,15 +233,15 @@ public class ImageGuiViewImpl implements ImageGuiView {
         }
       }
 
-      Icon icon=new ImageIcon(showingImage);
+      Icon icon = new ImageIcon(showingImage);
       JLabel imageLabel = new JLabel(icon, JLabel.CENTER);
       this.centerPanel.add(imageLabel);
       this.baseFrame.repaint();
       this.baseFrame.revalidate();
     } catch (IllegalArgumentException e) {
-
+      throw new IllegalStateException("cannot show the image");
     }
-      return;
+    return;
   }
 
 

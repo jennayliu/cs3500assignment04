@@ -112,6 +112,8 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     sepiaMatrix[2][2] = 0.131;
     ImageFunctionObject functionObject = new Transform(sepiaMatrix);
     this.model.process(functionObject, imageName, newName);
+    this.view.showCenterImage(newName, this.model.getImage(newName));
+
   }
 
   @Override
