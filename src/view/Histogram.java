@@ -35,21 +35,25 @@ public class Histogram extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
 
+
+
     Graphics2D g2d = (Graphics2D) g;
     g2d.setColor(color);
 
     // here we "flip" the y coordinate so that (0, 0) is bottom left
-    AffineTransform originalTransform = g2d.getTransform();
-    g2d.translate(0, this.getPreferredSize().getHeight());
-    g2d.scale(1, -1);
+//    AffineTransform originalTransform = g2d.getTransform();
+//    g2d.translate(0, this.getPreferredSize().getHeight());
+//    g2d.scale(1, -1);
 
 
 
     // we loop through all the color values, determine the amount of each color value, and plot
     // them on a bar graph.
     for (int i = 0; i < this.colorAmounts.length; i++) {
-      g2d.fillRect(i * 5, 0, 1, this.colorAmounts[i]);
+      g2d.fillRect(i, 0, 1, this.colorAmounts[i] / 50);
+
     }
+
 
   }
 

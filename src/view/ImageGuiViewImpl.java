@@ -99,8 +99,9 @@ public class ImageGuiViewImpl implements ImageGuiView {
    * @param rightPanel the right panel for placing the picture to modify
    */
   private void initialRightPanel(JPanel rightPanel) {
+    centerPanel.setBackground(Color.LIGHT_GRAY);
     rightPanel.setBorder(BorderFactory.createTitledBorder("Histogram"));
-
+    rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
     makeHistograms(null);
 
   }
@@ -391,7 +392,11 @@ public class ImageGuiViewImpl implements ImageGuiView {
         }
       }
 
-      Icon icon = new ImageIcon(showingImage);
+      int newHeight = this.height * 3 / 5;
+      double widthHeightRatio = 1.0 * image[0].length / image.length;
+      int newWidth = (int) (newHeight * widthHeightRatio);
+      Image scaledShowingImage = showingImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+      Icon icon = new ImageIcon(scaledShowingImage);
       JLabel imageLabel = new JLabel(icon, JLabel.CENTER);
       // remove all previous things on screen
       this.centerPanel.removeAll();
@@ -446,11 +451,14 @@ public class ImageGuiViewImpl implements ImageGuiView {
     Histogram blueHist = new Histogram(blueData, Color.green);
     Histogram intensityHist = new Histogram(intensityData, Color.yellow);
 
+    this.rightPanel.removeAll();
     // finally, add the histograms to the panel for display
     this.rightPanel.add(redHist);
     this.rightPanel.add(greenHist);
     this.rightPanel.add(blueHist);
     this.rightPanel.add(intensityHist);
+    this.baseFrame.repaint();
+    this.baseFrame.revalidate();
   }
 
 
