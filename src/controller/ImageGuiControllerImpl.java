@@ -52,12 +52,14 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   @Override
   public void saveEvent(String name, String path) throws IOException {
     this.model.save(path, name);
+    this.view.makeHistograms(this.model.getImage(name));
   }
 
   @Override
   public void loadEvent(String name, String path) throws NoSuchFileException {
     this.model.load(path, name);
     this.view.showCenterImage(name, this.model.getImage(name));
+    this.view.makeHistograms(this.model.getImage(name));
 
   }
 
@@ -66,6 +68,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new BrightenDarken(amount);
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
 
   }
 
@@ -74,6 +77,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new Greyscale(rgbvil);
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
   }
 
   @Override
@@ -81,6 +85,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new Blur();
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
   }
 
   @Override
@@ -88,6 +93,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new FlipHorizontal();
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
   }
 
   @Override
@@ -95,6 +101,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new FlipVertical();
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
   }
 
   @Override
@@ -102,6 +109,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new Sharpen();
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
   }
 
   @Override
@@ -119,7 +127,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new Transform(sepiaMatrix);
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
-
+    this.view.makeHistograms(this.model.getImage(newName));
   }
 
   @Override
@@ -137,7 +145,9 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     ImageFunctionObject functionObject = new Transform(greyscaleMatrix);
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
+    this.view.makeHistograms(this.model.getImage(newName));
   }
+
 
 
 }

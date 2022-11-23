@@ -1,6 +1,8 @@
-import java.awt.*;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.util.Scanner;
 
 import controller.ImageController;
 import controller.ImageControllerImpl;
@@ -31,19 +33,16 @@ public class Main {
 
 
     // I don't know if this if statement is needed, can remove and adjust after
-    if (args[0].equals("-jar") && args[1].equals("Program.jar")) {
 
       switch (args.length) {
-        case (2):
+        case (0):
           // equivalent to opening a jar file
           view = new ImageGuiViewImpl();
           // Start the guiController, initialize the main frame in side the constructor
           guiController = new ImageGuiControllerImpl(model, view);
-
-
           break;
-        case (3):
-          if (args[2].equals("-text")) {
+        case (1):
+          if (args[0].equals("-text")) {
             // interactive text mode
             model = new ImageModelImpl();
             controller = new ImageControllerImpl(model, rd, ap);
@@ -52,9 +51,17 @@ public class Main {
             // bad quit
           }
           break;
-        case (5):
-          if (args[3].equals("-file")) {
-            // execute the file named args[4]
+        case (2):
+          if (args[0].equals("-file") && args[1] != null) {
+            String inputString = "";
+            Scanner sc = new Scanner(new FileInputStream(args[1]));
+            while (sc.hasNextLine()) {
+              inputString = inputString + sc.nextLine() + "\n";
+            }
+//            StringReader inputReader = new StringReader(inputString);
+            rd = new StringReader(inputString);
+            controller = new ImageControllerImpl(model, rd, ap);
+            controller.control();
           } else {
             // bad quit
           }
@@ -63,7 +70,7 @@ public class Main {
           // bad quit
       }
 
-    }
+
 
     controller = new ImageControllerImpl(model, rd, ap);
     controller.control();
