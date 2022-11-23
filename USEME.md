@@ -1,8 +1,26 @@
+# Command Line Inputs
 
-# Script Commands
+Run the program through a script file. Replace
+"path-of-script-file" to the actual file path.
+Script commands are shown below.
+```
+java -jar Program.jar -file path-of-script-file
+```
+
+Run the program through interactive commands. 
+Script commands are shown below.
+```
+java -jar Program.jar -text
+```
+
+Rune the program through an interactive GUI.
+```
+java -jar Program.jar
+```
+
+## Script Commands
 **Everything must be typed in the order as shown,
 case-sensitive**
-
 
 Load an image from your files and refer to it henceforth by a new name
 ```
