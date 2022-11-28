@@ -1,11 +1,12 @@
 package view;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
+//import java.awt.*;
+//import javax.swing.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-import javax.swing.*;
-
-import model.ImageModel;
 
 /**
  * Image histograms show the frequency values of red, green, blue, or intensity in the pixels
@@ -13,20 +14,24 @@ import model.ImageModel;
  */
 public class Histogram extends JPanel {
 
-  private final int maxHeight;
-
-  // colorAmounts (int[256]) is set in a away such that the number of 0 value color pixels is in data[0],
-  // the number of 1 value color pixels is in data[1]... etc
+  // colorAmounts (int[256]) is set in a away such that the number of
+  // 0 value color pixels is in data[0], the number of 1 value color pixels is in data[1]... etc
   private final int[] colorAmounts;
   private final Color color;
 
+  /**
+   * Create a histogram that shows the color frequency.
+   *
+   * @param colorAmounts the amounts of color.
+   * @param color the color for histogram
+   * @throws IllegalArgumentException if color amounts is not 256
+   */
   public Histogram(int[] colorAmounts, Color color) throws IllegalArgumentException {
     super();
     if (colorAmounts.length != 256) {
       throw new IllegalArgumentException("Must be 256 in length");
     }
 
-    this.maxHeight = 270;
     this.colorAmounts = colorAmounts;
     this.color = color;
   }
@@ -36,15 +41,8 @@ public class Histogram extends JPanel {
     super.paintComponent(g);
 
 
-
     Graphics2D g2d = (Graphics2D) g;
     g2d.setColor(color);
-
-    // here we "flip" the y coordinate so that (0, 0) is bottom left
-//    AffineTransform originalTransform = g2d.getTransform();
-//    g2d.translate(0, this.getPreferredSize().getHeight());
-//    g2d.scale(1, -1);
-
 
 
     // we loop through all the color values, determine the amount of each color value, and plot

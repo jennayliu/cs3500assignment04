@@ -19,7 +19,7 @@ import view.ViewEvents;
 /**
  * This class is the implementation of the ImageController.
  */
-public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
+public class ImageGuiControllerImpl implements ViewEvents {
 
   private final ImageModel model;
 
@@ -29,7 +29,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
    * This constructor creates an instance of a controller.
    *
    * @param model The model to work with
-   * @param view
+   * @param view the user interface view
    * @throws IllegalArgumentException If any of the fields are null
    */
   public ImageGuiControllerImpl(ImageModel model, ImageGuiView view)
@@ -44,10 +44,6 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     this.view.initialize();
   }
 
-  @Override
-  public void control() throws IOException {
-
-  }
 
   @Override
   public void saveEvent(String name, String path) throws IOException {
@@ -73,7 +69,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   }
 
   @Override
-  public void ComponentEvent(ImageModel.RGBVIL rgbvil, String imageName, String newName) {
+  public void componentEvent(ImageModel.RGBVIL rgbvil, String imageName, String newName) {
     ImageFunctionObject functionObject = new Greyscale(rgbvil);
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
@@ -81,7 +77,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   }
 
   @Override
-  public void BlurEvent(String imageName, String newName) {
+  public void blurEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new Blur();
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
@@ -89,7 +85,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   }
 
   @Override
-  public void FlipHEvent(String imageName, String newName) {
+  public void flipHEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new FlipHorizontal();
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
@@ -97,7 +93,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   }
 
   @Override
-  public void FlipVEvent(String imageName, String newName) {
+  public void flipVEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new FlipVertical();
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
@@ -105,7 +101,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   }
 
   @Override
-  public void SharpenEvent(String imageName, String newName) {
+  public void sharpenEvent(String imageName, String newName) {
     ImageFunctionObject functionObject = new Sharpen();
     this.model.process(functionObject, imageName, newName);
     this.view.showCenterImage(newName, this.model.getImage(newName));
@@ -113,7 +109,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   }
 
   @Override
-  public void SepiaEvent(String imageName, String newName) {
+  public void sepiaEvent(String imageName, String newName) {
     double[][] sepiaMatrix = new double[3][3];
     sepiaMatrix[0][0] = 0.393;
     sepiaMatrix[1][0] = 0.349;
@@ -131,7 +127,7 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
   }
 
   @Override
-  public void GreyscaleEvent(String imageName, String newName) {
+  public void greyscaleEvent(String imageName, String newName) {
     double[][] greyscaleMatrix = new double[3][3];
     greyscaleMatrix[0][0] = 0.2126;
     greyscaleMatrix[1][0] = 0.2126;
@@ -147,7 +143,6 @@ public class ImageGuiControllerImpl implements ImageGuiController, ViewEvents {
     this.view.showCenterImage(newName, this.model.getImage(newName));
     this.view.makeHistograms(this.model.getImage(newName));
   }
-
 
 
 }

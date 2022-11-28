@@ -140,7 +140,7 @@ public class ImageUtil {
       for (int j = 0; j < input.getWidth(); j++) {
         int color = input.getRGB(j, i);
         Color c = new Color(color);
-        pixels[i][j] = new PixelRGB(c.getRed(), c.getGreen(), c.getBlue(),255);
+        pixels[i][j] = new PixelRGB(c.getRed(), c.getGreen(), c.getBlue(), 255);
       }
     }
 
@@ -152,7 +152,7 @@ public class ImageUtil {
   /**
    * Write a image from PixelRGB[][] format to png/jpg/bmp format.
    *
-   * @param image image to output as a file
+   * @param image    image to output as a file
    * @param filename the filename of the png/jpg/bmp file
    */
   public static void makeImageOutput(PixelRGB[][] image, String filename) {
@@ -192,7 +192,6 @@ public class ImageUtil {
     }
     return copy;
   }
-
 
 
   /**

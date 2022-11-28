@@ -90,7 +90,7 @@ public class ImageGuiTests {
     ImageGuiView view = new ImageGuiViewImpl();
     ImageGuiControllerImpl controller = new ImageGuiControllerImpl(model, view);
     controller.loadEvent("checker", "res/TestImageWith4Pixels.ppm");
-    controller.BlurEvent("checker", "blur");
+    controller.blurEvent("checker", "blur");
 
     assertEquals(61, model.getImage("blur")[0][0].getRed());
     assertEquals(58, model.getImage("blur")[0][0].getGreen());
@@ -138,7 +138,7 @@ public class ImageGuiTests {
     ImageGuiView view = new ImageGuiViewImpl();
     ImageGuiControllerImpl controller = new ImageGuiControllerImpl(model, view);
     controller.loadEvent("checker", "res/TestImageWith4Pixels.ppm");
-    controller.ComponentEvent(ImageModel.RGBVIL.Luma,
+    controller.componentEvent(ImageModel.RGBVIL.Luma,
             "checker", "GrayscaleLuma");
 
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
@@ -169,7 +169,7 @@ public class ImageGuiTests {
     ImageGuiView view = new ImageGuiViewImpl();
     ImageGuiControllerImpl controller = new ImageGuiControllerImpl(model, view);
     controller.loadEvent("checker", "res/1black1white.ppm");
-    controller.FlipHEvent("checker", "checkerH");
+    controller.flipHEvent("checker", "checkerH");
 
     assertEquals(255, model.getImage("checkerH")[0][0].getRed());
     assertEquals(255, model.getImage("checkerH")[0][0].getGreen());
@@ -188,7 +188,7 @@ public class ImageGuiTests {
     ImageGuiView view = new ImageGuiViewImpl();
     ImageGuiControllerImpl controller = new ImageGuiControllerImpl(model, view);
     controller.loadEvent("checker", "res/1black1whiteVertical.ppm");
-    controller.FlipVEvent("checker", "checkerV");
+    controller.flipVEvent("checker", "checkerV");
 
     assertEquals(255, model.getImage("checkerV")[0][0].getRed());
     assertEquals(255, model.getImage("checkerV")[0][0].getGreen());
@@ -207,7 +207,7 @@ public class ImageGuiTests {
     ImageGuiView view = new ImageGuiViewImpl();
     ImageGuiControllerImpl controller = new ImageGuiControllerImpl(model, view);
     controller.loadEvent("checker", "res/TestImageWith4Pixels.ppm");
-    controller.GreyscaleEvent("checker", "GrayscaleLuma");
+    controller.greyscaleEvent("checker", "GrayscaleLuma");
 
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getRed());
     assertEquals(90, model.getImage("GrayscaleLuma")[0][0].getGreen());
@@ -231,7 +231,7 @@ public class ImageGuiTests {
     ImageGuiView view = new ImageGuiViewImpl();
     ImageGuiControllerImpl controller = new ImageGuiControllerImpl(model, view);
     controller.loadEvent("checker", "res/TestImageWith4Pixels.ppm");
-    controller.SharpenEvent("checker", "sharpen");
+    controller.sharpenEvent("checker", "sharpen");
 
     assertEquals(190, model.getImage("sharpen")[0][0].getRed());
     assertEquals(177, model.getImage("sharpen")[0][0].getGreen());
@@ -260,7 +260,7 @@ public class ImageGuiTests {
     ImageGuiView view = new ImageGuiViewImpl();
     ImageGuiControllerImpl controller = new ImageGuiControllerImpl(model, view);
     controller.loadEvent("checker", "res/TestImageWith4Pixels.ppm");
-    controller.SepiaEvent("checker", "sepia");
+    controller.sepiaEvent("checker", "sepia");
 
     assertEquals(119, model.getImage("sepia")[0][0].getRed());
     assertEquals(106, model.getImage("sepia")[0][0].getGreen());

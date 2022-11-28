@@ -1,22 +1,36 @@
 package view;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
+import javax.swing.JButton;
+import javax.swing.JSlider;
+import javax.swing.JComboBox;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
-import controller.ImageGuiController;
-import controller.ImageGuiControllerImpl;
 import model.ImageModel;
 import model.Pixel;
 import model.PixelRGB;
 
+/**
+ * The implements of ImageGuiView, class that show the user interface of the program.
+ */
 public class ImageGuiViewImpl implements ImageGuiView {
 
   private final int width;
@@ -31,6 +45,9 @@ public class ImageGuiViewImpl implements ImageGuiView {
 
   private String currentName;
 
+  /**
+   * Create a gui view to show user interface.
+   */
   public ImageGuiViewImpl() {
     this.listeners = new ArrayList<>();
     this.width = 1920;
@@ -100,7 +117,8 @@ public class ImageGuiViewImpl implements ImageGuiView {
    */
   private void initialRightPanel(JPanel rightPanel) {
     centerPanel.setBackground(Color.LIGHT_GRAY);
-    rightPanel.setBorder(BorderFactory.createTitledBorder("Histogram"));
+    rightPanel.setBorder(BorderFactory.createTitledBorder("Histograms: Red, Green, " +
+            "Blue, Intensity"));
     rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.PAGE_AXIS));
     makeHistograms(null);
 
@@ -114,9 +132,6 @@ public class ImageGuiViewImpl implements ImageGuiView {
   private void initialLeftPanel(JPanel leftPanel) {
     //for elements to be arranged vertically within this panel
     leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.PAGE_AXIS));
-//    //scroll bars around this main panel
-//    JScrollPane rightScrollPane = new JScrollPane(rightPanel);
-//    rightPanel.add(rightScrollPane);
 
     // This part is for Load & Save
     JPanel loadSavePanel = new JPanel();
@@ -212,7 +227,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
     leftPanel.add(greyScalePanel);
 
     String[] options = {"Normal Greyscale", "Red Component", "Green Component", "Blue Component",
-            "Value Component", "Intensity Component", "Luma Component"};
+      "Value Component", "Intensity Component", "Luma Component"};
     JComboBox<String> greyScaleCombobox = new JComboBox<String>();
     greyScaleCombobox.setActionCommand("Greyscale options");
     for (int i = 0; i < options.length; i++) {
@@ -228,43 +243,43 @@ public class ImageGuiViewImpl implements ImageGuiView {
         if (greyScaleCombobox.getSelectedItem().equals("Normal Greyscale")) {
           String newName = this.currentName.split("\\.")[0] + "NormalGreyscale";
           for (ViewEvents listener : listeners) {
-            listener.GreyscaleEvent(this.currentName, newName);
+            listener.greyscaleEvent(this.currentName, newName);
           }
           this.currentName = newName;
         } else if (greyScaleCombobox.getSelectedItem().equals("Red Component")) {
           String newName = this.currentName.split("\\.")[0] + "RedComponent";
           for (ViewEvents listener : listeners) {
-            listener.ComponentEvent(ImageModel.RGBVIL.Red, this.currentName, newName);
+            listener.componentEvent(ImageModel.RGBVIL.Red, this.currentName, newName);
           }
           this.currentName = newName;
         } else if (greyScaleCombobox.getSelectedItem().equals("Green Component")) {
           String newName = this.currentName.split("\\.")[0] + "GreenComponent";
           for (ViewEvents listener : listeners) {
-            listener.ComponentEvent(ImageModel.RGBVIL.Green, this.currentName, newName);
+            listener.componentEvent(ImageModel.RGBVIL.Green, this.currentName, newName);
           }
           this.currentName = newName;
         } else if (greyScaleCombobox.getSelectedItem().equals("Blue Component")) {
           String newName = this.currentName.split("\\.")[0] + "BlueComponent";
           for (ViewEvents listener : listeners) {
-            listener.ComponentEvent(ImageModel.RGBVIL.Blue, this.currentName, newName);
+            listener.componentEvent(ImageModel.RGBVIL.Blue, this.currentName, newName);
           }
           this.currentName = newName;
         } else if (greyScaleCombobox.getSelectedItem().equals("Value Component")) {
           String newName = this.currentName.split("\\.")[0] + "ValueComponent";
           for (ViewEvents listener : listeners) {
-            listener.ComponentEvent(ImageModel.RGBVIL.Value, this.currentName, newName);
+            listener.componentEvent(ImageModel.RGBVIL.Value, this.currentName, newName);
           }
           this.currentName = newName;
         } else if (greyScaleCombobox.getSelectedItem().equals("Intensity Component")) {
           String newName = this.currentName.split("\\.")[0] + "IntensityComponent";
           for (ViewEvents listener : listeners) {
-            listener.ComponentEvent(ImageModel.RGBVIL.Intensity, this.currentName, newName);
+            listener.componentEvent(ImageModel.RGBVIL.Intensity, this.currentName, newName);
           }
           this.currentName = newName;
         } else if (greyScaleCombobox.getSelectedItem().equals("Luma Component")) {
           String newName = this.currentName.split("\\.")[0] + "LumaComponent";
           for (ViewEvents listener : listeners) {
-            listener.ComponentEvent(ImageModel.RGBVIL.Luma, this.currentName, newName);
+            listener.componentEvent(ImageModel.RGBVIL.Luma, this.currentName, newName);
           }
           this.currentName = newName;
         }
@@ -286,7 +301,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
       } else {
         String newName = this.currentName.split("\\.")[0] + "FlipVertical";
         for (ViewEvents listener : listeners) {
-          listener.FlipVEvent(this.currentName, newName);
+          listener.flipVEvent(this.currentName, newName);
         }
         this.currentName = newName;
       }
@@ -299,7 +314,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
       } else {
         String newName = this.currentName.split("\\.")[0] + "FlipHorizontal";
         for (ViewEvents listener : listeners) {
-          listener.FlipHEvent(this.currentName, newName);
+          listener.flipHEvent(this.currentName, newName);
         }
 
         this.currentName = newName;
@@ -323,7 +338,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
       } else {
         String newName = this.currentName.split("\\.")[0] + "Sepia";
         for (ViewEvents listener : listeners) {
-          listener.SepiaEvent(this.currentName, newName);
+          listener.sepiaEvent(this.currentName, newName);
 
         }
         this.currentName = newName;
@@ -344,7 +359,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
       } else {
         String newName = this.currentName.split("\\.")[0] + "Sharpen";
         for (ViewEvents listener : listeners) {
-          listener.SharpenEvent(this.currentName, newName);
+          listener.sharpenEvent(this.currentName, newName);
         }
         this.currentName = newName;
       }
@@ -364,7 +379,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
       } else {
         String newName = this.currentName.split("\\.")[0] + "Blur";
         for (ViewEvents listener : listeners) {
-          listener.BlurEvent(this.currentName, newName);
+          listener.blurEvent(this.currentName, newName);
 
         }
         this.currentName = newName;
@@ -395,7 +410,8 @@ public class ImageGuiViewImpl implements ImageGuiView {
       int newHeight = this.height * 3 / 5;
       double widthHeightRatio = 1.0 * image[0].length / image.length;
       int newWidth = (int) (newHeight * widthHeightRatio);
-      Image scaledShowingImage = showingImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+      Image scaledShowingImage = showingImage.getScaledInstance(newWidth, newHeight,
+              Image.SCALE_SMOOTH);
       Icon icon = new ImageIcon(scaledShowingImage);
       JLabel imageLabel = new JLabel(icon, JLabel.CENTER);
       // remove all previous things on screen
@@ -409,6 +425,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
     return;
   }
 
+  @Override
   public void makeHistograms(PixelRGB[][] image) {
     if (image == null) {
       // no need to display histograms if there is no image!
@@ -420,10 +437,7 @@ public class ImageGuiViewImpl implements ImageGuiView {
     int[] greenData = new int[256];
     int[] blueData = new int[256];
     int[] intensityData = new int[256];
-//    Arrays.fill(redData, 0);
-//    Arrays.fill(greenData, 0);
-//    Arrays.fill(blueData, 0);
-//    Arrays.fill(intensityData, 0);
+
 
     // loop through the image to get the color data
     for (int r = 0; r < image.length - 1; r++) {
